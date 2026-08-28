@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cracker House x Snuggle - Pop-up Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=Playfair+Display:wght@100..900&family=Space+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        /* Grain overlay for vintage editorial feel */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff8f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9b2d27;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#164a6f",
+                        "background": "#fff8f5",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary-fixed-dim": "#ffb598",
+                        "on-tertiary-container": "#ffede7",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary-fixed": "#ffdbce",
+                        "secondary": "#336289",
+                        "on-secondary-container": "#2c5b82",
+                        "primary": "#9b2d27",
+                        "secondary-container": "#a7d3ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7e2c00",
+                        "surface-bright": "#fff8f5",
+                        "on-primary-container": "#ffecea",
+                        "surface-tint": "#a8372f",
+                        "on-surface-variant": "#58413f",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ffe3d3",
+                        "surface-container": "#ffeade",
+                        "outline": "#8b716e",
+                        "inverse-on-surface": "#ffede4",
+                        "outline-variant": "#dfbfbc",
+                        "on-primary-fixed": "#410002",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "inverse-surface": "#402c1f",
+                        "secondary-fixed": "#cde5ff",
+                        "surface-variant": "#fddcc9",
+                        "surface-container-low": "#fff1ea",
+                        "on-surface": "#28180c",
+                        "tertiary": "#963500",
+                        "secondary-fixed-dim": "#9ecbf7",
+                        "surface-container-highest": "#fddcc9",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#bc453c",
+                        "on-secondary-fixed": "#001d32",
+                        "surface": "#fff8f5",
+                        "inverse-primary": "#ffb4ab",
+                        "on-primary-fixed-variant": "#881f1a",
+                        "surface-dim": "#f4d4c1",
+                        "tertiary-container": "#be4600",
+                        "on-background": "#28180c",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-margin": "2rem",
+                        "section-padding": "4rem",
+                        "gutter": "1rem",
+                        "block-gap": "2px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "label-caps": ["Space Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "38px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "52px", "fontWeight": "700" }],
+                        "display-lg": ["84px", { "lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<div class="grain-overlay"></div>
+<!-- TopNavBar -->
+<nav class="bg-primary dark:bg-primary docked full-width top-0 border-b-2 border-on-surface flat no shadows flex justify-between items-center w-full px-grid-margin py-4 sticky top-0 z-50">
+<div class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tighter">
+            CRACKER HOUSE × SNUGGLE
+        </div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-primary opacity-80 font-label-caps text-label-caps uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors p-2" href="#intro">Intro</a>
+<a class="text-on-primary opacity-80 font-label-caps text-label-caps uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors p-2" href="#zones">Zones</a>
+<a class="text-on-primary opacity-80 font-label-caps text-label-caps uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors p-2" href="#shop">Shop</a>
+<a class="text-on-primary opacity-80 font-label-caps text-label-caps uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors p-2" href="#guestbook">Guestbook</a>
+</div>
+<button class="bg-surface text-on-surface border border-outline px-4 py-2 font-label-caps text-label-caps uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors">
+            Pre-register
+        </button>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b-2 border-outline px-grid-margin py-section-padding" id="hero">
+<div class="absolute inset-0 z-0">
+<img alt="Background" class="w-full h-full object-cover opacity-30 grayscale" data-alt="A cinematic, high-contrast black and white photograph of vintage denim hanging on a clothesline in a vast, empty field, evoking a raw, editorial aesthetic reminiscent of mid-century fashion magazines, with deep shadows and striking highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx3xH5vPeu2VQe4FpPWfTChfyP8wo84bwOEXKwMjNIlZQwyNjsePJ3oveVFl-rxJX8-wU5xBD20wYIF5TMdzXr3qNSe1859U1ogrbwQEiv8tLWZC_y_imZ6RaZfOPgJ7b6Grd1AoLVzkPW8mfcWt5uH1Pfhcl5-ElrjHK4XYqvs0BQy2els-FeCxZmppbhK4tBHpbgcLHfglyfzuDtcOc149ShBHzYECymBjS0yBsd32RR-dAf3DC1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background"></div>
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col gap-8 items-center border-2 border-outline p-8 bg-surface/90 backdrop-blur-sm">
+<p class="font-label-caps text-label-caps uppercase tracking-widest text-primary">Limited Time Pop-Up Experience</p>
+<h1 class="font-display-lg text-display-lg md:text-[100px] leading-none uppercase mix-blend-multiply text-on-background">
+                    Clean Laundry,<br/>Dirty Denim
+                </h1>
+<p class="font-body-lg text-body-lg max-w-2xl text-on-surface-variant">
+                    An unexpected collision between the raw, unrefined edge of Cracker House and the pristine, comforting essence of Snuggle. A sensory journey through contrast.
+                </p>
+<button class="bg-inverse-surface text-inverse-on-surface border border-outline px-8 py-4 font-label-caps text-label-caps uppercase hover:bg-tertiary hover:text-on-tertiary transition-colors mt-4">
+                    Reserve Your Spot
+                </button>
+</div>
+</section>
+<!-- Brand Intro Section -->
+<section class="py-section-padding px-grid-margin border-b-2 border-outline bg-surface-container-low" id="intro">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-grid-margin">
+<div class="border-2 border-outline p-6 flex flex-col gap-4 bg-surface">
+<h2 class="font-headline-xl text-headline-xl text-primary border-b-2 border-outline pb-4">The Collision</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        We brought together two opposing forces. The utilitarian grit of vintage workwear and the soft, nostalgic embrace of fresh laundry. The result is a space that challenges expectations and redefines comfort.
+                    </p>
+<div class="mt-auto pt-8">
+<img alt="Denim texture" class="w-full h-64 object-cover border border-outline grayscale" data-alt="A gritty, textured close-up of a vintage denim jacket with prominent fraying and heavy fading, resting on a stark white, impeccably clean surface, lit with harsh, direct lighting typical of avant-garde editorial photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO_PTODE--uF34Fg2k4VqNJcr54gizNc7S5-MUDJA3AJjuDZhePusqQAnDVkTMftR2Q2EwHs797cHZf8qTrtA2bZ0VqLwfN5WRPsVVWX7G6GNu3SNKiqd58cHRtkjcaF6p7jGw3Va0mS9_07y3iIlQg3JofetbuCXG655GCUJDm_xOVgmSSSXcYAKUKa3mqFGUzTFrCb6VpyucS_9_EpQ0rMSsuXQapCSKbZIrbo5gRFQejY5Gkw67"/>
+</div>
+</div>
+<div class="grid grid-rows-2 gap-grid-margin">
+<div class="border-2 border-outline p-6 flex items-center justify-center bg-surface relative overflow-hidden group">
+<img alt="Cotton texture" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="A soft, ethereal macro photograph of white cotton fabric billowing gently, with delicate sunlight filtering through the weave, creating a serene, almost spiritual mood characteristic of high-end lifestyle magazines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe1YB-p8F0f18E6WhFYKm_HtFLQx7ao2bMhA3pC1dx5O0I6HFbPeuSklvRHEnt-sUZz_J3EmVr6RTGk9P87qPJIN2LK7dnx_GvE4R1beAd9ysx2Dg054r9bSXy5cMTpNn5eiTAAjNbsC9VYuLzXbLq393hyktADqW--dsiZGdBuTMkhvuSR7P_2sb5HBU3C4LcTj08mZqYgYiF93-3XBwAqqprOWSbEG9QWfWZKbQkkOqqoTO-s8TP"/>
+<h3 class="relative z-10 font-headline-lg text-headline-lg bg-surface/80 px-4 py-2 border border-outline backdrop-blur-sm">Snuggle Essence</h3>
+</div>
+<div class="border-2 border-outline p-6 flex items-center justify-center bg-inverse-surface text-inverse-on-surface">
+<p class="font-label-caps text-label-caps uppercase text-center leading-loose">
+                            Explore the juxtaposition<br/>
+                            of textures,<br/>
+                            scents,<br/>
+                            and memories.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Shop Section (Placeholder) -->
+<section class="py-section-padding px-grid-margin border-b-2 border-outline bg-background" id="shop">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end border-b-2 border-outline pb-4 mb-8">
+<h2 class="font-headline-xl text-headline-xl">The Collection</h2>
+<a class="font-label-caps text-label-caps uppercase hover:text-primary underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-grid-margin">
+<!-- Product 1 -->
+<div class="border-2 border-outline bg-surface group flex flex-col">
+<div class="h-80 border-b-2 border-outline relative overflow-hidden bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A minimalist product shot of a bespoke denim tote bag with crisp, clean lines, placed against a stark, textured beige paper background, lit evenly to highlight the fabric's premium quality, styled like a catalog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwqrd03CYaMKkHrPU90RJjfE4IDEl_V8GWre42FDlk3jSbQmXf8Cf-eWB1_jXExF3I6BvRlwkr3sqFd6gtyR-l_kmuBhOnNBH40PmSTwD3ebw2fXkIjg4ql5yMvFRl637617aePmfZKjLw7AH1AgC4P1r7PPECTYntLnT0pzY281ZKAkE-6uN3NsP-x2ny8DU6EXPsyJjtektrVdU5e2C376jrac6_cxy39N5MwU0yq8be8WnryFYu"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary font-label-caps text-label-caps px-2 py-1 rotate-3">Exclusive</div>
+</div>
+<div class="p-4 flex flex-col flex-grow gap-2">
+<h3 class="font-headline-lg text-headline-lg text-lg">Heavy Canvas Tote</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">$85.00</p>
+<button class="mt-auto border border-outline py-2 font-label-caps text-label-caps uppercase hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors w-full">Add to Cart</button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="border-2 border-outline bg-surface group flex flex-col">
+<div class="h-80 border-b-2 border-outline relative overflow-hidden bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A sleek, modern glass bottle of fabric spray with a minimalist label featuring sharp typography, set against a soft, blurred background of white linen, shot with shallow depth of field in natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfBS3MyevJ0lO6JtiMZCBq5uXWJL1FgdDZJeczPgBdbeqwo-YdG_VLCC0CSkF_qtwh7sQnk0Ba7mmC4US8Z5-WAIgoWzw-uC9_Pr5pZZ43wAGKB7mc8CNyxZofjCuHggBJpo9bX7BArv3hHGb8nnxSPE47Jc4pi84IHpCJY-wi1jbZD1hIHtVa06lFlxTUiPzB0bvsiuP5jmTFGnsbFd-fMwSyQss_W4oFV4p8JGBvZfTvtQl8mdZA"/>
+</div>
+<div class="p-4 flex flex-col flex-grow gap-2">
+<h3 class="font-headline-lg text-headline-lg text-lg">Signature Fabric Spray</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">$42.00</p>
+<button class="mt-auto border border-outline py-2 font-label-caps text-label-caps uppercase hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors w-full">Add to Cart</button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="border-2 border-outline bg-surface group flex flex-col">
+<div class="h-80 border-b-2 border-outline relative overflow-hidden bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A rugged, vintage-style chore coat made of dark selvedge denim, neatly folded and presented on an industrial metal shelving unit, with dramatic, moody lighting emphasizing the texture and construction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh_UEXkcXpPBIgZELzIKoJ5QgbyNlye1i77I_Q4ttrdvmlXttv6ZFEGTloG2dDkgBRxX4mmVWyk4p-YceG17B_kKNPd4qfVfjWZpgtCCfCmnkqMe5LReIM4XcZe_-pfvYqY1ewNsFkQ9OKPLWtwtis0nYFvaTxLfWVx37FD3erIXZEyJOsdLfAOp7Rr1-rfBmwVAYsuHOJiGjogMDxNXJP0mZ1O53xZtO60wpnUbTOpiEBwzH2ATfa"/>
+</div>
+<div class="p-4 flex flex-col flex-grow gap-2">
+<h3 class="font-headline-lg text-headline-lg text-lg">Selvedge Chore Coat</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">$195.00</p>
+<button class="mt-auto border border-outline py-2 font-label-caps text-label-caps uppercase hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors w-full">Add to Cart</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary text-on-primary full-width border-t-2 border-on-surface flat no shadows flex flex-col md:flex-row justify-between items-center w-full px-grid-margin py-section-padding gap-gutter">
+<div class="font-headline-lg text-headline-lg text-on-primary mb-4 md:mb-0">
+            CRACKER HOUSE × SNUGGLE
+        </div>
+<div class="flex flex-col md:flex-row items-center gap-6">
+<span class="font-body-md text-body-md opacity-70">© 2024 CRACKER HOUSE & SNUGGLE. ALL RIGHTS RESERVED.</span>
+<div class="flex gap-4">
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 uppercase hover:text-tertiary-fixed transition-colors" href="#">Instagram</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 uppercase hover:text-tertiary-fixed transition-colors" href="#">Contact</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 uppercase hover:text-tertiary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 uppercase hover:text-tertiary-fixed transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+</body></html>

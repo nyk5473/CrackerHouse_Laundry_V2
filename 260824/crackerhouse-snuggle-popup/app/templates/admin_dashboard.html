@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 대시보드 - 크래커하우스 X 스너글</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="admin-shell">
+  <div class="admin-topbar">
+    <div>
+      <h1 style="margin:0; font-size:20px;">팝업 운영 관리자</h1>
+      <p class="muted" style="margin:4px 0 0;">{{ admin.display_name or admin.username }}님 환영합니다.</p>
+    </div>
+    <button class="btn btn-outline" style="width:auto; padding:9px 16px;" id="logout-btn">로그아웃</button>
+  </div>
+
+  <div class="stat-grid" id="stat-grid">
+    <div class="stat-card"><div class="num">-</div><div class="label">오늘 사전예약</div></div>
+    <div class="stat-card"><div class="num">-</div><div class="label">현장 대기중</div></div>
+    <div class="stat-card"><div class="num">-</div><div class="label">오늘 현장 입장완료</div></div>
+    <div class="stat-card"><div class="num">-</div><div class="label">방명록 (숨김)</div></div>
+    <div class="stat-card"><div class="num">-</div><div class="label">재고부족 상품</div></div>
+  </div>
+
+  <h2 class="section-title" style="margin:0;">예약 관리</h2>
+  <div class="admin-tabs">
+    <button class="admin-tab-btn active" data-type="ONSITE">현장예약</button>
+    <button class="admin-tab-btn" data-type="PRE">사전예약</button>
+  </div>
+
+  <div id="onsite-controls" style="margin-bottom:10px;">
+    <button class="btn btn-secondary" style="width:auto; padding:9px 16px;" id="call-next-btn">다음 대기번호 호출</button>
+  </div>
+  <div id="pre-controls" style="display:none; margin-bottom:10px;">
+    <label class="muted">날짜 필터: <input type="date" id="pre-date-filter"></label>
+  </div>
+
+  <div style="overflow-x:auto;">
+    <table class="data-table" id="reservation-table">
+      <thead><tr id="reservation-thead"></tr></thead>
+      <tbody id="reservation-tbody"></tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title" style="margin-top:32px;">방명록 관리</h2>
+  <div style="overflow-x:auto;">
+    <table class="data-table">
+      <thead><tr><th>작성자</th><th>내용</th><th>작성시각</th><th>상태</th><th>관리</th></tr></thead>
+      <tbody id="guestbook-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+let currentType = 'ONSITE';
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, { credentials: 'same-origin', ...opts });
+  if (res.status === 401) {
+    window.location.href = '/admin';
+    throw new Error('unauthorized');
+  }
+  return res;
+}
+
+async function loadDashboard() {
+  const res = await api('/api/admin/dashboard');
+  const d = await res.json();
+  const cards = document.querySelectorAll('#stat-grid .num');
+  cards[0].textContent = d.pre_reservations_today;
+  cards[1].textContent = d.onsite_waiting;
+  cards[2].textContent = d.onsite_visited_today;
+  cards[3].textContent = `${d.guestbook_total} (${d.guestbook_hidden})`;
+  cards[4].textContent = d.products_low_stock;
+}
+
+function statusButtons(r) {
+  const btns = [];
+  if (r.type === 'ONSITE') {
+    if (r.status === 'PENDING' || r.status === 'CALLED') {
+      btns.push(`<button class="mini-btn visited" data-action="VISITED" data-id="${r.id}">입장완료</button>`);
+    }
+  } else {
+    if (r.status === 'CONFIRMED') {
+      btns.push(`<button class="mini-btn visited" data-action="VISITED" data-id="${r.id}">방문완료</button>`);
+    }
+  }
+  if (r.status !== 'CANCELLED' && r.status !== 'VISITED') {
+    btns.push(`<button class="mini-btn cancel" data-action="CANCELLED" data-id="${r.id}">취소</button>`);
+  }
+  return btns.join(' ');
+}
+
+function renderReservations(list) {
+  const thead = document.getElementById('reservation-thead');
+  const tbody = document.getElementById('reservation-tbody');
+  if (currentType === 'ONSITE') {
+    thead.innerHTML = '<th>대기번호</th><th>이름</th><th>연락처</th><th>인원</th><th>상태</th><th>관리</th>';
+    tbody.innerHTML = list.map(r => `
+      <tr>
+        <td><strong>${r.queue_number ?? '-'}</strong></td>
+        <td>${r.name}</td>
+        <td>${r.phone}</td>
+        <td>${r.party_size}명</td>
+        <td><span class="tag-status tag-${r.status}">${r.status}</span></td>
+        <td>${statusButtons(r)}</td>
+      </tr>`).join('') || '<tr><td colspan="6" class="muted" style="text-align:center;">데이터가 없습니다.</td></tr>';
+  } else {
+    thead.innerHTML = '<th>방문일</th><th>이름</th><th>연락처</th><th>인원</th><th>상태</th><th>관리</th>';
+    tbody.innerHTML = list.map(r => `
+      <tr>
+        <td>${r.visit_date}</td>
+        <td>${r.name}</td>
+        <td>${r.phone}</td>
+        <td>${r.party_size}명</td>
+        <td><span class="tag-status tag-${r.status}">${r.status}</span></td>
+        <td>${statusButtons(r)}</td>
+      </tr>`).join('') || '<tr><td colspan="6" class="muted" style="text-align:center;">데이터가 없습니다.</td></tr>';
+  }
+
+  tbody.querySelectorAll('button[data-action]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      await api(`/api/reservations/${btn.dataset.id}/status`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ status: btn.dataset.action }),
+      });
+      loadReservations();
+      loadDashboard();
+    });
+  });
+}
+
+async function loadReservations() {
+  let url = `/api/reservations?type=${currentType}`;
+  if (currentType === 'PRE') {
+    const dateVal = document.getElementById('pre-date-filter').value;
+    if (dateVal) url += `&date=${dateVal}`;
+  } else {
+    const today = new Date().toISOString().slice(0, 10);
+    url += `&date=${today}`;
+  }
+  const res = await api(url);
+  const list = await res.json();
+  renderReservations(list);
+}
+
+document.querySelectorAll('.admin-tab-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-tab-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.type;
+    document.getElementById('onsite-controls').style.display = currentType === 'ONSITE' ? 'block' : 'none';
+    document.getElementById('pre-controls').style.display = currentType === 'PRE' ? 'block' : 'none';
+    loadReservations();
+  });
+});
+
+document.getElementById('call-next-btn').addEventListener('click', async () => {
+  const res = await api('/api/reservations/onsite/call-next', { method: 'POST' });
+  if (!res.ok) {
+    const data = await res.json();
+    alert(data.detail || '호출할 대기 인원이 없습니다.');
+    return;
+  }
+  loadReservations();
+  loadDashboard();
+});
+
+document.getElementById('pre-date-filter').addEventListener('change', loadReservations);
+
+async function loadGuestbook() {
+  const res = await api('/api/admin/guestbook?include_hidden=true');
+  const list = await res.json();
+  const tbody = document.getElementById('guestbook-tbody');
+  tbody.innerHTML = list.map((g) => `
+    <tr>
+      <td>${g.sticker ? g.sticker + ' ' : ''}${g.nickname}</td>
+      <td>${g.message}</td>
+      <td>${new Date(g.created_at).toLocaleString('ko-KR')}</td>
+      <td>${g.is_visible === false ? '숨김' : '노출중'}</td>
+      <td>
+        <button class="mini-btn call" data-restore="${g.id}">노출</button>
+        <button class="mini-btn cancel" data-hide="${g.id}">숨김</button>
+      </td>
+    </tr>`).join('') || '<tr><td colspan="5" class="muted" style="text-align:center;">방명록이 없습니다.</td></tr>';
+
+  tbody.querySelectorAll('button[data-hide]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      await api(`/api/guestbook/${btn.dataset.hide}`, { method: 'DELETE' });
+      loadGuestbook();
+      loadDashboard();
+    });
+  });
+  tbody.querySelectorAll('button[data-restore]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      await api(`/api/admin/guestbook/${btn.dataset.restore}/restore`, { method: 'POST' });
+      loadGuestbook();
+      loadDashboard();
+    });
+  });
+}
+
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  await api('/api/admin/logout', { method: 'POST' });
+  window.location.href = '/admin';
+});
+
+document.getElementById('pre-date-filter').value = new Date().toISOString().slice(0, 10);
+loadDashboard();
+loadReservations();
+loadGuestbook();
+</script>
+</body>
+</html>

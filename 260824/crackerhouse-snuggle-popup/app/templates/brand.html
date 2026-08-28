@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}브랜드소개 - 크래커하우스 X 스너글{% endblock %}
+{% block content %}
+<section class="section" style="padding-bottom:0;">
+  <h2 class="section-title">브랜드소개</h2>
+  <div class="brand-tabs">
+    {% for b in brands %}
+    <a class="brand-tab {{ 'active-' + b.slug.value if active and active.id == b.id else '' }}" href="/brand?brand={{ b.slug.value }}">{{ b.name_kr }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if active %}
+<section class="hero" style="background:{{ active.color_primary }};">
+  <img src="{{ active.hero_image_url }}" alt="{{ active.name_kr }} 대표 이미지">
+  <div class="hero-copy">
+    <div class="eyebrow">{{ active.category }}</div>
+    <h1>{{ active.name_kr }} <span class="muted" style="color:#fff; opacity:0.7; font-size:14px;">{{ active.name_en }}</span></h1>
+    <p>{{ active.tagline }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card"><div class="card-body">
+    <p style="white-space:pre-line;">{{ active.description }}</p>
+    <div style="margin-top:14px; display:flex; gap:10px;">
+      {% if active.instagram_url %}<a class="chip" href="{{ active.instagram_url }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+      {% if active.website_url %}<a class="chip" href="{{ active.website_url }}" target="_blank" rel="noopener">Website</a>{% endif %}
+    </div>
+  </div></div>
+  <a class="btn btn-primary" style="margin-top:16px;" href="/products?brand={{ active.slug.value }}">{{ active.name_kr }} 상품 보러가기</a>
+</section>
+{% else %}
+<section class="section"><p class="muted">등록된 브랜드가 없습니다.</p></section>
+{% endif %}
+{% endblock %}

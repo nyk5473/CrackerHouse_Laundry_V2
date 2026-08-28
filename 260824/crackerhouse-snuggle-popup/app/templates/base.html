@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}크래커하우스 X 스너글 팝업스토어{% endblock %}</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="logo" href="/">CRACKER<span class="x">X</span>SNUGGLE</a>
+    <nav>
+      <a href="/brand" class="{{ 'active' if request.url.path == '/brand' else '' }}">브랜드소개</a>
+      <a href="/popup" class="{{ 'active' if request.url.path == '/popup' else '' }}">팝업정보</a>
+      <a href="/products" class="{{ 'active' if request.url.path == '/products' else '' }}">상품</a>
+      <a href="/guestbook" class="{{ 'active' if request.url.path == '/guestbook' else '' }}">방명록</a>
+      <a href="/register" class="{{ 'active' if request.url.path == '/register' else '' }}">사전등록</a>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="footer">
+    스타필드 빌리지 팝업스토어 · CRACKERHOUSE X SNUGGLE<br>
+    <a href="/kiosk">현장예약 키오스크 바로가기</a> · <a href="/admin">관리자</a>
+  </footer>
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

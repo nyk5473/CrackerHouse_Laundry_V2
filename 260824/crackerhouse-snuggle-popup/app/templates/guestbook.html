@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}방명록 - 크래커하우스 X 스너글{% endblock %}
+{% block content %}
+<section class="section">
+  <h2 class="section-title">방명록 남기기</h2>
+  <div id="gb-alert"></div>
+  <form id="gb-form">
+    <div class="field">
+      <label for="nickname">닉네임</label>
+      <input type="text" id="nickname" maxlength="50" required placeholder="예: 크래커러버">
+    </div>
+    <div class="field">
+      <label for="sticker">스티커 (선택)</label>
+      <select id="sticker">
+        <option value="">선택 안함</option>
+        <option value="❤️">❤️</option>
+        <option value="🧺">🧺 (스너글)</option>
+        <option value="🧥">🧥 (크래커하우스)</option>
+        <option value="✨">✨</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">메시지</label>
+      <textarea id="message" maxlength="500" required placeholder="팝업 방문 후기를 남겨주세요!"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">등록하기</button>
+  </form>
+</section>
+
+<section class="section">
+  <h2 class="section-title">방문객 메시지</h2>
+  <div class="card"><div class="card-body" id="gb-list">
+    {% for g in entries %}
+      <div class="gb-entry">
+        <div class="gb-head"><span>{{ g.sticker or '' }} {{ g.nickname }}</span><span class="gb-time">{{ g.created_at.strftime('%Y/%m/%d %H:%M') }}</span></div>
+        <div class="gb-msg">{{ g.message }}</div>
+      </div>
+    {% else %}
+      <p class="muted">아직 방명록이 없어요. 첫 메시지를 남겨보세요!</p>
+    {% endfor %}
+  </div></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const form = document.getElementById('gb-form');
+const alertBox = document.getElementById('gb-alert');
+const list = document.getElementById('gb-list');
+
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  alertBox.innerHTML = '';
+  const payload = {
+    nickname: document.getElementById('nickname').value.trim(),
+    message: document.getElementById('message').value.trim(),
+    sticker: document.getElementById('sticker').value || null,
+  };
+  try {
+    const res = await fetch('/api/guestbook', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alertBox.innerHTML = `<div class="alert alert-error">${data.detail || '등록에 실패했습니다.'}</div>`;
+      return;
+    }
+    const entryHtml = `<div class="gb-entry">
+      <div class="gb-head"><span>${data.sticker ? escapeHtml(data.sticker) + ' ' : ''}${escapeHtml(data.nickname)}</span>
+      <span class="gb-time">방금 전</span></div>
+      <div class="gb-msg">${escapeHtml(data.message)}</div></div>`;
+    if (list.querySelector('.muted')) list.innerHTML = '';
+    list.insertAdjacentHTML('afterbegin', entryHtml);
+    form.reset();
+    alertBox.innerHTML = `<div class="alert alert-success">방명록이 등록되었습니다. 감사합니다!</div>`;
+  } catch (err) {
+    alertBox.innerHTML = `<div class="alert alert-error">네트워크 오류가 발생했습니다.</div>`;
+  }
+});
+</script>
+{% endblock %}

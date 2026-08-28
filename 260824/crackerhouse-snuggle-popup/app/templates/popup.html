@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}팝업정보 - 크래커하우스 X 스너글{% endblock %}
+{% block content %}
+<section class="hero">
+  <img src="{{ popup.hero_image_url if popup else '/static/img/popup_hero.svg' }}" alt="팝업 대표 이미지">
+  <div class="hero-copy">
+    <div class="eyebrow">POP-UP INFO</div>
+    <h1>{{ popup.title if popup else '팝업 정보' }}</h1>
+  </div>
+</section>
+
+{% if popup %}
+<section class="section">
+  <div class="card"><div class="card-body">
+    <table style="width:100%; font-size:13.5px; border-collapse:collapse;">
+      <tr><td class="muted" style="padding:6px 0; width:80px;">장소</td><td>{{ popup.location_name }}</td></tr>
+      <tr><td class="muted" style="padding:6px 0;">주소</td><td>{{ popup.address }}</td></tr>
+      <tr><td class="muted" style="padding:6px 0;">위치</td><td>{{ popup.floor_info }}</td></tr>
+      <tr><td class="muted" style="padding:6px 0;">기간</td><td>{{ popup.start_date }} ~ {{ popup.end_date }}</td></tr>
+      <tr><td class="muted" style="padding:6px 0;">시간</td><td>{{ popup.open_time.strftime('%H:%M') }} - {{ popup.close_time.strftime('%H:%M') }}</td></tr>
+    </table>
+  </div></div>
+
+  <div class="card" style="margin-top:12px;"><div class="card-body">
+    <strong>소개</strong>
+    <p style="margin:8px 0 0;">{{ popup.description }}</p>
+  </div></div>
+
+  {% if popup.notice %}
+  <div class="alert alert-error" style="margin-top:12px;">{{ popup.notice }}</div>
+  {% endif %}
+</section>
+{% endif %}
+
+<section class="section">
+  <h2 class="section-title">체험존</h2>
+  {% for z in zones %}
+  <div class="card">
+    <img src="{{ z.image_url }}" alt="{{ z.name }}">
+    <div class="card-body">
+      <strong>{{ z.name }}</strong>
+      {% if z.brand %}<span class="chip" style="margin-left:6px; background:{{ z.brand.color_primary }}22; color:{{ z.brand.color_primary }};">{{ z.brand.name_kr }}</span>{% else %}<span class="chip">공용</span>{% endif %}
+      <p class="muted" style="margin:6px 0;">{{ z.description }}</p>
+      <p class="muted">소요시간 약 {{ z.duration_minutes }}분 · 회당 최대 {{ z.capacity_per_slot }}명</p>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">등록된 체험존이 없습니다.</p>
+  {% endfor %}
+</section>
+
+<section class="section" style="padding-top:0;">
+  <a class="btn btn-primary" href="/register">이 팝업 사전예약 하기</a>
+</section>
+{% endblock %}

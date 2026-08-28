@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRACKER HOUSE × SNUGGLE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#fff8f5",
+                      "on-surface": "#28180c",
+                      "on-secondary-container": "#2c5b82",
+                      "on-tertiary-fixed-variant": "#7e2c00",
+                      "surface-container-highest": "#fddcc9",
+                      "primary-fixed-dim": "#ffb4ab",
+                      "surface-container": "#ffeade",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#ffb4ab",
+                      "inverse-surface": "#402c1f",
+                      "secondary": "#336289",
+                      "tertiary-container": "#be4600",
+                      "tertiary-fixed-dim": "#ffb598",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#a8372f",
+                      "primary-container": "#bc453c",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#58413f",
+                      "on-primary-fixed": "#410002",
+                      "on-primary": "#ffffff",
+                      "on-primary-container": "#ffecea",
+                      "outline": "#8b716e",
+                      "on-secondary-fixed-variant": "#164a6f",
+                      "tertiary": "#963500",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#cde5ff",
+                      "inverse-on-surface": "#ffede4",
+                      "tertiary-fixed": "#ffdbce",
+                      "surface-variant": "#fddcc9",
+                      "primary": "#9b2d27",
+                      "background": "#fff8f5",
+                      "on-tertiary-container": "#ffede7",
+                      "surface-container-low": "#fff1ea",
+                      "outline-variant": "#dfbfbc",
+                      "secondary-fixed-dim": "#9ecbf7",
+                      "secondary-container": "#a7d3ff",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#28180c",
+                      "on-primary-fixed-variant": "#881f1a",
+                      "on-secondary-fixed": "#001d32",
+                      "primary-fixed": "#ffdad6",
+                      "on-tertiary-fixed": "#370e00",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#f4d4c1",
+                      "surface-bright": "#fff8f5",
+                      "surface-container-high": "#ffe3d3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "block-gap": "2px",
+                      "grid-margin": "2rem",
+                      "section-padding": "4rem",
+                      "gutter": "1rem"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Playfair Display"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "headline-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "headline-lg": [
+                              "Playfair Display"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "Space Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "52px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "84px",
+                              {
+                                      "lineHeight": "90px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "38px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            position: relative;
+        }
+        /* Film Grain Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .grain-img {
+            position: relative;
+        }
+        .grain-img::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+        .block-border {
+            border: 2px solid theme('colors.on-surface');
+        }
+        .block-border-bottom {
+            border-bottom: 2px solid theme('colors.on-surface');
+        }
+        .block-border-top {
+            border-top: 2px solid theme('colors.on-surface');
+        }
+        .block-border-right {
+            border-right: 2px solid theme('colors.on-surface');
+        }
+        .vintage-btn {
+            background-color: theme('colors.on-surface');
+            color: theme('colors.surface');
+            border: 1px solid theme('colors.on-surface');
+            transition: all 0.2s ease;
+        }
+        .vintage-btn:hover {
+            background-color: theme('colors.tertiary-container');
+            color: theme('colors.on-tertiary-container');
+        }
+        .image-filter {
+            filter: contrast(1.1) sepia(0.2) saturate(0.9);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar -->
+<header class="bg-primary dark:bg-primary text-on-primary docked full-width top-0 border-b-2 border-on-surface flat no shadows flex justify-between items-center w-full px-grid-margin py-4 sticky top-0 z-50">
+<div class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tighter">
+            CRACKER HOUSE × SNUGGLE
+        </div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-label-caps text-label-caps text-on-primary border-b-2 border-on-primary pb-1 hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors translate-y-0.5 duration-100 uppercase" href="#">Intro</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-80 hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors uppercase" href="#zones">Zones</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-80 hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors uppercase" href="#shop">Shop</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-80 hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors uppercase" href="#guestbook">Guestbook</a>
+</nav>
+<button class="vintage-btn font-label-caps text-label-caps px-4 py-2 uppercase hidden md:block">
+            Pre-register
+        </button>
+<button class="md:hidden text-on-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col gap-block-gap bg-on-surface pb-block-gap">
+<!-- Hero Section -->
+<section class="w-full bg-surface min-h-[80vh] flex flex-col relative block-border">
+<div class="flex-grow flex flex-col md:flex-row relative">
+<!-- Large Image Area -->
+<div class="w-full md:w-2/3 h-[50vh] md:h-auto relative grain-img border-b-2 md:border-b-0 md:border-r-2 border-on-surface overflow-hidden">
+<img class="w-full h-full object-cover image-filter" data-alt="A vintage editorial style fashion photograph of a model in a laundromat setting. The model is wearing a mix of high-fashion and casual streetwear. Warm, grainy film texture, strong contrast, cinematic lighting. Dominant colors are muted oranges, deep browns, and soft blues. The mood is nostalgic and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf0fglYjS4nkk9SVPnN4PkDR3brMRmc6tc5KIL2KX5jxxoMlpJt2BJRrLJEZftVsjahImmwZT3dk_f3U9QmVe4QaphtoUkA27aILT9Olo6rdz40qxQHmMV2AHGZrHEhqRFo_ToRCCYrU1Sygm35clvwcDOmuZjzb3iCNcdKea7MCC8SN-qabWBm2lsqG7wB4zI1DaxfdKXS6TXtxNfonR8xPC7IjGiWEAlnz0YNJd7sCMPCo-7g-IY"/>
+<!-- Sticker -->
+<div class="absolute top-8 left-8 w-24 h-24 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center text-center font-label-caps text-label-caps uppercase -rotate-6 shadow-md border border-on-surface z-10">
+                        Pop-Up<br/>Exclusive
+                    </div>
+</div>
+<!-- Text Area -->
+<div class="w-full md:w-1/3 p-section-padding flex flex-col justify-center items-start bg-surface-container-highest">
+<h1 class="font-display-lg text-display-lg md:text-[64px] md:leading-[70px] text-on-surface uppercase mb-6 break-words hyphens-auto">
+                        Clean<br/>Laundry,<br/>Dirty<br/>Denim.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-sm">
+                        An unexpected collision of high-fashion rigor and utilitarian warmth. Discover the curated collection at our exclusive pop-up space.
+                    </p>
+<button class="vintage-btn font-label-caps text-label-caps px-8 py-4 uppercase w-full md:w-auto">
+                        Pre-Register Now
+                    </button>
+</div>
+</div>
+<!-- Film Strip Edge Details -->
+<div class="absolute top-0 bottom-0 left-0 w-8 border-r-2 border-on-surface flex flex-col justify-between py-4 items-center bg-surface hidden md:flex pointer-events-none">
+<span class="font-label-caps text-[10px] rotate-90 tracking-widest">KODAK PORTRA</span>
+<div class="w-2 h-2 rounded-full bg-on-surface opacity-30"></div>
+<span class="font-label-caps text-[10px] rotate-90 tracking-widest">400</span>
+</div>
+</section>
+<!-- Brand Intro Section -->
+<section class="w-full bg-surface block-border grid grid-cols-1 md:grid-cols-2" id="intro">
+<!-- Cracker House -->
+<div class="p-section-padding border-b-2 md:border-b-0 md:border-r-2 border-on-surface flex flex-col gap-6 relative overflow-hidden group">
+<div class="absolute -right-10 -bottom-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
+<span class="material-symbols-outlined text-[300px]">checkroom</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface uppercase">Cracker<br/>House</h2>
+<div class="w-full h-64 grain-img block-border">
+<img class="w-full h-full object-cover image-filter" data-alt="Close up shot of heavy textured denim and raw cotton fabrics folded neatly. Vintage magazine editorial style, soft natural light creating deep shadows. High contrast, warm film grain. Focus on the raw materials and craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzIxAXK5qUvKXbsf2olSkBjNal4h3c_aJkIXf7N69fz3IO6w_jt22Twe-m2YtczGYGl0gJxyw6Y6C78U-bZosF1mQPqwF0diocEjzL2uCkU0DJPv17-G0x_u4Y7mHyY9qw9mzeGKMNi3CbNCoSd9Jnzh1iDKeZzaqJioTuBk2O8LjhKQF_D2ZGY7kfNKqvJg4k1oms_i4E2sssMnB6tDhGNOsMdkMCtwTDix_vGKgguYnDAxzMGPzq"/>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Redefining modern silhouettes with raw, uncompromising materials. Cracker House brings an architectural approach to everyday wear, focusing on structure, drape, and the longevity of physical garments in a digital age.
+                </p>
+</div>
+<!-- Snuggle -->
+<div class="p-section-padding flex flex-col gap-6 bg-surface-container-low relative overflow-hidden group">
+<div class="absolute -right-10 -bottom-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
+<span class="material-symbols-outlined text-[300px]">local_laundry_service</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface uppercase text-right md:text-left">Snuggle</h2>
+<div class="w-full h-64 grain-img block-border">
+<img class="w-full h-full object-cover image-filter" data-alt="A minimalist composition of white laundry detergent bottles and soft towels against a stark white background. Highly stylized product photography, reminiscent of 90s conceptual art. Clean, bright, but with a distinct analog film grain and slight color shift." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTmJagtbfzaHOcGw-9Ajvx4IP8RAFfJvdjNwCE7zW_TCQ-fIWnhw4O6sp1xPTD37e4tXTxhYGu_uomFJzG21AscnxqhY58lfk52xCHbzPr9DovTndwkpcLgLhDrU006cl9giXcF-8luhM3wKJnfkBrQ4FVhWbiBd86ybNQ4why2iqkXy-xPmtERlmi2trhSHypXyOc759XyQmT2VxOps39nXGrzJqGgXJbrXHfTzbrmuZnqtS94WXZ"/>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    The quiet science of care. Snuggle provides the foundational chemistry required to maintain the integrity of premium textiles. It is the invisible force that preserves the architecture of your wardrobe.
+                </p>
+</div>
+</section>
+<!-- Experience Zones -->
+<section class="w-full bg-surface block-border" id="zones">
+<div class="border-b-2 border-on-surface p-6 bg-secondary text-on-secondary">
+<h2 class="font-headline-lg text-headline-lg uppercase text-center tracking-wide">The Pop-Up Experience</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+<!-- Zone 1 -->
+<div class="p-8 border-b-2 md:border-b-0 md:border-r-2 border-on-surface flex flex-col gap-4">
+<span class="font-label-caps text-label-caps bg-on-surface text-surface px-2 py-1 inline-block w-max">ZONE 01</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile uppercase">The Wash Room</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">An immersive sensory installation exploring the scents and sounds of a conceptual laundromat.</p>
+<div class="w-full h-48 grain-img block-border mt-4">
+<img class="w-full h-full object-cover image-filter grayscale" data-alt="Abstract architectural shot of a modern, conceptual laundromat space. Metallic surfaces, neon lighting, steam. Brutalist aesthetic mixed with clean industrial design. Vintage film grain texture, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCigb61fr0qq7H-DlzwUGFge1x69gvRAdHxiJBRtdm9_M_R1rzJWhaimP3d_A8lwk8_bEeZ-sSFBn-MlnxArAGUN4qV5pshFOXA_FImprKoEyc_rW03LJz3AAtfbiGitBGTag89LfoKbqBM-8VUk2wZ5aWPKYnZFoU_oi-d4Y0yhpRJ7yF6gcZmdvqnSq0rxcCnSHD8RNNjU1c6bFRiLOeDQRariJ0h3dMf-YMQygfJxxVN3R03gH_9"/>
+</div>
+</div>
+<!-- Zone 2 -->
+<div class="p-8 border-b-2 md:border-b-0 md:border-r-2 border-on-surface flex flex-col gap-4 bg-surface-container">
+<span class="font-label-caps text-label-caps bg-on-surface text-surface px-2 py-1 inline-block w-max">ZONE 02</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile uppercase">The Archive</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">A curated gallery of Cracker House's foundational pieces, presented alongside their chemical care pairings.</p>
+<div class="w-full h-48 grain-img block-border mt-4">
+<img class="w-full h-full object-cover image-filter" data-alt="Garments hanging in a stark, gallery-like setting. Minimalist display racks, clinical lighting, concrete floors. The aesthetic is raw and curatorial, like a museum exhibit. Heavy film grain overlay." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Y7CzHiOfnZ_Vfr6t1YPQxrsE5ymUad5YKz5Yu0RIGmCFb3mvfUeybE-rA52C8waRO-LOZbEA-WBAGbVeiKoQQPJbs2I03y6Izj4dWN3eCXzp_FT69XB47KsMfUYiCT5Rn3ANwoiIetb5iv_exPZnDob-T3mKnFaRhdOtUFAjSl8zFDDJ4_EusnLOCTg5cFFrLOfXqOkO1TitBfIa9ACkHpIiPApmb0gMFnPNJIOuy-DcTcqxzbW7"/>
+</div>
+</div>
+<!-- Zone 3 -->
+<div class="p-8 flex flex-col gap-4">
+<span class="font-label-caps text-label-caps bg-on-surface text-surface px-2 py-1 inline-block w-max">ZONE 03</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile uppercase">The Kiosk</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Exclusive collaborative merchandise, limited edition detergent formulations, and lifestyle accessories.</p>
+<div class="w-full h-48 grain-img block-border mt-4">
+<img class="w-full h-full object-cover image-filter" data-alt="A small, brutalist retail kiosk made of plywood and steel. Products are arranged with meticulous geometric precision. Harsh, directional lighting creating strong shadows. Vintage analog photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwcoKJLSgUEpsD2H32RuHChWnTlTbP81Z8vBT19dPHVifNi1VU5iLswBb48Hi0eELvk-BVZ1_T57McOa2H3CPfcW9MantMEty0eJSAp_LkmvVB7x-L-wgD4EqfKfNppaljUypzi4aAscfamMroGT5ay96JZGuA6PMZKBXk1_JxmI-T1s6LBFlmamNUs0Y1FE_mrPyyQn7lEmjKr7Bh4eL6n2faqyKlAKy0vfM1D5IRvDnhaTatuKRR"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary text-on-primary full-width border-t-2 border-on-surface flat no shadows flex flex-col md:flex-row justify-between items-center w-full px-grid-margin py-section-padding gap-gutter">
+<div class="font-headline-lg text-headline-lg text-on-primary font-bold">
+            CRACKER HOUSE × SNUGGLE
+        </div>
+<nav class="flex flex-wrap justify-center gap-6">
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 hover:text-tertiary-fixed transition-colors uppercase" href="#">Instagram</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 hover:text-tertiary-fixed transition-colors uppercase" href="#">Contact</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 hover:text-tertiary-fixed transition-colors uppercase" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-primary opacity-70 hover:text-tertiary-fixed transition-colors uppercase" href="#">Terms</a>
+</nav>
+<div class="font-body-md text-body-md opacity-70 text-center md:text-right mt-4 md:mt-0">
+            © 2024 CRACKER HOUSE &amp; SNUGGLE. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <img src="{{ popup.hero_image_url if popup else '/static/img/popup_hero.svg' }}" alt="팝업 대표 이미지">
+  <div class="hero-copy">
+    <div class="eyebrow">{{ popup.location_name if popup else 'STARFIELD VILLAGE' }} POP-UP</div>
+    <h1>{{ popup.title if popup else '크래커하우스 X 스너글 팝업스토어' }}</h1>
+    <p>{{ popup.subtitle if popup else '바삭하게 입고, 포근하게 세탁하기' }}</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:18px;">
+  <div class="btn-block-group">
+    <a class="btn btn-primary" href="/register">사전예약 하러 가기</a>
+    <a class="btn btn-secondary" href="/kiosk">현장예약(키오스크)으로 바로 등록</a>
+  </div>
+  {% if popup %}
+  <p class="muted" style="margin-top:10px; text-align:center;">
+    {{ popup.start_date }} ~ {{ popup.end_date }} · {{ popup.open_time.strftime('%H:%M') }} - {{ popup.close_time.strftime('%H:%M') }}
+  </p>
+  {% endif %}
+</section>
+
+<section class="section">
+  <h2 class="section-title">브랜드소개</h2>
+  <div class="grid-2">
+    {% for b in brands %}
+    <a class="card" href="/brand?brand={{ b.slug.value }}">
+      <div style="background:{{ b.color_primary }}; height:90px; display:flex; align-items:center; justify-content:center;">
+        <img src="{{ b.logo_url }}" alt="{{ b.name_kr }} 로고" style="width:48px;height:48px;border-radius:50%;">
+      </div>
+      <div class="card-body">
+        <strong>{{ b.name_kr }}</strong>
+        <div class="muted">{{ b.category }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">팝업정보 <span class="badge">체험존</span></h2>
+  <div class="card">
+    <div class="card-body">
+      <strong>{{ popup.location_name if popup else '스타필드 빌리지' }}</strong>
+      <p class="muted" style="margin:6px 0 0;">{{ popup.floor_info if popup else '' }}</p>
+      <a class="btn btn-outline" style="margin-top:12px;" href="/popup">자세히 보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">상품</h2>
+  <a class="btn btn-outline" href="/products">크래커하우스 X 스너글 상품 보러가기</a>
+</section>
+
+<section class="section">
+  <h2 class="section-title">방명록</h2>
+  {% if guestbook_preview %}
+    <div class="card"><div class="card-body">
+    {% for g in guestbook_preview %}
+      <div class="gb-entry">
+        <div class="gb-head"><span>{{ g.sticker or '' }} {{ g.nickname }}</span><span class="gb-time">{{ g.created_at.strftime('%m/%d %H:%M') }}</span></div>
+        <div class="gb-msg">{{ g.message }}</div>
+      </div>
+    {% endfor %}
+    </div></div>
+  {% else %}
+    <p class="muted">아직 방명록이 없어요. 첫 메시지를 남겨보세요!</p>
+  {% endif %}
+  <a class="btn btn-outline" style="margin-top:12px;" href="/guestbook">방명록 전체 보기 / 남기기</a>
+</section>
+{% endblock %}

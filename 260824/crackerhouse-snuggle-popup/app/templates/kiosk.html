@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>현장예약 키오스크 - 크래커하우스 X 스너글</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="kiosk-wrap">
+  <div id="kiosk-form-view">
+    <h1>현장예약</h1>
+    <p class="sub">CRACKERHOUSE X SNUGGLE POP-UP · 출입구 현장예약</p>
+    <div class="kiosk-card">
+      <div id="kiosk-alert"></div>
+      <form id="kiosk-form">
+        <div class="field" style="text-align:left;">
+          <label for="k-name">이름</label>
+          <input type="text" id="k-name" required maxlength="50">
+        </div>
+        <div class="field" style="text-align:left;">
+          <label for="k-phone">연락처</label>
+          <input type="tel" id="k-phone" placeholder="010-0000-0000" required>
+        </div>
+        <div class="field" style="text-align:left;">
+          <label for="k-party">방문 인원</label>
+          <input type="number" id="k-party" min="1" max="20" value="1" required>
+        </div>
+        <div class="field" style="text-align:left;">
+          <label style="display:flex; align-items:center; gap:8px; font-weight:400;">
+            <input type="checkbox" id="k-marketing" style="width:auto;"> 홍보/이벤트 정보 수신 동의 (선택)
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="font-size:17px; padding:16px;">대기번호 받기</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="kiosk-result-view" style="display:none;">
+    <p class="sub">대기번호를 확인해주세요</p>
+    <div class="kiosk-card">
+      <p class="muted">나의 대기번호</p>
+      <div class="kiosk-number" id="k-number">-</div>
+      <p class="muted" id="k-waiting"></p>
+      <button class="btn btn-outline" style="margin-top:18px;" id="k-reset">처음 화면으로</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const formView = document.getElementById('kiosk-form-view');
+const resultView = document.getElementById('kiosk-result-view');
+const alertBox = document.getElementById('kiosk-alert');
+
+document.getElementById('kiosk-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  alertBox.innerHTML = '';
+  const payload = {
+    name: document.getElementById('k-name').value.trim(),
+    phone: document.getElementById('k-phone').value.trim(),
+    party_size: parseInt(document.getElementById('k-party').value, 10),
+    marketing_agree: document.getElementById('k-marketing').checked,
+  };
+  const res = await fetch('/api/reservations/onsite', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    alertBox.innerHTML = `<div class="alert alert-error">${data.detail || '등록에 실패했습니다. 직원에게 문의해주세요.'}</div>`;
+    return;
+  }
+  document.getElementById('k-number').textContent = data.queue_number;
+
+  const statusRes = await fetch('/api/reservations/onsite/queue-status');
+  const status = await statusRes.json();
+  document.getElementById('k-waiting').textContent = `현재 대기 인원: ${status.waiting_count}명`;
+
+  formView.style.display = 'none';
+  resultView.style.display = 'block';
+});
+
+document.getElementById('k-reset').addEventListener('click', () => {
+  document.getElementById('kiosk-form').reset();
+  resultView.style.display = 'none';
+  formView.style.display = 'block';
+});
+</script>
+</body>
+</html>

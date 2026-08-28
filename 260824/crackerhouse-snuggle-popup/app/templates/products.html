@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}상품 - 크래커하우스 X 스너글{% endblock %}
+{% block content %}
+<section class="section" style="padding-bottom:0;">
+  <h2 class="section-title">상품</h2>
+  <div class="brand-tabs">
+    {% for b in brands %}
+    <a class="brand-tab {{ 'active-' + b.slug.value if active and active.id == b.id else '' }}" href="/products?brand={{ b.slug.value }}">{{ b.name_kr }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  {% for p in products %}
+  <div class="card">
+    <img src="{{ p.image_url }}" alt="{{ p.name }}">
+    <div class="card-body">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <strong>{{ p.name }}</strong>
+        {% if p.is_collab_exclusive %}<span class="chip" style="background:{{ active.color_primary }}22; color:{{ active.color_primary }};">팝업 단독</span>{% endif %}
+      </div>
+      <p class="muted" style="margin:6px 0;">{{ p.description }}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="price">{{ "{:,}".format(p.price) }}원</span>
+        <span class="muted">재고 {{ p.stock_qty }}개</span>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p class="muted">등록된 상품이 없습니다.</p>
+  {% endfor %}
+</section>
+{% endblock %}

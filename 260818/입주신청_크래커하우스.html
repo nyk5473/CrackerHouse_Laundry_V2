@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임시입주 : 크래커하우스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Rye&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --cream:#F4EBDD;
+    --paper:#FBF6EC;
+    --rust:#BE5B34;
+    --rust-dark:#9A4526;
+    --mustard:#D9A441;
+    --olive:#4E5A3E;
+    --ink:#2B2118;
+    --ink-soft:#5B4E42;
+    --line:#D8C7AE;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(43,33,24,0.05) 1px, transparent 0);
+    background-size:22px 22px;
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+  }
+  .display{font-family:'DM Serif Display', serif;}
+  .stamp-font{font-family:'Rye', serif;}
+
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(244,235,221,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1.5px solid var(--line);
+  }
+  header .wordmark{
+    font-family:'Rye', serif;
+    font-size:18px;
+    color:var(--rust-dark);
+    letter-spacing:0.5px;
+  }
+  header .tag{
+    font-size:12px;
+    padding:5px 12px;
+    border:1px solid var(--olive);
+    border-radius:999px;
+    color:var(--olive);
+    letter-spacing:1px;
+  }
+
+  .hero{
+    max-width:880px; margin:0 auto;
+    padding:88px 24px 56px;
+    text-align:center;
+  }
+  .hero .eyebrow{
+    font-size:13px; letter-spacing:3px; color:var(--rust);
+    text-transform:uppercase; margin-bottom:18px; font-weight:600;
+  }
+  .hero h1{
+    font-size:clamp(36px, 6vw, 58px);
+    margin:0 0 20px;
+    line-height:1.25;
+    color:var(--ink);
+  }
+  .hero h1 span{color:var(--rust);}
+  .hero p.lead{
+    font-size:17px; color:var(--ink-soft);
+    max-width:520px; margin:0 auto 34px;
+  }
+  .hero-info{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:38px;
+  }
+  .pill{
+    background:var(--paper); border:1px solid var(--line);
+    padding:8px 16px; border-radius:999px; font-size:13px; color:var(--ink-soft);
+    display:flex; align-items:center; gap:6px;
+  }
+  .cta{
+    display:inline-block; background:var(--rust); color:#fff;
+    padding:14px 34px; border-radius:8px; font-weight:600; font-size:15px;
+    text-decoration:none; box-shadow:0 6px 0 var(--rust-dark);
+    transition:transform .12s ease;
+  }
+  .cta:hover{transform:translateY(-2px);}
+  .cta:active{transform:translateY(2px); box-shadow:0 3px 0 var(--rust-dark);}
+
+  .frame{
+    max-width:880px; margin:0 auto 64px;
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:6px;
+  }
+  .frame-inner{
+    background:var(--paper);
+    border-radius:10px;
+    padding:40px;
+  }
+
+  section.story{max-width:880px; margin:0 auto; padding:20px 24px 70px;}
+  .story-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:44px; align-items:center;
+  }
+  @media (max-width:720px){ .story-grid{grid-template-columns:1fr;} }
+  .story h2{font-size:28px; margin:0 0 16px;}
+  .story p{color:var(--ink-soft); font-size:15px; margin:0 0 14px;}
+  .story .highlight{
+    color:var(--olive); font-weight:600;
+  }
+  .room-illustration{
+    aspect-ratio:4/3;
+    background:linear-gradient(180deg, #EADFC9 0%, #EADFC9 62%, var(--olive) 62%, var(--olive) 100%);
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .room-illustration::before{ /* window */
+    content:"";
+    position:absolute; top:16%; left:12%; width:30%; height:34%;
+    background:#F4EBDD; border:6px solid var(--ink);
+    box-shadow:inset 0 0 0 2px #F4EBDD;
+  }
+  .room-illustration::after{ /* window cross */
+    content:"";
+    position:absolute; top:16%; left:12%; width:30%; height:34%;
+    background:
+      linear-gradient(var(--ink), var(--ink)) center/100% 6px no-repeat,
+      linear-gradient(90deg, var(--ink), var(--ink)) center/6px 100% no-repeat;
+  }
+  .room-illustration .chair{
+    position:absolute; bottom:6%; right:14%; width:26%; height:44%;
+    background:var(--rust); border-radius:10px 10px 4px 4px;
+  }
+  .room-illustration .lamp{
+    position:absolute; top:8%; right:12%; width:3px; height:20%;
+    background:var(--ink);
+  }
+  .room-illustration .lamp::before{
+    content:"";
+    position:absolute; top:-14px; left:-13px; width:29px; height:16px;
+    background:var(--mustard); border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .info-strip{
+    max-width:880px; margin:0 auto 10px; padding:0 24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  @media (max-width:720px){ .info-strip{grid-template-columns:1fr 1fr;} }
+  .info-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    padding:16px; text-align:center;
+  }
+  .info-card .k{font-size:12px; color:var(--ink-soft); margin-bottom:4px;}
+  .info-card .v{font-weight:700; font-size:15px; color:var(--rust-dark);}
+
+  /* --- Application form --- */
+  #apply{max-width:720px; margin:70px auto; padding:0 24px;}
+  .doc{
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    border-radius:6px;
+    padding:0;
+    position:relative;
+    box-shadow:8px 8px 0 rgba(43,33,24,0.08);
+  }
+  .doc-head{
+    padding:26px 34px 18px;
+    border-bottom:1.5px dashed var(--line);
+  }
+  .doc-head .doc-title{font-size:24px; margin:0 0 4px;}
+  .doc-head .doc-sub{font-size:13px; color:var(--ink-soft);}
+  .doc-body{padding:28px 34px 34px;}
+
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block; font-size:13px; font-weight:600; margin-bottom:7px; color:var(--ink);
+  }
+  .field input, .field select{
+    width:100%; padding:11px 12px; font-size:14px;
+    border:1px solid var(--line); border-radius:6px;
+    background:#fff; font-family:inherit; color:var(--ink);
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--mustard); outline-offset:1px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .row2{grid-template-columns:1fr;} }
+
+  .oath{
+    background:var(--cream); border:1px solid var(--line); border-radius:8px;
+    padding:18px 18px 6px; margin:24px 0;
+  }
+  .oath .oath-title{font-weight:700; font-size:13px; margin-bottom:12px; color:var(--olive);}
+  .oath-item{
+    display:flex; gap:10px; align-items:flex-start; margin-bottom:14px; font-size:13.5px; color:var(--ink-soft);
+  }
+  .oath-item input{margin-top:3px;}
+
+  .submit-btn{
+    width:100%; padding:15px; background:var(--olive); color:#fff; border:none;
+    border-radius:7px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+    letter-spacing:0.5px;
+  }
+  .submit-btn:hover{background:#3d4732;}
+
+  .stamp-corner{
+    position:absolute; top:20px; right:26px;
+    width:64px; height:64px; border:2.5px solid var(--rust);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    transform:rotate(-14deg); opacity:0.55;
+  }
+  .stamp-corner span{
+    font-family:'Rye', serif; font-size:10px; color:var(--rust); text-align:center; line-height:1.2;
+  }
+
+  /* --- confirmation --- */
+  #confirm{display:none;}
+  .cert{
+    background:var(--paper); border:1.5px solid var(--ink); border-radius:6px;
+    padding:40px 36px; position:relative; overflow:hidden;
+  }
+  .cert-code{font-size:12px; letter-spacing:1px; color:var(--ink-soft); margin-bottom:6px;}
+  .cert h3{font-size:26px; margin:0 0 4px;}
+  .cert .cert-sub{font-size:13px; color:var(--ink-soft); margin-bottom:26px;}
+  .cert-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px 24px; margin-bottom:26px;}
+  .cert-grid .k{font-size:11px; color:var(--ink-soft); margin-bottom:3px; letter-spacing:0.5px;}
+  .cert-grid .v{font-size:15px; font-weight:600;}
+  .qr{
+    width:86px; height:86px; border:1px solid var(--ink);
+    background:
+      repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px),
+      repeating-linear-gradient(0deg, var(--ink) 0 6px, transparent 6px 12px);
+    background-blend-mode:multiply;
+    opacity:0.85;
+  }
+  .cert-foot{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+  .big-stamp{
+    font-family:'Rye', serif; font-size:34px; color:var(--rust);
+    border:4px solid var(--rust); border-radius:10px; padding:10px 22px;
+    transform:rotate(-8deg); opacity:0.9;
+    animation: stampIn .5s ease;
+  }
+  @keyframes stampIn{
+    0%{ transform:rotate(-8deg) scale(2); opacity:0; }
+    70%{ opacity:1; }
+    100%{ transform:rotate(-8deg) scale(1); opacity:0.9; }
+  }
+  .confirm-actions{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+  .btn-secondary{
+    padding:12px 20px; background:transparent; border:1.5px solid var(--ink); color:var(--ink);
+    border-radius:7px; font-weight:600; font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .btn-primary{
+    padding:12px 20px; background:var(--rust); color:#fff; border:none;
+    border-radius:7px; font-weight:600; font-size:14px; cursor:pointer; font-family:inherit;
+  }
+
+  footer{
+    text-align:center; padding:40px 24px 60px; color:var(--ink-soft); font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">Kracker House</div>
+  <div class="tag">TEMPORARY TENANT PROJECT</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">POP-UP · STARFIELD VILLAGE</div>
+  <h1>임시입주<br><span>: 크래커하우스</span></h1>
+  <p class="lead">완전히 내 집은 아니지만, 잠깐은 애정을 담아 삽니다.<br>한 달간, 형제의 방에 당신을 세입자로 초대합니다.</p>
+  <div class="hero-info">
+    <div class="pill">📍 스타필드 빌리지</div>
+    <div class="pill">🗓️ 2026.11.1 – 11.30 (1개월)</div>
+    <div class="pill">🔑 사전 입주 신청제</div>
+  </div>
+  <a href="#apply" class="cta">입주 신청하기</a>
+</section>
+
+<div class="frame">
+  <div class="frame-inner">
+    <section class="story" style="padding:0;">
+      <div class="story-grid">
+        <div>
+          <h2 class="display">왜 &lsquo;임시&rsquo;인가</h2>
+          <p>Cracker House는 원래 미국 플로리다 개척민들이 정착 전, <span class="highlight">짧게 머물기 위해 실용적으로 지어 살던 집</span>을 가리키는 말이었습니다. 완벽하지 않아도, 잠깐이어도 &mdash; 사람은 그 안에서 자기만의 방식으로 살아냅니다.</p>
+          <p>크래커하우스는 &ldquo;집들이에 오신 걸 환영합니다&rdquo;라는 인사로 손님을 맞는 형제의 공간입니다. 이번 팝업은 그 인사를 뒤집어, 정착이 아니라 <span class="highlight">스쳐가는 사람들을 위한 집들이</span>를 열어보려 합니다. 자취, 이사, 짧은 여행처럼&mdash; 우리 모두가 한 번쯤 겪는 &lsquo;임시로 사는 감각&rsquo;을 이 방에 옮겨 놓았습니다.</p>
+        </div>
+        <div class="room-illustration"><div class="chair"></div><div class="lamp"></div></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="info-strip">
+  <div class="info-card"><div class="k">기간</div><div class="v">1개월</div></div>
+  <div class="info-card"><div class="k">장소</div><div class="v">스타필드 빌리지</div></div>
+  <div class="info-card"><div class="k">대상</div><div class="v">전 연령 무료입장</div></div>
+  <div class="info-card"><div class="k">방식</div><div class="v">사전 입주 신청</div></div>
+</div>
+
+<!-- ================= APPLICATION FORM ================= -->
+<section id="apply">
+  <form class="doc" id="applyForm" onsubmit="return handleSubmit(event)">
+    <div class="stamp-corner"><span>KRACKER<br>HOUSE</span></div>
+    <div class="doc-head">
+      <p class="doc-title display">입주 신청서</p>
+      <p class="doc-sub">MOVE-IN APPLICATION · 크래커하우스 임시입주 프로젝트</p>
+    </div>
+    <div class="doc-body">
+      <div class="field">
+        <label for="name">입주자 성함</label>
+        <input type="text" id="name" required placeholder="홍길동">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="phone">연락처</label>
+          <input type="tel" id="phone" required placeholder="010-0000-0000">
+        </div>
+        <div class="field">
+          <label for="people">입주(방문) 인원</label>
+          <select id="people">
+            <option>1인</option><option>2인</option><option>3인</option><option>4인 이상</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="date">희망 입주일</label>
+          <input type="date" id="date" required min="2026-11-01" max="2026-11-30">
+        </div>
+        <div class="field">
+          <label for="time">희망 입주 시간</label>
+          <select id="time">
+            <option>11:00</option><option>13:00</option><option>15:00</option>
+            <option>17:00</option><option>19:00</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="oath">
+        <div class="oath-title">임시 거주 서약 (필수)</div>
+        <label class="oath-item"><input type="checkbox" required> 본인은 방문 중 이 방을 마치 내 방처럼 마음껏 둘러보고 사진 찍을 것을 서약합니다.</label>
+        <label class="oath-item"><input type="checkbox" required> 본인은 짐(흔적)을 남기고 떠날 것이며, 이 방을 다음 세입자에게 깨끗이 물려줄 것을 서약합니다.</label>
+        <label class="oath-item"><input type="checkbox" required> 개인정보는 입주 확인 및 팝업 운영 목적으로만 사용됨에 동의합니다.</label>
+      </div>
+
+      <button type="submit" class="submit-btn">입주 신청서 제출하기</button>
+    </div>
+  </form>
+
+  <!-- ================= CONFIRMATION ================= -->
+  <div id="confirm">
+    <div class="cert" id="certToDownload">
+      <div class="cert-code" id="certCode">RESERVATION NO. CH-2026-0000</div>
+      <h3 class="display">입주 확정 계약서</h3>
+      <p class="cert-sub">이 문서는 임시입주 : 크래커하우스 팝업의 입주 확정을 증명합니다.</p>
+      <div class="cert-grid">
+        <div><div class="k">입주자</div><div class="v" id="outName">-</div></div>
+        <div><div class="k">입주 인원</div><div class="v" id="outPeople">-</div></div>
+        <div><div class="k">입주 일시</div><div class="v" id="outDate">-</div></div>
+        <div><div class="k">장소</div><div class="v">스타필드 빌리지</div></div>
+      </div>
+      <div class="cert-foot">
+        <div class="big-stamp">입주확정</div>
+        <div class="qr"></div>
+      </div>
+    </div>
+    <div class="confirm-actions">
+      <button class="btn-primary" onclick="downloadCert()">📥 확정서 다운로드</button>
+      <button class="btn-secondary" onclick="resetForm()">처음으로</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  임시입주 : 크래커하우스 &middot; 팝업 프로토타입 (기획 데모용) &middot; 2026<br>
+  실제 입주 신청은 팀 운영 채널을 통해 접수됩니다.
+</footer>
+
+<script>
+function pad(n){return String(n).padStart(4,'0');}
+
+function handleSubmit(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const people = document.getElementById('people').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+
+  if(!name || !date){ return false; }
+
+  const dateObj = new Date(date + 'T00:00:00');
+  const dateStr = `${dateObj.getFullYear()}.${String(dateObj.getMonth()+1).padStart(2,'0')}.${String(dateObj.getDate()).padStart(2,'0')} ${time}`;
+
+  document.getElementById('outName').textContent = name + ' 님';
+  document.getElementById('outPeople').textContent = people;
+  document.getElementById('outDate').textContent = dateStr;
+
+  const code = 'CH-2026-' + pad(Math.floor(Math.random()*9999));
+  document.getElementById('certCode').textContent = 'RESERVATION NO. ' + code;
+
+  document.getElementById('applyForm').style.display = 'none';
+  document.getElementById('confirm').style.display = 'block';
+  document.getElementById('confirm').scrollIntoView({behavior:'smooth', block:'start'});
+  return false;
+}
+
+function resetForm(){
+  document.getElementById('applyForm').reset();
+  document.getElementById('applyForm').style.display = 'block';
+  document.getElementById('confirm').style.display = 'none';
+  document.getElementById('apply').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function downloadCert(){
+  const el = document.getElementById('certToDownload');
+  html2canvas(el, {backgroundColor:'#FBF6EC', scale:2}).then(canvas=>{
+    const link = document.createElement('a');
+    link.download = '입주확정계약서.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="100%" height="100%" fill="#517EA6"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-weight="700"
+        font-size="54" fill="#EFF5FA">SNUGGLE<tspan x="50%" dy="1.6em" font-size="36" fill="#EFF5FA" opacity="0.85">세탁 세제 브랜드</tspan></text>
+</svg>

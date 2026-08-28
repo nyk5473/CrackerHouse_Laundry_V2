@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Archivo:wght@400;600;800&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700;6..96,900&display=swap" rel="stylesheet"><style>
+body{margin:0;background:#f0eee9;font-family:Archivo,system-ui,sans-serif}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 Archivo,system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 Archivo,system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fdfcf7;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#c0392b;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 Archivo,system-ui,sans-serif;color:rgba(0,0,0,.5)}
+.b{border:1.5px solid #1a1a1a}
+.ph{background:repeating-linear-gradient(135deg,rgba(26,26,26,.08) 0 6px,transparent 6px 12px);display:flex;align-items:center;justify-content:center;text-align:center;font:500 9px/1.3 ui-monospace,Menlo,monospace;color:rgba(26,26,26,.55);letter-spacing:.04em;padding:6px}
+.hand{font-family:Caveat,cursive;color:#c0392b}
+.bar{background:rgba(26,26,26,.22);border-radius:1px}
+.sec{padding:14px 16px;border-bottom:1.5px solid #1a1a1a}
+.lbl{font:600 8px ui-monospace,Menlo,monospace;letter-spacing:.14em;color:rgba(26,26,26,.45);margin-bottom:8px}
+.btn{box-sizing:border-box;border:1.5px solid #1a1a1a;padding:5px 10px;font:600 8.5px ui-monospace,Menlo,monospace;letter-spacing:.08em;display:inline-block}
+.red{background:#c0392b;color:#fdfcf7;border-color:#c0392b}
+.disp{font-family:'Bodoni Moda',serif}
+.b2{border:1.5px solid #594335}
+.ph2{background:repeating-linear-gradient(135deg,rgba(89,67,53,.13) 0 6px,transparent 6px 12px);display:flex;align-items:center;justify-content:center;text-align:center;font:500 9px/1.35 ui-monospace,Menlo,monospace;color:rgba(89,67,53,.7);letter-spacing:.04em;padding:6px}
+.sec2{padding:15px 17px;border-bottom:1.5px solid #594335;color:#594335}
+.lbl2{font:600 8px ui-monospace,Menlo,monospace;letter-spacing:.14em;color:rgba(89,67,53,.55);margin-bottom:9px}
+.btn2{box-sizing:border-box;border:1.5px solid #594335;padding:6px 11px;font:600 8.5px ui-monospace,Menlo,monospace;letter-spacing:.08em;display:inline-block;color:#594335}
+.cta{background:#F25C05;border-color:#F25C05;color:#fff}
+.bar2{background:rgba(89,67,53,.25);border-radius:1px}
+.en{font:500 7.5px ui-monospace,Menlo,monospace;letter-spacing:.12em;color:rgba(89,67,53,.5)}
+</style></helmet>
+
+<section class="dv-turn" id="t2" style="background:#F4EFE6">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">확정 팔레트 적용 · 랜딩 전체 + 존 표현 3안 + 예약 플로우 (웹/앱)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>데스크탑 랜딩 원페이지 — 인트로 영상 → 섹션, 한/영 병기</div>
+<div class="dv-card" style="width:430px;background:#F7F3EA;border-color:rgba(89,67,53,.25)">
+  <div style="height:200px;background:#594335;color:#F7F3EA;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px">
+    <div style="width:118px;height:118px;border-radius:50%;border:6px solid rgba(247,243,234,.85);display:flex;align-items:center;justify-content:center;font:500 8px/1.4 ui-monospace,monospace;color:rgba(247,243,234,.8);background:repeating-linear-gradient(135deg,rgba(247,243,234,.14) 0 6px,transparent 6px 12px)">LOOP VIDEO<br>세탁기 회전</div>
+    <div class="disp" style="margin-top:14px;font-size:20px;font-weight:900;letter-spacing:.02em">KRACKER LAUNDRY</div>
+    <div style="margin-top:6px;font:500 7.5px ui-monospace,monospace;letter-spacing:.2em;color:rgba(247,243,234,.55)">SCROLL / 스크롤</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 15px;background:#BC453C;color:#F7F3EA;font:600 8px ui-monospace,monospace;letter-spacing:.1em">
+    <span>KRACKER LAUNDRY</span>
+    <span style="display:flex;gap:10px;color:rgba(247,243,234,.75)"><span>ABOUT</span><span>ZONES</span><span>EXPERIENCE</span><span>GOODS</span><span>VISIT</span></span>
+    <span class="btn2 cta" style="border-color:#F25C05">사전등록</span>
+  </div>
+  <div class="sec2" style="padding:24px 18px">
+    <div class="en">VINTAGE COIN LAUNDRY · POP-UP</div>
+    <div class="disp" style="margin-top:10px;font-size:34px;font-weight:900;line-height:1;color:#BC453C">KRACKER<br>LAUNDRY</div>
+    <div style="display:flex;align-items:baseline;gap:7px;margin-top:7px"><span class="en">with</span><span style="font:800 13px Archivo,sans-serif;color:#517EA6">Snuggle</span></div>
+    <div style="margin-top:16px;font:600 18px/1.3 Archivo,sans-serif">세탁은 핑계고,<br>취향은 남는다.</div>
+    <div class="en" style="margin-top:7px">LAUNDRY IS JUST AN EXCUSE. TASTE REMAINS.</div>
+    <div style="margin-top:10px;font:400 10px/1.5 Archivo,sans-serif;color:rgba(89,67,53,.75)">철들지 않는 취향의 빈티지 코인 세탁소</div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:16px">
+      <span class="btn2" style="background:#BF6E50;border-color:#BF6E50;color:#F7F3EA">ONLY 14 DAYS</span>
+      <span style="font:600 8.5px ui-monospace,monospace;color:rgba(89,67,53,.6)">09.01 – 09.22 · 스타필드 운정 1F</span>
+    </div>
+    <div class="ph2 b2" style="height:120px;margin-top:16px">빈티지 세탁소 전경 (필름톤)</div>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="btn2 cta">사전등록 하기 / RESERVE</span><span class="btn2">공간 미리보기</span></div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">01 CONCEPT · 콘셉트</div>
+    <div style="font:600 13px/1.45 Archivo,sans-serif">빈티지는 오래 입은 옷,<br>세탁은 오래 입기 위한 일.</div>
+    <div style="display:flex;gap:7px;margin-top:13px">
+      <div class="b2" style="flex:1;padding:10px 8px;background:#fff"><div class="disp" style="font-size:11px;font-weight:700;color:#BC453C">FASHION</div><div class="en" style="margin-top:2px">크래커하우스</div><div class="bar2" style="height:4px;margin-top:8px"></div><div class="bar2" style="height:4px;margin-top:4px;width:65%"></div></div>
+      <div class="b2" style="flex:1;padding:10px 8px;background:#fff"><div class="disp" style="font-size:11px;font-weight:700;color:#BC453C">LAUNDRY</div><div class="en" style="margin-top:2px">공간</div><div class="bar2" style="height:4px;margin-top:8px"></div><div class="bar2" style="height:4px;margin-top:4px;width:55%"></div></div>
+      <div class="b2" style="flex:1;padding:10px 8px;background:#fff"><div class="disp" style="font-size:11px;font-weight:700;color:#517EA6">SCENT</div><div class="en" style="margin-top:2px">스너글</div><div class="bar2" style="height:4px;margin-top:8px"></div><div class="bar2" style="height:4px;margin-top:4px;width:72%"></div></div>
+    </div>
+  </div>
+  <div class="sec2" style="background:#BF6E50;color:#F7F3EA;border-color:#594335">
+    <div style="font:600 8px ui-monospace,monospace;letter-spacing:.14em;color:rgba(247,243,234,.7);margin-bottom:9px">02 ZONES · 8개의 존</div>
+    <div class="ph2" style="height:100px;border:1.5px solid rgba(247,243,234,.7);color:rgba(247,243,234,.85);background:repeating-linear-gradient(135deg,rgba(247,243,234,.18) 0 6px,transparent 6px 12px)">원형 평면도 (온이온 레이아웃)</div>
+    <div style="display:flex;gap:6px;margin-top:10px;overflow:hidden">
+      <div style="width:88px;border:1.5px solid rgba(247,243,234,.7)"><div class="ph2" style="height:46px;border:none;color:rgba(247,243,234,.8);background:repeating-linear-gradient(135deg,rgba(247,243,234,.18) 0 6px,transparent 6px 12px)">zone 01</div><div style="padding:6px;font:600 7.5px ui-monospace,monospace">세탁기 존</div></div>
+      <div style="width:88px;border:1.5px solid rgba(247,243,234,.7)"><div class="ph2" style="height:46px;border:none;color:rgba(247,243,234,.8);background:repeating-linear-gradient(135deg,rgba(247,243,234,.18) 0 6px,transparent 6px 12px)">zone 02</div><div style="padding:6px;font:600 7.5px ui-monospace,monospace">세제 진열</div></div>
+      <div style="width:88px;border:1.5px solid rgba(247,243,234,.7)"><div class="ph2" style="height:46px;border:none;color:rgba(247,243,234,.8);background:repeating-linear-gradient(135deg,rgba(247,243,234,.18) 0 6px,transparent 6px 12px)">zone 03</div><div style="padding:6px;font:600 7.5px ui-monospace,monospace">포토 스팟</div></div>
+      <div style="width:88px;border:1.5px solid rgba(247,243,234,.45);opacity:.5"><div class="ph2" style="height:46px;border:none;color:rgba(247,243,234,.7);background:repeating-linear-gradient(135deg,rgba(247,243,234,.18) 0 6px,transparent 6px 12px)">zone 04</div><div style="padding:6px;font:600 7.5px ui-monospace,monospace">아지트</div></div>
+    </div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">03 EXPERIENCE · 체험 동선</div>
+    <div style="display:flex;align-items:center;gap:4px">
+      <div class="b2" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace;background:#fff">ENTER<br>입장</div><span style="font-size:9px;color:#BF6E50">→</span>
+      <div class="b2" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace;background:#fff">MISSION<br>미션 5</div><span style="font-size:9px;color:#BF6E50">→</span>
+      <div class="b2" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace;background:#fff">SCENT<br>향 선택</div><span style="font-size:9px;color:#BF6E50">→</span>
+      <div class="b2" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace;background:#fff">LABEL<br>라벨</div><span style="font-size:9px;color:#BF6E50">→</span>
+      <div class="btn2" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace;background:#BC453C;border-color:#BC453C;color:#F7F3EA">TOKEN<br>토큰</div>
+    </div>
+    <div class="ph2 b2" style="height:66px;margin-top:11px">미션 카드 · 라벨 제작 컷</div>
+  </div>
+  <div class="sec2" style="background:rgba(81,126,166,.09)">
+    <div class="lbl2">04 SNUGGLE ROOM · 향</div>
+    <div class="disp" style="font-size:15px;font-weight:700;color:#517EA6">SCENT IS THE MEMORY</div>
+    <div style="font:600 11px Archivo,sans-serif;margin-top:3px">향으로 남는 하루</div>
+    <div style="display:flex;gap:7px;margin-top:10px"><div class="ph2 b2" style="flex:1;height:56px">세제 진열 벽</div><div class="ph2 b2" style="flex:1;height:56px">향 3종 라인업</div></div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">05 GOODS · 한정 굿즈</div>
+    <div style="display:flex;gap:7px"><div class="ph2 b2" style="flex:1;height:60px">세탁 토큰</div><div class="ph2 b2" style="flex:1;height:60px">개인 라벨</div><div class="ph2 b2" style="flex:1;height:60px">멤버스 카드</div></div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">06 VISIT · 방문 안내</div>
+    <div style="display:flex;gap:9px">
+      <div class="ph2 b2" style="flex:1;height:78px">지도</div>
+      <div style="flex:1;font:600 9px/1.6 ui-monospace,monospace">
+        <div>사전예약 09.01–09.06</div><div>워크인 09.02–09.06</div><div>자율입장 09.07–09.22</div>
+        <div class="btn2 cta" style="margin-top:8px;display:block;text-align:center">사전등록 →</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:15px 17px;display:flex;justify-content:space-between;background:#594335;color:rgba(247,243,234,.75);font:600 8px ui-monospace,monospace"><span>KRACKER HOUSE</span><span>INSTAGRAM · CONTACT</span></div>
+</div>
+</div>
+
+<div class="dv-opt" id="2b">
+<div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>존 표현 A — 평면도형 (도면 위 핀 클릭)</div>
+<div class="dv-card" style="width:340px;background:#F7F3EA;border-color:rgba(89,67,53,.25)">
+  <div class="sec2" style="text-align:center">
+    <div class="lbl2" style="margin-bottom:6px">ZONES · 8</div>
+    <div class="disp" style="font-size:17px;font-weight:900;color:#BC453C">FLOOR PLAN</div>
+    <div style="margin:14px auto 0;width:240px;height:240px;border:1.5px solid #594335;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,rgba(89,67,53,.1) 0 7px,transparent 7px 14px)">
+      <div style="width:112px;height:112px;border:1.5px solid #594335;border-radius:50%;background:#F7F3EA;display:flex;align-items:center;justify-content:center;font:600 8px/1.4 ui-monospace,monospace;text-align:center;color:#594335">SECRET<br>HIDEOUT</div>
+      <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);background:#BC453C;color:#F7F3EA;font:600 7.5px ui-monospace,monospace;padding:3px 7px;border-radius:9px">01 세탁기</div>
+      <div style="position:absolute;left:0;top:34%;background:#517EA6;color:#fff;font:600 7.5px ui-monospace,monospace;padding:3px 7px;border-radius:9px">02 세제</div>
+      <div style="position:absolute;right:0;top:44%;background:#594335;color:#F7F3EA;font:600 7.5px ui-monospace,monospace;padding:3px 7px;border-radius:9px">06 커피</div>
+      <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#594335;color:#F7F3EA;font:600 7.5px ui-monospace,monospace;padding:3px 7px;border-radius:9px">08 다락</div>
+    </div>
+    <div class="hand" style="font-size:14px;margin-top:8px;color:#BC453C">핀 클릭 → 하단 상세로 이동</div>
+  </div>
+  <div class="sec2" style="border-bottom:none">
+    <div class="lbl2">ZONE 01 / 08 · 빈티지 세탁기</div>
+    <div style="display:flex;gap:10px">
+      <div class="ph2 b2" style="flex:0 0 120px;height:88px">존 사진</div>
+      <div style="flex:1"><div class="bar2" style="height:4px"></div><div class="bar2" style="height:4px;margin-top:4px"></div><div class="bar2" style="height:4px;margin-top:4px;width:62%"></div><div class="btn2" style="margin-top:10px">NEXT ZONE →</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="2c">
+<div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>존 표현 B — 존 카드형 (8장 그리드, 필름 인덱스)</div>
+<div class="dv-card" style="width:340px;background:#F7F3EA;border-color:rgba(89,67,53,.25)">
+  <div class="sec2">
+    <div class="lbl2">ZONES · 8개의 존</div>
+    <div class="disp" style="font-size:17px;font-weight:900;color:#BC453C">EIGHT ROOMS,<br>ONE DRUM</div>
+    <div style="margin-top:5px;font:400 10px Archivo,sans-serif;color:rgba(89,67,53,.75)">한 바퀴 돌면 취향이 남는다</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+    <div class="sec2" style="border-right:1.5px solid #594335"><div class="ph2 b2" style="height:70px">01</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace">세탁기 존</div><div class="en">WASHING</div></div>
+    <div class="sec2"><div class="ph2 b2" style="height:70px">02</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace;color:#517EA6">세제 진열</div><div class="en">DETERGENT</div></div>
+    <div class="sec2" style="border-right:1.5px solid #594335"><div class="ph2 b2" style="height:70px">03</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace">포토 스팟</div><div class="en">PHOTO</div></div>
+    <div class="sec2"><div class="ph2 b2" style="height:70px">04</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace">아지트</div><div class="en">HIDEOUT</div></div>
+    <div class="sec2" style="border-right:1.5px solid #594335"><div class="ph2 b2" style="height:70px">05</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace">독서 코너</div><div class="en">READING</div></div>
+    <div class="sec2"><div class="ph2 b2" style="height:70px">06</div><div style="margin-top:7px;font:600 9px ui-monospace,monospace">커피 바</div><div class="en">COFFEE</div></div>
+  </div>
+  <div style="padding:13px 17px;background:#BF6E50;color:#F7F3EA;display:flex;justify-content:space-between;font:600 8.5px ui-monospace,monospace"><span>07 단차 존 · 08 다락</span><span>MORE →</span></div>
+</div>
+</div>
+
+<div class="dv-opt" id="2d">
+<div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>존 표현 C — 인터랙티브 드럼 다이얼 (돌려서 존 선택)</div>
+<div class="dv-card" style="width:340px;background:#594335;border-color:rgba(89,67,53,.25)">
+  <div style="padding:16px 17px 0;color:#F7F3EA">
+    <div style="font:600 8px ui-monospace,monospace;letter-spacing:.14em;color:rgba(247,243,234,.55)">ZONES · 드럼을 돌리세요</div>
+    <div class="disp" style="margin-top:8px;font-size:19px;font-weight:900">SPIN THE DRUM</div>
+  </div>
+  <div style="padding:16px;display:flex;justify-content:center">
+    <div style="width:250px;height:250px;border-radius:50%;border:8px solid #F7F3EA;background:#BC453C;position:relative;display:flex;align-items:center;justify-content:center">
+      <div style="width:130px;height:130px;border-radius:50%;background:#F7F3EA;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#594335">
+        <div class="en">ZONE 05</div>
+        <div style="font:600 11px Archivo,sans-serif;margin-top:2px">독서 코너</div>
+        <div class="btn2" style="margin-top:7px;padding:4px 8px">보기 →</div>
+      </div>
+      <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#F25C05"></div>
+      <div style="position:absolute;top:20px;right:36px;font:600 7px ui-monospace,monospace;color:rgba(247,243,234,.8)">04</div>
+      <div style="position:absolute;bottom:20px;right:36px;font:600 7px ui-monospace,monospace;color:rgba(247,243,234,.8)">06</div>
+      <div style="position:absolute;bottom:20px;left:36px;font:600 7px ui-monospace,monospace;color:rgba(247,243,234,.8)">07</div>
+      <div style="position:absolute;top:20px;left:36px;font:600 7px ui-monospace,monospace;color:rgba(247,243,234,.8)">03</div>
+    </div>
+  </div>
+  <div style="padding:0 16px 14px"><div class="ph2" style="height:80px;border:1.5px solid rgba(247,243,234,.6);color:rgba(247,243,234,.8);background:repeating-linear-gradient(135deg,rgba(247,243,234,.16) 0 6px,transparent 6px 12px)">선택된 존 사진 (드럼 회전에 맞춰 전환)</div>
+  <div class="hand" style="font-size:14px;margin-top:7px;color:#F25C05">스크롤/드래그로 회전 · 모바일 스와이프</div></div>
+</div>
+</div>
+
+<div class="dv-opt" id="2e">
+<div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>웹 사전등록 — 4스텝 자체 예약</div>
+<div class="dv-card" style="width:340px;background:#F7F3EA;border-color:rgba(89,67,53,.25)">
+  <div style="padding:11px 15px;background:#594335;color:#F7F3EA;display:flex;justify-content:space-between;font:600 8px ui-monospace,monospace"><span>RESERVE · 사전등록</span><span>STEP 2 / 4</span></div>
+  <div style="display:flex;border-bottom:1.5px solid #594335">
+    <div style="flex:1;padding:8px 4px;text-align:center;font:600 7px ui-monospace,monospace;background:#BF6E50;color:#F7F3EA">01 날짜</div>
+    <div style="flex:1;padding:8px 4px;text-align:center;font:600 7px ui-monospace,monospace;background:#BC453C;color:#F7F3EA">02 시간</div>
+    <div style="flex:1;padding:8px 4px;text-align:center;font:600 7px ui-monospace,monospace;color:rgba(89,67,53,.5)">03 정보</div>
+    <div style="flex:1;padding:8px 4px;text-align:center;font:600 7px ui-monospace,monospace;color:rgba(89,67,53,.5)">04 완료</div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">DATE · 방문 날짜</div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px">
+      <div class="b2" style="padding:7px 0;text-align:center;font:600 8px ui-monospace,monospace;opacity:.35">9/1</div>
+      <div class="btn2" style="padding:7px 0;text-align:center;background:#BC453C;border-color:#BC453C;color:#F7F3EA">9/2</div>
+      <div class="b2" style="padding:7px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">9/3</div>
+      <div class="b2" style="padding:7px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">9/4</div>
+      <div class="b2" style="padding:7px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">9/5</div>
+      <div class="b2" style="padding:7px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">9/6</div>
+    </div>
+    <div class="en" style="margin-top:7px">SOLD OUT 9/1 · 회색은 마감</div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">TIME · 회차 (30분 단위)</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+      <div class="b2" style="padding:9px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">11:00<br><span class="en">잔여 4</span></div>
+      <div class="btn2" style="padding:9px 0;text-align:center;background:#BC453C;border-color:#BC453C;color:#F7F3EA">11:30<br>선택</div>
+      <div class="b2" style="padding:9px 0;text-align:center;font:600 8px ui-monospace,monospace;opacity:.35">12:00<br><span class="en">마감</span></div>
+      <div class="b2" style="padding:9px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">12:30<br><span class="en">잔여 8</span></div>
+      <div class="b2" style="padding:9px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">13:00<br><span class="en">잔여 6</span></div>
+      <div class="b2" style="padding:9px 0;text-align:center;font:600 8px ui-monospace,monospace;background:#fff">13:30<br><span class="en">잔여 2</span></div>
+    </div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">GUEST · 인원 / 정보</div>
+    <div style="display:flex;gap:7px;align-items:center">
+      <div class="b2" style="flex:1;padding:8px;background:#fff;font:600 8.5px ui-monospace,monospace">인원 2명</div>
+      <div class="b2" style="width:30px;padding:8px 0;text-align:center;background:#fff;font:600 10px">−</div>
+      <div class="b2" style="width:30px;padding:8px 0;text-align:center;background:#fff;font:600 10px">+</div>
+    </div>
+    <div class="b2" style="margin-top:6px;padding:8px;background:#fff" ><span class="en">이름 / NAME</span></div>
+    <div class="b2" style="margin-top:6px;padding:8px;background:#fff"><span class="en">휴대폰 / PHONE</span></div>
+    <div style="display:flex;gap:6px;align-items:center;margin-top:9px"><span class="b2" style="width:12px;height:12px;background:#BC453C;border-color:#BC453C"></span><span style="font:400 8.5px ui-monospace,monospace">개인정보 수집 동의 (필수)</span></div>
+  </div>
+  <div class="sec2" style="border-bottom:none">
+    <div class="btn2 cta" style="display:block;text-align:center;padding:11px">사전등록 완료 / CONFIRM</div>
+    <div class="en" style="margin-top:8px;text-align:center">완료 후 QR 티켓 발급 · 09.07부터 자율입장</div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="2f">
+<div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>앱 — 사전등록 + 현장등록(QR 대기)</div>
+<div class="dv-card" style="width:280px;background:#F7F3EA;border-color:rgba(89,67,53,.25)">
+  <div style="padding:9px 13px;background:#594335;color:#F7F3EA;display:flex;justify-content:space-between;font:600 7.5px ui-monospace,monospace"><span>9:41</span><span>KRACKER LAUNDRY APP</span></div>
+  <div style="padding:15px 14px;border-bottom:1.5px solid #594335;text-align:center">
+    <div style="margin:0 auto;width:96px;height:96px;border-radius:50%;border:5px solid #594335;background:repeating-linear-gradient(135deg,rgba(89,67,53,.13) 0 6px,transparent 6px 12px);display:flex;align-items:center;justify-content:center;font:500 7.5px/1.3 ui-monospace,monospace;color:rgba(89,67,53,.7)">LOOP<br>VIDEO</div>
+    <div class="disp" style="margin-top:11px;font-size:15px;font-weight:900;color:#BC453C">KRACKER LAUNDRY</div>
+    <div class="en" style="margin-top:4px">ONLY 14 DAYS</div>
+  </div>
+  <div style="display:flex;border-bottom:1.5px solid #594335">
+    <div style="flex:1;padding:9px 4px;text-align:center;font:600 8px ui-monospace,monospace;background:#BC453C;color:#F7F3EA">사전등록</div>
+    <div style="flex:1;padding:9px 4px;text-align:center;font:600 8px ui-monospace,monospace;color:rgba(89,67,53,.55)">현장등록</div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">현장등록 · WALK-IN</div>
+    <div class="b2" style="padding:12px;background:#fff;text-align:center">
+      <div class="ph2" style="height:74px;border:1.5px solid #594335">QR</div>
+      <div style="margin-top:9px;font:600 10px Archivo,sans-serif">대기 12번째</div>
+      <div class="en" style="margin-top:3px">EST. 20 MIN</div>
+    </div>
+    <div class="btn2 cta" style="display:block;text-align:center;margin-top:9px;padding:10px">호출 알림 받기</div>
+  </div>
+  <div class="sec2">
+    <div class="lbl2">MY MISSION · 스탬프</div>
+    <div style="display:flex;justify-content:space-between;font:600 9px ui-monospace,monospace"><span>진행</span><span>2 / 5</span></div>
+    <div style="display:flex;gap:5px;margin-top:8px">
+      <span class="b2" style="flex:1;height:24px;background:#BC453C;border-color:#BC453C"></span>
+      <span class="b2" style="flex:1;height:24px;background:#BC453C;border-color:#BC453C"></span>
+      <span class="b2" style="flex:1;height:24px;background:#fff"></span>
+      <span class="b2" style="flex:1;height:24px;background:#fff"></span>
+      <span class="b2" style="flex:1;height:24px;background:#fff"></span>
+    </div>
+  </div>
+  <div class="sec2" style="background:rgba(81,126,166,.09)">
+    <div class="lbl2">SNUGGLE · 향 선택</div>
+    <div style="display:flex;gap:6px"><div class="ph2 b2" style="flex:1;height:44px">향 A</div><div class="ph2 b2" style="flex:1;height:44px">향 B</div><div class="ph2 b2" style="flex:1;height:44px">향 C</div></div>
+  </div>
+  <div style="display:flex;background:#594335;color:rgba(247,243,234,.7);font:600 7.5px ui-monospace,monospace">
+    <div style="flex:1;padding:10px 0;text-align:center;color:#F7F3EA">HOME</div>
+    <div style="flex:1;padding:10px 0;text-align:center">MISSION</div>
+    <div style="flex:1;padding:10px 0;text-align:center">TICKET</div>
+    <div style="flex:1;padding:10px 0;text-align:center">MAP</div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "<a class="dv-oid" href="#2a">2a</a>에 존 표현은 <a class="dv-oid" href="#2d">2d</a>로 바꿔줘" · "<a class="dv-oid" href="#2a">2a</a>를 실제 시안으로 만들어줘" · "<a class="dv-oid" href="#2e">2e</a> 모바일 버전도"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">KRACKER LAUNDRY 랜딩 — 구조 4방향</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>정공법 스크롤 — 카피 우선, 위계 가장 안전</div>
+<div class="dv-card" style="width:380px">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1.5px solid #1a1a1a;font:600 8px ui-monospace,Menlo,monospace;letter-spacing:.1em">
+    <span>KRACKER LAUNDRY</span>
+    <span style="display:flex;gap:9px;color:rgba(26,26,26,.5)"><span>LAUNDRY</span><span>ZONES</span><span>EXP</span><span>GOODS</span><span>VISIT</span></span>
+    <span class="btn red">RESERVE</span>
+  </div>
+  <div class="sec" style="padding:26px 18px 22px">
+    <div style="font:800 27px/1.05 Archivo,sans-serif;letter-spacing:-.02em">KRACKER<br>LAUNDRY</div>
+    <div style="display:flex;align-items:baseline;gap:7px;margin-top:6px"><span style="font:600 11px ui-monospace,monospace;color:rgba(26,26,26,.5)">with</span><span style="font:800 13px Archivo,sans-serif;color:#2a5cc8">Snuggle</span></div>
+    <div style="margin-top:16px;font:600 16px/1.35 Archivo,sans-serif">세탁은 핑계고,<br>취향은 남는다.</div>
+    <div style="margin-top:8px;font:400 10px/1.4 Archivo,sans-serif;color:rgba(26,26,26,.6)">철들지 않는 취향의 빈티지 코인 세탁소</div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:16px">
+      <span class="btn red">ONLY 14 DAYS</span>
+      <span style="font:600 8.5px ui-monospace,monospace;color:rgba(26,26,26,.55)">09.01 – 09.22 · 스타필드 운정 1F</span>
+    </div>
+    <div class="ph b" style="height:120px;margin-top:16px">공간 메인 컷 / 세탁소 전경</div>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="btn red">사전예약 하기</span><span class="btn">공간 미리보기</span></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">01 CONCEPT</div>
+    <div style="font:600 12px/1.4 Archivo,sans-serif">빈티지는 오래 입은 옷,<br>세탁은 오래 입기 위한 일.</div>
+    <div style="display:flex;gap:6px;margin-top:12px">
+      <div class="b" style="flex:1;padding:9px 7px"><div style="font:600 9px ui-monospace,monospace">FASHION</div><div style="height:4px;margin-top:7px" class="bar"></div><div style="height:4px;margin-top:4px;width:70%" class="bar"></div></div>
+      <div class="b" style="flex:1;padding:9px 7px"><div style="font:600 9px ui-monospace,monospace">LAUNDRY</div><div style="height:4px;margin-top:7px" class="bar"></div><div style="height:4px;margin-top:4px;width:60%" class="bar"></div></div>
+      <div class="b" style="flex:1;padding:9px 7px"><div style="font:600 9px ui-monospace,monospace">SCENT</div><div style="height:4px;margin-top:7px" class="bar"></div><div style="height:4px;margin-top:4px;width:80%" class="bar"></div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="lbl">02 ZONES · 8</div>
+    <div class="ph b" style="height:96px">원형 평면도 (온이온 레이아웃)</div>
+    <div style="display:flex;gap:6px;margin-top:9px;overflow:hidden">
+      <div class="b" style="width:74px"><div class="ph" style="height:44px">zone 01</div><div style="padding:5px"><div class="bar" style="height:4px"></div><div class="bar" style="height:4px;margin-top:3px;width:60%"></div></div></div>
+      <div class="b" style="width:74px"><div class="ph" style="height:44px">zone 02</div><div style="padding:5px"><div class="bar" style="height:4px"></div><div class="bar" style="height:4px;margin-top:3px;width:60%"></div></div></div>
+      <div class="b" style="width:74px"><div class="ph" style="height:44px">zone 03</div><div style="padding:5px"><div class="bar" style="height:4px"></div><div class="bar" style="height:4px;margin-top:3px;width:60%"></div></div></div>
+      <div class="b" style="width:74px;opacity:.45"><div class="ph" style="height:44px">zone 04</div><div style="padding:5px"><div class="bar" style="height:4px"></div></div></div>
+    </div>
+    <div class="hand" style="font-size:13px;margin-top:5px">→ 가로 스크롤로 8존</div>
+  </div>
+  <div class="sec">
+    <div class="lbl">03 EXPERIENCE</div>
+    <div style="display:flex;align-items:center;gap:5px;margin-top:4px">
+      <div class="b" style="flex:1;padding:6px 4px;text-align:center;font:600 7.5px ui-monospace,monospace">입장</div><span style="font-size:9px">→</span>
+      <div class="b" style="flex:1;padding:6px 4px;text-align:center;font:600 7.5px ui-monospace,monospace">미션5</div><span style="font-size:9px">→</span>
+      <div class="b" style="flex:1;padding:6px 4px;text-align:center;font:600 7.5px ui-monospace,monospace">향선택</div><span style="font-size:9px">→</span>
+      <div class="b" style="flex:1;padding:6px 4px;text-align:center;font:600 7.5px ui-monospace,monospace">라벨</div><span style="font-size:9px">→</span>
+      <div class="b red" style="flex:1;padding:6px 4px;text-align:center;font:600 7.5px ui-monospace,monospace">토큰</div>
+    </div>
+    <div class="ph b" style="height:64px;margin-top:10px">미션 카드 / 라벨 제작 컷</div>
+  </div>
+  <div class="sec" style="background:rgba(42,92,200,.05)">
+    <div class="lbl">04 SNUGGLE ROOM</div>
+    <div style="font:600 11px Archivo,sans-serif;color:#2a5cc8">향으로 남는 하루</div>
+    <div style="display:flex;gap:6px;margin-top:9px">
+      <div class="ph b" style="flex:1;height:56px">세제 진열 벽</div>
+      <div class="ph b" style="flex:1;height:56px">향 3종 라인업</div>
+    </div>
+    <div class="hand" style="font-size:13px;margin-top:5px">스너글이 주인공인 유일한 섹션</div>
+  </div>
+  <div class="sec">
+    <div class="lbl">05 GOODS</div>
+    <div style="display:flex;gap:6px">
+      <div class="ph b" style="flex:1;height:60px">한정 토큰</div><div class="ph b" style="flex:1;height:60px">세탁 라벨</div><div class="ph b" style="flex:1;height:60px">멤버스 카드</div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="lbl">06 VISIT</div>
+    <div style="display:flex;gap:8px">
+      <div class="ph b" style="flex:1;height:70px">지도</div>
+      <div style="flex:1">
+        <div style="font:600 9px ui-monospace,monospace">사전예약 09.01–09.06</div>
+        <div style="font:600 9px ui-monospace,monospace;margin-top:4px">워크인 09.02–09.06</div>
+        <div style="font:600 9px ui-monospace,monospace;margin-top:4px">자율입장 09.07–09.22</div>
+        <div class="btn red" style="margin-top:8px">예약 페이지 →</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:14px 16px;display:flex;justify-content:space-between;font:600 8px ui-monospace,monospace;color:rgba(26,26,26,.5)"><span>KRACKER HOUSE</span><span>INSTAGRAM · 문의</span></div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>콜라주 / 러프 — 첨부 레퍼런스 무드, 영문 대형 타이포</div>
+<div class="dv-card" style="width:380px">
+  <div style="display:flex;justify-content:space-between;padding:8px 12px;background:#1a1a1a;color:#fdfcf7;font:600 8px ui-monospace,monospace;letter-spacing:.1em"><span>KRACKER LAUNDRY</span><span>ONLY 14 DAYS</span></div>
+  <div style="position:relative;padding:20px 16px 26px;background:#c0392b;color:#fdfcf7">
+    <div style="font:800 40px/.88 Archivo,sans-serif;letter-spacing:-.03em">KRACKER<br>LAUNDRY</div>
+    <div style="display:inline-block;transform:rotate(-3deg);margin-top:10px;background:#fdfcf7;color:#1a1a1a;padding:4px 8px;font:600 10px Archivo,sans-serif">with Snuggle</div>
+    <div style="margin-top:14px;font:600 15px/1.3 Archivo,sans-serif">세탁은 핑계고,<br>취향은 남는다.</div>
+    <div class="ph" style="height:110px;margin-top:14px;border:1.5px solid #fdfcf7;color:rgba(253,252,247,.75);background:repeating-linear-gradient(135deg,rgba(253,252,247,.16) 0 6px,transparent 6px 12px)">세탁기 앞 인물 컷 (B&amp;W)</div>
+    <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
+      <span style="transform:rotate(-2deg);background:#e8e3d3;color:#1a1a1a;padding:3px 7px;font:600 8px ui-monospace,monospace">#빈티지</span>
+      <span style="transform:rotate(2deg);background:#e8e3d3;color:#1a1a1a;padding:3px 7px;font:600 8px ui-monospace,monospace">#향</span>
+      <span style="transform:rotate(-1deg);background:#e8e3d3;color:#1a1a1a;padding:3px 7px;font:600 8px ui-monospace,monospace">#철들지않음</span>
+    </div>
+  </div>
+  <div style="background:#1a1a1a;color:#fdfcf7;padding:7px 12px;font:600 8.5px ui-monospace,monospace;letter-spacing:.1em;white-space:nowrap;overflow:hidden">09.01 — 09.22 · 스타필드 운정 1F · 09.01 — 09.22 · 스타필드</div>
+  <div class="sec" style="display:flex;gap:12px">
+    <div style="flex:0 0 76px;font:800 15px/1 Archivo,sans-serif;color:#c0392b">ABOUT<br><span style="font:500 15px Caveat,cursive">소개</span></div>
+    <div style="flex:1"><div class="bar" style="height:5px"></div><div class="bar" style="height:5px;margin-top:4px"></div><div class="bar" style="height:5px;margin-top:4px;width:74%"></div><div class="bar" style="height:5px;margin-top:4px;width:58%"></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1.5px solid #1a1a1a">
+    <div class="ph" style="height:110px;border-right:1.5px solid #1a1a1a">존 컷 01</div>
+    <div style="padding:12px;background:#c0392b;color:#fdfcf7;font:600 10px/1.4 Archivo,sans-serif">8개의 존.<br>드럼처럼 한 바퀴 돌면<br>취향이 남는다.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1.5px solid #1a1a1a">
+    <div class="ph" style="height:80px;border-right:1.5px solid #1a1a1a">존 컷 02</div>
+    <div class="ph" style="height:80px;border-right:1.5px solid #1a1a1a">존 컷 03</div>
+    <div class="ph" style="height:80px">존 컷 04</div>
+  </div>
+  <div class="sec">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:800 15px Archivo,sans-serif;color:#c0392b">MISSION</div><span class="hand" style="font-size:14px">5개 미션 → 토큰</span></div>
+    <div style="display:flex;gap:5px;margin-top:10px">
+      <div class="b" style="flex:1;height:34px;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace">01</div>
+      <div class="b" style="flex:1;height:34px;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace">02</div>
+      <div class="b" style="flex:1;height:34px;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace">03</div>
+      <div class="b" style="flex:1;height:34px;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace">04</div>
+      <div class="b red" style="flex:1;height:34px;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace">05</div>
+    </div>
+  </div>
+  <div class="sec" style="background:#e8e3d3">
+    <div style="font:800 15px Archivo,sans-serif;color:#2a5cc8">SNUGGLE ROOM</div>
+    <div style="display:flex;gap:6px;margin-top:9px"><div class="ph b" style="flex:1;height:52px">향 A</div><div class="ph b" style="flex:1;height:52px">향 B</div><div class="ph b" style="flex:1;height:52px">향 C</div></div>
+  </div>
+  <div class="sec"><div style="font:800 15px Archivo,sans-serif;color:#c0392b">GOODS</div><div style="display:flex;gap:6px;margin-top:9px"><div class="ph b" style="flex:1;height:58px">토큰</div><div class="ph b" style="flex:1;height:58px">라벨</div><div class="ph b" style="flex:1;height:58px">카드</div></div></div>
+  <div style="padding:16px;background:#1a1a1a;color:#fdfcf7">
+    <div style="font:800 20px/1 Archivo,sans-serif">RESERVE →</div>
+    <div style="margin-top:8px;font:600 8.5px/1.5 ui-monospace,monospace;color:rgba(253,252,247,.65)">사전예약 09.01–09.06 / 이후 자율입장</div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>평면도 우선 — 도면이 히어로, 존 탐색이 메인 인터랙션</div>
+<div class="dv-card" style="width:380px">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1.5px solid #1a1a1a;font:600 8px ui-monospace,monospace;letter-spacing:.1em"><span>KRACKER LAUNDRY / with Snuggle</span><span class="btn red">RESERVE</span></div>
+  <div style="padding:18px 16px;border-bottom:1.5px solid #1a1a1a;text-align:center">
+    <div style="font:600 8px ui-monospace,monospace;letter-spacing:.16em;color:rgba(26,26,26,.5)">ONLY 14 DAYS · STARFIELD UNJEONG 1F</div>
+    <div style="margin-top:10px;font:800 22px/1.05 Archivo,sans-serif">세탁은 핑계고,<br>취향은 남는다</div>
+    <div style="margin:16px auto 0;width:250px;height:250px;border:1.5px solid #1a1a1a;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,rgba(26,26,26,.06) 0 7px,transparent 7px 14px)">
+      <div style="width:120px;height:120px;border:1.5px solid #1a1a1a;border-radius:50%;background:#fdfcf7;display:flex;align-items:center;justify-content:center;font:600 8px/1.4 ui-monospace,monospace;text-align:center">SECRET<br>HIDEOUT</div>
+      <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);background:#c0392b;color:#fdfcf7;font:600 7.5px ui-monospace,monospace;padding:2px 6px;border-radius:9px">01 세탁기</div>
+      <div style="position:absolute;right:2px;top:44%;background:#1a1a1a;color:#fdfcf7;font:600 7.5px ui-monospace,monospace;padding:2px 6px;border-radius:9px">05 커피</div>
+      <div style="position:absolute;left:2px;top:36%;background:#1a1a1a;color:#fdfcf7;font:600 7.5px ui-monospace,monospace;padding:2px 6px;border-radius:9px">02 세제</div>
+      <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fdfcf7;font:600 7.5px ui-monospace,monospace;padding:2px 6px;border-radius:9px">08 다락</div>
+    </div>
+    <div class="hand" style="font-size:14px;margin-top:8px">핀 클릭 → 아래 존 상세로 스크롤</div>
+  </div>
+  <div class="sec">
+    <div class="lbl">ZONE 01 / 08</div>
+    <div style="display:flex;gap:10px">
+      <div class="ph b" style="flex:0 0 130px;height:92px">존 사진</div>
+      <div style="flex:1"><div style="font:600 11px Archivo,sans-serif">빈티지 세탁기 존</div><div class="bar" style="height:4px;margin-top:8px"></div><div class="bar" style="height:4px;margin-top:4px"></div><div class="bar" style="height:4px;margin-top:4px;width:65%"></div><div class="btn" style="margin-top:9px">다음 존 →</div></div>
+    </div>
+  </div>
+  <div class="sec"><div class="lbl">ZONE 02 / 08 · SNUGGLE</div><div style="display:flex;gap:10px"><div class="ph b" style="flex:0 0 130px;height:92px">세제 진열 벽</div><div style="flex:1"><div style="font:600 11px Archivo,sans-serif;color:#2a5cc8">향 고르는 곳</div><div class="bar" style="height:4px;margin-top:8px"></div><div class="bar" style="height:4px;margin-top:4px;width:70%"></div></div></div></div>
+  <div class="sec"><div class="lbl">EXPERIENCE</div><div style="display:flex;gap:5px;margin-top:2px"><div class="b" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace">MISSION</div><div class="b" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace">SCENT</div><div class="b" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace">LABEL</div><div class="b red" style="flex:1;padding:7px 3px;text-align:center;font:600 7px ui-monospace,monospace">TOKEN</div></div></div>
+  <div class="sec"><div class="lbl">GOODS</div><div style="display:flex;gap:6px"><div class="ph b" style="flex:1;height:56px">토큰</div><div class="ph b" style="flex:1;height:56px">라벨</div><div class="ph b" style="flex:1;height:56px">카드</div></div></div>
+  <div class="sec" style="border-bottom:none"><div class="lbl">VISIT &amp; RESERVE</div><div class="ph b" style="height:66px">지도 + 운영 규칙</div><div class="btn red" style="margin-top:9px;width:100%;text-align:center">사전예약 하기</div></div>
+</div>
+</div>
+
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>모바일 우선 — 드럼 창 프레임, 현장에서 쓰는 화면</div>
+<div class="dv-card" style="width:300px">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1.5px solid #1a1a1a;font:600 8px ui-monospace,monospace"><span>KRACKER LAUNDRY</span><span>☰</span></div>
+  <div style="padding:16px 14px;text-align:center;border-bottom:1.5px solid #1a1a1a">
+    <div style="margin:0 auto;width:180px;height:180px;border-radius:50%;border:6px solid #1a1a1a;overflow:hidden" class="ph">세탁기 창 안에서<br>재생되는 루프 영상</div>
+    <div style="margin-top:14px;font:800 18px/1.1 Archivo,sans-serif">세탁은 핑계고,<br>취향은 남는다</div>
+    <div style="margin-top:7px;font:400 9.5px/1.4 Archivo,sans-serif;color:rgba(26,26,26,.6)">철들지 않는 취향의 빈티지 코인 세탁소</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px"><span style="font:600 8px ui-monospace,monospace;color:rgba(26,26,26,.5)">with</span><span style="font:800 11px Archivo,sans-serif;color:#2a5cc8">Snuggle</span></div>
+    <div class="btn red" style="display:block;margin-top:14px;text-align:center;padding:9px">FOR 14 DAYS · 사전예약</div>
+  </div>
+  <div class="sec" style="display:flex;gap:6px;padding:10px 12px;overflow:hidden">
+    <span class="btn">ZONES</span><span class="btn">MISSION</span><span class="btn">GOODS</span><span class="btn">VISIT</span>
+  </div>
+  <div class="sec">
+    <div class="lbl">지금 여기</div>
+    <div class="ph b" style="height:110px">존 사진 (스와이프 카드)</div>
+    <div style="display:flex;justify-content:center;gap:4px;margin-top:8px"><span style="width:5px;height:5px;border-radius:50%;background:#1a1a1a"></span><span style="width:5px;height:5px;border-radius:50%;background:rgba(26,26,26,.22)"></span><span style="width:5px;height:5px;border-radius:50%;background:rgba(26,26,26,.22)"></span></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">MY MISSION</div>
+    <div class="b" style="padding:9px">
+      <div style="display:flex;justify-content:space-between;font:600 9px ui-monospace,monospace"><span>스탬프</span><span>2 / 5</span></div>
+      <div style="display:flex;gap:5px;margin-top:8px"><span class="b" style="flex:1;height:22px;background:#c0392b;border-color:#c0392b"></span><span class="b" style="flex:1;height:22px;background:#c0392b;border-color:#c0392b"></span><span class="b" style="flex:1;height:22px"></span><span class="b" style="flex:1;height:22px"></span><span class="b" style="flex:1;height:22px"></span></div>
+    </div>
+    <div class="hand" style="font-size:13px;margin-top:6px">현장 QR로 진입하는 화면</div>
+  </div>
+  <div class="sec" style="background:rgba(42,92,200,.05)"><div class="lbl">SNUGGLE · 향 고르기</div><div style="display:flex;gap:6px"><div class="ph b" style="flex:1;height:50px">향 A</div><div class="ph b" style="flex:1;height:50px">향 B</div><div class="ph b" style="flex:1;height:50px">향 C</div></div></div>
+  <div class="sec"><div class="lbl">GOODS</div><div style="display:flex;gap:6px"><div class="ph b" style="flex:1;height:52px">토큰</div><div class="ph b" style="flex:1;height:52px">라벨</div></div></div>
+  <div class="sec" style="border-bottom:none"><div class="lbl">VISIT</div><div class="ph b" style="height:62px">지도 · 운영시간 · 워크인</div></div>
+  <div style="padding:9px 12px;background:#1a1a1a;color:#fdfcf7;display:flex;justify-content:space-between;font:600 8px ui-monospace,monospace"><span>KRACKER HOUSE</span><span>예약 →</span></div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "<a class="dv-oid" href="#1b">1b</a> 방향으로 실제 시안 만들어줘" · "<a class="dv-oid" href="#1c">1c</a>의 평면도를 <a class="dv-oid" href="#1a">1a</a>에 합쳐줘" · "모바일 <a class="dv-oid" href="#1d">1d</a>를 데스크탑까지 확장"</p>
+</section>
+</x-dc>
+</body>
+</html>
