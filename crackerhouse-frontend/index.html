@@ -1,1065 +1,437 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>크래커하우스 X 스너글 팝업스토어 — 스타필드 빌리지</title>
-  <meta name="description" content="크래커하우스 X 스너글 콜라보 팝업스토어. 스타필드 빌리지 1F, 2026.9.11-9.23" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRACKER LAUNDRY - 팝업스토어 통합 관문</title>
+  <link rel="stylesheet" href="kracker_style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'SheLeeOkSun';
-      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/Her-Leeoksun.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
+    .gate-container {
+      width: 100%;
+      margin: 24px auto 0;
+      padding: 24px 20px;
     }
-
-    :root {
-      --red:#BC453C; --clay:#BF6E50; --orange:#F25C05; --espresso:#594335;
-      --blue:#517EA6; --beige:#EBE4D8; --dark:#1A1208; --dark2:#231609;
-      --card:#2E1D0F; --white:#FFFFFF; --muted:#C4B9AE;
-      --ff-serif: 'Noto Sans KR', sans-serif;
-      --ff-mono:  'Noto Sans KR', sans-serif;
-      --ff-sans:  'Noto Sans KR', sans-serif;
-      --tr:all 0.28s ease;
+    .panel-box {
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
     }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Noto Sans KR',sans-serif !important;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Noto Sans KR',sans-serif !important;background:var(--dark);color:var(--white);overflow-x:hidden;}
-    a{text-decoration:none;color:inherit;}
-    #top-nav{position:fixed;top:0;left:0;right:0;height:58px;background:var(--red);display:flex;align-items:center;justify-content:space-between;padding:0 36px;z-index:999;box-shadow:0 3px 24px rgba(0,0,0,0.35);}
-    .nav-logo{font-family:var(--ff-mono);font-size:13px;font-weight:500;letter-spacing:0.14em;background:var(--orange);padding:5px 14px;border-radius:3px;color:var(--white);}
-    .nav-links{display:flex;list-style:none;gap:30px;}
-    .nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.82);letter-spacing:0.03em;transition:var(--tr);}
-    .nav-links a:hover{color:var(--white);}
-    @media(max-width:768px){.nav-links{display:none;}#top-nav{padding:0 20px;}}
-    #main-page{position:relative;width:100%;height:100vh;min-height:600px;overflow:hidden;background:#0d0906;}
-    .hero-grain{position:absolute;inset:0;opacity:0.035;}
-    .hero-text-layer{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:80px 48px 48px;pointer-events:none;}
-    .hw-row{display:flex;align-items:baseline;line-height:0.93;}
-    .hw-row+.hw-row{margin-top:-0.04em;}
-    .hw{font-family:var(--ff-sans);font-size:clamp(80px,14vw,200px);font-weight:900;letter-spacing:-0.04em;color:var(--white);opacity:0.92;animation:fadeUp 0.7s ease both;}
-    .hw--serif{font-family:var(--ff-serif);font-style:italic;font-weight:700;color:var(--orange);}
-    .hw--gap{flex:1;}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-    .hero-bottom{position:absolute;bottom:0;left:0;right:0;padding:0 48px 32px;display:flex;justify-content:space-between;align-items:flex-end;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 100%);}
-    .hero-credit{font-family:var(--ff-mono);font-size:10px;color:rgba(255,255,255,0.35);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.12em;}
-    .hero-scroll{font-family:var(--ff-mono);font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.12em;display:flex;align-items:center;gap:8px;}
-    .hero-scroll::after{content:'';display:block;width:44px;height:1px;background:rgba(255,255,255,0.25);}
-    .hero-pill{background:var(--orange);color:var(--white);padding:10px 22px;font-size:13px;font-weight:700;border-radius:3px;transition:var(--tr);}
-    .hero-pill:hover{background:var(--red);transform:translateY(-2px);}
-    #popup-section{background:var(--dark);padding:0;}
-    .film-topbar{background:#111;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;}
-    .film-seg{display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:10px;color:#555;}
-    .film-perfs{display:flex;gap:4px;}
-    .fperf{width:9px;height:13px;border-radius:2px;border:1px solid #333;background:#080808;}
-    .popup-content{padding:64px 48px 0;max-width:1100px;margin:0 auto;}
-    .popup-eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--clay);margin-bottom:14px;}
-    .popup-title{font-family:var(--ff-serif);font-style:italic;font-size:clamp(34px,4.5vw,60px);line-height:1.05;margin-bottom:48px;}
-    .popup-title strong{font-style:normal;color:var(--orange);}
-    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;margin-bottom:52px;}
-    @media(max-width:900px){.info-grid{grid-template-columns:1fr 1fr;}}
-    .info-cell{background:#1c1208;padding:28px 22px;display:flex;flex-direction:column;gap:8px;}
-    .info-cell__ico{font-size:26px;}
-    .info-cell__key{font-family:var(--ff-mono);font-size:9px;letter-spacing:0.18em;color:var(--clay);text-transform:uppercase;}
-    .info-cell__val{font-size:14px;font-weight:700;line-height:1.45;}
-    .film-strip-outer{position:relative;padding-bottom:22px;}
-    .film-holes{position:absolute;left:0;right:0;height:22px;display:flex;align-items:center;gap:10px;padding:0 10px;}
-    .film-holes--top{top:-22px;}.film-holes--bot{bottom:-22px;}
-    .fhole{width:13px;height:11px;border-radius:2px;border:1px solid #2e2e2e;background:#000;flex-shrink:0;}
-    .film-strip-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:2px;}
-    @media(max-width:1100px){.film-strip-grid{grid-template-columns:repeat(3,1fr);}}
-    @media(max-width:640px){.film-strip-grid{grid-template-columns:repeat(2,1fr);}}
-    .film-frame{position:relative;aspect-ratio:3/4;overflow:hidden;}
-    .film-frame__img{width:100%;height:100%;object-fit:cover;display:block;}
-    .film-frame__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.2) 55%,transparent 100%);}
-    .film-frame__meta{position:absolute;bottom:0;left:0;right:0;padding:14px 14px 16px;}
-    .film-frame__num{font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,0.35);margin-bottom:5px;}
-    .film-frame__zone-badge{display:inline-block;background:var(--orange);color:var(--white);font-family:var(--ff-mono);font-size:10px;font-weight:700;letter-spacing:0.1em;padding:2px 8px;border-radius:2px;margin-bottom:7px;}
-    .film-frame__title{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px;}
-    .film-frame__desc{font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5;}
-    .film-kodak-bar{background:#111;display:flex;align-items:center;justify-content:space-between;padding:5px 16px;font-family:var(--ff-mono);font-size:10px;color:#4a4a4a;}
-    .popup-zone-quote{padding:44px 48px;text-align:center;font-family:var(--ff-serif);font-style:italic;font-size:clamp(15px,1.6vw,20px);color:var(--muted);line-height:2.2;}
-    #prereg-section{background:var(--orange);padding:72px 48px;}
-    .prereg-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px;}
-    @media(max-width:768px){.prereg-inner{grid-template-columns:1fr;}}
-    .prereg-label{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.22em;color:rgba(255,255,255,0.65);margin-bottom:18px;}
-    .prereg-headline{font-family:var(--ff-serif);font-size:clamp(42px,5.5vw,72px);font-weight:900;line-height:1.0;color:var(--white);}
-    .prereg-headline em{font-style:italic;color:var(--dark);display:block;}
-    .prereg-desc{font-size:15px;color:rgba(255,255,255,0.88);line-height:1.9;max-width:420px;margin-bottom:28px;}
-    .prereg-btns{display:flex;flex-direction:column;gap:12px;}
-    .reg-btn{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;font-size:15px;font-weight:700;border-radius:4px;cursor:pointer;transition:var(--tr);border:none;}
-    .reg-btn--web{background:var(--dark);color:var(--white);}
-    .reg-btn--web:hover{background:var(--espresso);transform:translateY(-2px);}
-    .reg-btn--kiosk{background:rgba(255,255,255,0.18);color:var(--white);border:1.5px solid rgba(255,255,255,0.45);}
-    .reg-btn--kiosk:hover{background:rgba(255,255,255,0.28);transform:translateY(-2px);}
-    #brand-section{background:var(--beige);overflow:hidden;padding:0;}
-    .brand-editorial-row{display:grid;grid-template-columns:1fr 1fr;min-height:78vh;}
-    @media(max-width:768px){.brand-editorial-row{grid-template-columns:1fr;}}
-    .brand-photo-side{position:relative;overflow:hidden;min-height:480px;}
-    .brand-part-badge{position:absolute;top:24px;left:22px;font-family:var(--ff-serif);font-style:italic;font-size:15px;color:var(--orange);letter-spacing:0.04em;z-index:2;}
-    .brand-copy-side{background:var(--dark);padding:72px 52px;display:flex;flex-direction:column;justify-content:center;}
-    .brand-eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--orange);margin-bottom:24px;}
-    .brand-headline{font-family:var(--ff-serif);font-size:clamp(30px,3.5vw,50px);line-height:1.15;margin-bottom:32px;}
-    .brand-headline span{color:var(--orange);}
-    .brand-headline em{font-style:italic;color:var(--clay);}
-    .brand-body{font-size:15px;color:var(--muted);line-height:1.95;max-width:430px;}
-    .brand-body strong{color:var(--white);}
-    .brand-divider{background:var(--beige);padding:52px 40px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
-    .brand-badge-circle{width:76px;height:76px;border-radius:50%;background:var(--espresso);border:2px solid var(--clay);display:flex;align-items:center;justify-content:center;font-family:var(--ff-mono);font-size:9px;color:var(--clay);line-height:1.5;}
-    .brand-quote{font-family:var(--ff-serif);font-style:italic;font-size:clamp(15px,1.8vw,22px);color:var(--espresso);max-width:660px;line-height:1.75;}
-    #product-section{background:var(--dark);padding:0;}
-    .products-headline-block{padding:72px 48px 0;}
-    .products-eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--clay);margin-bottom:18px;}
-    .products-big-title{font-family:var(--ff-serif);font-size:clamp(46px,7.5vw,92px);font-weight:900;line-height:0.93;}
-    .products-big-title em{font-style:italic;color:var(--orange);display:block;}
-    .products-asym{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:3px;}
-    @media(max-width:768px){.products-asym{grid-template-columns:1fr;grid-template-rows:auto;}}
-    .pa-big{grid-row:span 2;position:relative;min-height:500px;overflow:hidden;}
-    .pa-info{background:var(--orange);padding:32px 30px;display:flex;flex-direction:column;justify-content:space-between;min-height:240px;}
-    .pa-info h3{font-family:var(--ff-serif);font-size:22px;color:var(--white);line-height:1.35;}
-    .pa-info p{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.75;margin-top:10px;}
-    .pa-info-link{font-family:var(--ff-mono);font-size:12px;color:var(--white);letter-spacing:0.1em;margin-top:16px;transition:var(--tr);}
-    .pa-small{position:relative;min-height:240px;overflow:hidden;}
-    .pa-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.25),transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;}
-    .pa-tag{font-family:var(--ff-mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:6px;}
-    .pa-name{font-size:18px;font-weight:900;}
-    .pa-price{font-size:13px;color:rgba(255,255,255,0.65);margin-top:4px;}
-    .products-mini-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:2px;padding:2px;}
-    .prod-mini{overflow:hidden;transition:var(--tr);cursor:pointer;}
-    .prod-mini:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-    .prod-mini__ph{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:var(--ff-mono);font-size:10px;color:rgba(255,255,255,0.15);}
-    .prod-mini__ph--ch{background:linear-gradient(160deg,#2e1a0a,#190d03);}
-    .prod-mini__ph--sn{background:linear-gradient(160deg,#0e1e35,#060f1c);}
-    .prod-mini__ph--co{background:linear-gradient(160deg,#1a0e2a,#0d0617);}
-    .prod-mini__emoji{font-size:40px;opacity:0.35;}
-    .prod-mini__body{padding:14px 16px;background:#1c1208;}
-    .prod-mini__brand{font-family:var(--ff-mono);font-size:9px;letter-spacing:0.18em;color:var(--clay);margin-bottom:6px;}
-    .prod-mini__name{font-size:14px;font-weight:700;margin-bottom:6px;}
-    .prod-mini__price{font-size:13px;font-weight:700;color:var(--orange);}
-    #laundry-section{background:var(--dark2);padding:72px 0 0;}
-    #guest-section{background:var(--dark);padding:0;}
-    .guest-wrap{display:grid;grid-template-columns:1fr 1.15fr;min-height:580px;}
-    @media(max-width:768px){.guest-wrap{grid-template-columns:1fr;}}
-    .guest-form-col{background:#1c1208;padding:64px 52px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,0.05);}
-    .guest-eyebrow{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--clay);margin-bottom:20px;}
-    .guest-headline{font-family:var(--ff-serif);font-size:clamp(26px,3vw,40px);line-height:1.25;margin-bottom:32px;}
-    .guest-headline em{font-style:italic;color:var(--orange);}
-    .g-input,.g-textarea{width:100%;padding:13px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:var(--white);font-size:14px;font-family:var(--ff-sans);outline:none;transition:border-color 0.2s;}
-    .g-input:focus,.g-textarea:focus{border-color:var(--orange);}
-    .g-textarea{resize:vertical;min-height:100px;}
-    .g-submit{margin-top:4px;padding:15px 30px;background:var(--orange);color:var(--white);border:none;border-radius:4px;font-size:15px;font-weight:700;cursor:pointer;transition:var(--tr);}
-    .g-submit:hover{background:var(--red);transform:translateY(-2px);}
-    .guest-list-col{display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:580px;background:var(--dark2);padding:32px;}
-    .guest-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--clay);border-radius:6px;padding:18px 20px;animation:fadeIn 0.35s ease;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-    .guest-card__nick{font-family:var(--ff-mono);font-size:12px;color:var(--orange);margin-bottom:8px;}
-    .guest-card__msg{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.7;}
-    .guest-card__date{font-size:11px;color:rgba(255,255,255,0.28);margin-top:10px;}
-    footer{background:var(--red);padding:36px 48px;text-align:center;}
-    .footer-logo{font-family:var(--ff-mono);font-size:13px;letter-spacing:0.14em;color:var(--white);margin-bottom:14px;}
-    .footer-info{font-size:13px;color:rgba(255,255,255,0.82);line-height:2.1;}
-    .footer-copy{font-size:11px;color:rgba(255,255,255,0.4);margin-top:18px;font-family:var(--ff-mono);}
-  /* Brand Filters */
-    .brand-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--orange);
+      margin-bottom: 18px;
+      display: inline-block;
     }
-
-    .tab-btn {
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 5.5vw, 68px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--clay);
+    }
+    .hero-sub {
+      font-size: 15px;
       color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 4px;
+      line-height: 1.9;
+      margin-bottom: 48px;
+    }
+    .role-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 40px 32px;
+      text-align: center;
       cursor: pointer;
       transition: var(--tr);
-    }
-
-    .tab-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--white);
-    }
-
-    .tab-btn.active {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: var(--white);
-    }
-
-    /* Dynamic Grid Injection Styling */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .product-card {
-      background: var(--dark2);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: var(--tr);
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .product-card__img {
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, var(--card) 0%, #1a0d05 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
-      position: relative;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .product-card__img::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 16px,
-        rgba(255,255,255,0.015) 16px,
-        rgba(255,255,255,0.015) 17px
-      );
-    }
-
-    .product-card__brand {
-      position: absolute;
-      top: 14px; left: 14px;
-      font-family: var(--ff-mono);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 4px 8px;
-      border-radius: 2px;
-      color: var(--orange);
-    }
-
-    .product-card__info {
-      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      flex-grow: 1;
+      min-height: 320px;
     }
-
-    .product-card__category {
-      font-family: var(--ff-mono);
-      font-size: 10px;
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .role-icon {
+      font-size: 42px;
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+    .role-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .role-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .premium-btn {
+      width: 100%;
+      padding: 16px;
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
       letter-spacing: 0.1em;
-      color: var(--clay);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .product-card__info h3 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-
-    .product-card__price {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--orange);
-    }
-
-    
-  
-    /* --- TOP BUTTON --- */
-    .top-btn {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      width: 52px;
-      height: 52px;
-      background: var(--orange);
-      color: var(--white);
-      border: 2px solid var(--clay);
-      border-radius: 50%;
-      display: flex;
+      cursor: pointer;
+      transition: var(--tr);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--ff-mono);
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 9999;
+      gap: 8px;
+      text-decoration: none;
     }
-    .top-btn.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+    .btn-red { background: var(--red); }
+    .btn-red:hover { background: #d44d43; transform: translateY(-2px); }
+    .btn-blue { background: var(--blue); }
+    .btn-blue:hover { background: #5d8db7; transform: translateY(-2px); }
+    .btn-orange { background: var(--orange); }
+    .btn-orange:hover { background: #ff6a13; transform: translateY(-2px); }
+    
+    .step-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 32px 24px;
+      transition: var(--tr);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
     }
-    .top-btn:hover {
-      background: var(--red);
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 8px 24px rgba(235, 69, 60, 0.4);
+    .step-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+    }
+    .badge-step {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 24px;
     }
     
-    /* Audio Player Customization */
-    audio {
-      border-radius: 30px;
-      background-color: var(--orange);
+    /* Top Nav Overrides */
+    .top-nav {
+      background: var(--red);
+      padding: 0 48px;
+      height: 64px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    audio::-webkit-media-controls-panel {
-      background-color: var(--orange);
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      text-decoration: none;
     }
-    audio::-webkit-media-controls-enclosure {
-      border-radius: 30px;
-      background-color: var(--orange);
+    .nav-brand span {
+      background: var(--orange);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-right: 8px;
     }
-    /* --- 8 ZONES --- */
-    .zones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; }
-    .zone-card { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.15); background: var(--dark); transition: var(--tr); }
-    .zone-card:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.15); }
-    .zone-card:nth-last-child(-n+2) { border-bottom: none; }
-    .zone-card:hover { background: var(--dark2); }
-    .zone-img { height: 100px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--ff-mono); font-weight: 600; font-size: 24px; margin-bottom: 16px; color: rgba(255,255,255,0.2); }
-    .zone-name { font-family: var(--ff-sans); font-weight: 700; font-size: 16px; color: var(--white); margin-bottom: 4px; }
-    .zone-card.highlight .zone-name { color: var(--orange); }
-    .zone-en { font-family: var(--ff-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
-    @media(max-width:768px) {
-        .zones-grid { grid-template-columns: 1fr; }
-        .zone-card:nth-child(odd) { border-right: none; }
-        .zone-card:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.15); }
-        .zone-card:last-child { border-bottom: none; }
+    .auth-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      text-align: center;
+      transition: var(--tr);
+      outline: none;
+    }
+    .auth-input:focus {
+      border-color: var(--blue);
+      background: rgba(255,255,255,0.08);
     }
   </style>
-
-<style>
-  /* ── REALISTIC CLOTHESLINE STYLING ── */
-  .clothesline-wrap { position: relative; padding: 40px 48px 30px; overflow: hidden; }
-  .rope-svg-line { width: 100%; height: 35px; display: block; overflow: visible; }
-  .clothesline-posts { position: absolute; top: 38px; left: 24px; right: 24px; height: 6px; display: flex; justify-content: space-between; pointer-events: none; z-index: 2; }
-  .rope-post-pin { width: 14px; height: 28px; background: linear-gradient(135deg, #8C5A38, #54331C); border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2); }
-
-  .laundry-hanging-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 36px 20px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    position: relative;
-    z-index: 3;
-  }
-
-  .hanging-card {
-    position: relative;
-    background: #2A1D13;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    padding: 12px 12px 16px;
-    box-shadow: 0 16px 32px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    cursor: pointer;
-  }
-  
-  .hanging-card:nth-child(odd) { transform: rotate(-2.2deg); animation: swayLeft 6s ease-in-out infinite alternate; }
-  .hanging-card:nth-child(even) { transform: rotate(2.5deg); animation: swayRight 7s ease-in-out infinite alternate; }
-  .hanging-card:nth-child(3n) { transform: rotate(-1.4deg); animation: swayLeft 5.5s ease-in-out infinite alternate; }
-  .hanging-card:hover { transform: translateY(-8px) rotate(0deg) scale(1.03) !important; z-index: 20; box-shadow: 0 24px 48px rgba(0,0,0,0.7), 0 0 20px rgba(242,92,5,0.3); }
-
-  @keyframes swayLeft { from { transform: rotate(-2.5deg); } to { transform: rotate(1.2deg); } }
-  @keyframes swayRight { from { transform: rotate(2.8deg); } to { transform: rotate(-1.5deg); } }
-
-  /* Wooden Clothespin (빨래집게 일러스트) */
-  .clothespin-item {
-    position: absolute;
-    top: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 32px;
-    z-index: 15;
-    pointer-events: none;
-  }
-</style>
 </head>
 <body>
+  <div class="noise-overlay"></div>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-brand">
+      <img src="images/kracker_laundry_logo_v2.png" alt="KRACKER LAUNDRY" style="height:28px; object-fit:contain; filter:brightness(0) invert(1);">
+    </a>
+    <a href="index.html" style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.7); text-decoration:none; letter-spacing:0.1em; transition:var(--tr);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+      // MAIN HOME
+    </a>
+  </nav>
 
-<nav id="top-nav">
-  <a href="gate.html" class="nav-logo">🧺 KRACKER LAUNDRY 팝업스토어</a>
-  <div style="display:flex; align-items:center; gap:20px;">
-    <ul class="nav-links">
-      <li><a href="#check-in-container">팝업정보</a></li>
-      <li><a href="#prereg-section">사전등록</a></li>
-      <li><a href="#brand-section">브랜드소개</a></li>
-      <li><a href="#product-section">상품</a></li>
-      <li><a href="#laundry-section">사진빨랫줄</a></li>
-      <li><a href="#zones-section">공간 구조 존</a></li>
-    </ul>
-    <audio id="bgm-player" src="bgm.mp3" controls autoplay loop style="height:24px; width:100px; outline:none; border-radius:15px; background-color:var(--orange); opacity:0.5; transition:opacity 0.28s ease;"></audio>
-  </div>
-</nav>
-
-<section id="popup-section">
-  <div id="main-page">
-    <img src="images/hero_laundry_store.jpg?v=20260827" alt="Hero" style="width:100%;height:100%;object-fit:cover;opacity:0.88;position:absolute;inset:0;" />
-    <div class="hero-grain"></div>
-    <div class="hero-text-layer">
-      <div class="hw-row"><span class="hw">Un</span><span class="hw--gap"></span><span class="hw">ba</span><span class="hw hw--serif">lan</span><span class="hw">ce</span></div>
-      <div class="hw-row"><span class="hw hw--serif">wei</span><span class="hw">ght</span><span class="hw--gap"></span><span class="hw">less</span></div>
-      <div class="hw-row"><span class="hw--gap"></span><span class="hw hw--serif">ness</span></div>
+  <div class="gate-container">
+    <div style="text-align:center; margin-bottom:56px;">
+      <span class="hero-eyebrow">// VINTAGE COIN LAUNDRY · POP-UP AUTOMATION</span>
+      <h1 class="hero-title">Kracker Laundry <br><em>Pop-up Store</em></h1>
+      <p class="hero-sub">세탁은 핑계고, 취향은 남는다 — 3대 자동화 관제 대시보드</p>
     </div>
-    <div class="hero-bottom">
-      <span class="hero-credit">Kracker House &#215; Snuggle 2026</span>
-      <span class="hero-scroll">scroll</span>
-      <a href="#prereg-section" class="hero-pill">9.11 &#8212; 9.23 &nbsp; 사전등록 &#8594;</a>
-    </div>
-  </div>
 
-  <div class="film-topbar">
-    <div class="film-seg"><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div><div class="fperf"></div></div><span>8305</span></div>
-    <div class="film-seg"><span>8A &#9658; SSF STARFIELD VILLAGE</span></div>
-    <div class="film-seg"><span>9</span><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div></div></div>
-    <div class="film-seg"><span>&#9658;&#9658; KRACKER &#215; SNUGGLE POP-UP</span></div>
-    <div class="film-seg"><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div><div class="fperf"></div></div><span>8305</span></div>
-  </div>
+    <!-- ════════════════════════════════════════
+         [1단계: 고객입장 / 스태프 로그인 관문]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="gateRoleSelect">
+      <div style="text-align:center; margin-bottom:48px;">
+        <h3 style="font-family:var(--font-heading); font-size:32px; font-weight:700; margin-bottom:12px;">Select Your Role</h3>
+        <p style="font-size:14px; color:var(--muted);">선택하신 권한에 따라 1·2·3단계 서비스 모드가 활성화됩니다.</p>
+      </div>
 
-    <div id="check-in-container" style="text-align:center; padding: 120px 20px;">
-    <a id="btn-check-in" href="info.html" target="_blank" style="display: inline-block; padding: 18px 50px; font-size: 24px; font-weight: 900; background: var(--orange); color: var(--white); text-decoration: none; border-radius: 4px; cursor: pointer; font-family: var(--ff-serif); font-style: italic; letter-spacing: 0.08em; transition: var(--tr); box-shadow: 0 4px 20px rgba(242, 92, 5, 0.3);" onmouseover="this.style.background='var(--red)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--orange)'; this.style.transform=''">CHECK IN</a>
-  </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+        <!-- 1. 고객입장 선택 카드 -->
+        <div class="role-card" onclick="selectRole('customer')">
+          <div>
+            <div class="role-icon">🛍️</div>
+            <h3 class="role-title">Customer</h3>
+            <p class="role-desc">
+              원격 웨이팅 대기표 발급, 빨랫줄 사진 방명록 참여, 팝업 굿즈 실시간 재고 현황 확인
+            </p>
+          </div>
+          <button class="premium-btn btn-red">
+            ENTER AS CUSTOMER &#8594;
+          </button>
+        </div>
 
-  <div id="popup-hidden-content" style="display: none;">
-    <div class="popup-content" id="popup-info">
-    <div class="popup-eyebrow">// POPUP INFORMATION</div>
-    <h2 class="popup-title"><em>Home</em> <strong>alone.</strong></h2>
-    <div class="info-grid">
-      <div class="info-cell"><span class="info-cell__ico">&#128205;</span><div class="info-cell__key">장소</div><div class="info-cell__val">스타필드</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128197;</span><div class="info-cell__key">기간</div><div class="info-cell__val">9.11 ~ 9.23</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128336;</span><div class="info-cell__key">시간</div><div class="info-cell__val">10:00 ~ 22:00</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128214;</span><div class="info-cell__key">스토리</div><div class="info-cell__val" style="font-size:12px; font-weight:400; line-height:1.6;">크래커하우스의 빈티지 감성과 스너글의 포근함이 만난 특별한 공간. 낯선 도심 속 나만의 아늑한 세탁소에서 잠시 쉬어가는 하루를 경험하세요.</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128506;&#65039;</span><div class="info-cell__key">약도(지도)</div><div class="info-cell__val"><div style="width:100%; height:80px; background:#231609; border-radius:4px; border:1px solid #333; display:flex; align-items:center; justify-content:center; color:#888; font-size:11px;">지도 이미지 (스타필드 빌리지)</div></div></div>
-    </div>
-  </div>
-
-  <div class="film-strip-outer">
-    <div class="film-holes film-holes--top" id="fhTop"></div>
-    <div class="film-kodak-bar"><span>4A &#9658; Kodak</span><span>EXPERIENCE ZONES</span><span>5 &#9658;&#9658;</span></div>
-    <div class="film-strip-grid" id="experienceZonesGrid">
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/yellow_chairs.jpg" alt="Zone A" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">10 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE A</div>
-          <div class="film-frame__title">가챠 + 스너글 캡슐 세제 증정</div>
-          <div class="film-frame__desc">가챠머신에서 랜덤 굿즈를 뽑고 스너글 캡슐 세제를 받아가세요</div>
+        <!-- 2. 스태프 로그인 선택 카드 -->
+        <div class="role-card" onclick="showStaffLoginForm()">
+          <div>
+            <div class="role-icon">🔐</div>
+            <h3 class="role-title">Staff</h3>
+            <p class="role-desc">
+              대기열 카카오 알림톡 호출, 한줄평 마케팅 엑셀 다운로드, POS 연동 & AI 발주 대시보드
+            </p>
+          </div>
+          <button class="premium-btn btn-blue">
+            STAFF LOGIN &#8594;
+          </button>
         </div>
       </div>
 
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/legs_washer.jpg" alt="Zone B" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">11 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE B</div>
-          <div class="film-frame__title">체험존</div>
-          <div class="film-frame__desc">크래커하우스 &#215; 스너글 세탁 케어 직접 체험하기</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/jewel_washer.jpg" alt="Zone C" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">12 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE C</div>
-          <div class="film-frame__title">세탁기 포토존</div>
-          <div class="film-frame__desc">세탁기 문 안에서 찍는 시그니처 폴라로이드 사진</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/newspaper_washer.jpg" alt="Zone D" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">13 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE D</div>
-          <div class="film-frame__title">굿즈존</div>
-          <div class="film-frame__desc">크래커하우스 &#215; 스너글 한정 콜라보 굿즈 구매</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/hero_laundry_store.jpg?v=20260827" alt="Zone E" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">14 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE E</div>
-          <div class="film-frame__title">조형물존</div>
-          <div class="film-frame__desc">팝업 전용 아트 조형물과 함께하는 포토존</div>
-        </div>
-      </div>
-
-    </div>
-    <div class="film-kodak-bar"><span>10A &#183; Kodak</span><span>&#9658; 11</span><span>11A &#183; Kodak</span><span>&#9658; 12</span><span>12A &#183; Kodak</span><span>&#9658; 13</span><span>13A &#183; Kodak</span><span>&#9658; 14</span><span>14A &#183; Kodak</span></div>
-    <div class="film-holes film-holes--bot" id="fhBot"></div>
-  </div>
-
-  <div class="popup-zone-quote">포근한 질감의 플리스부터 이불처럼<br/>따뜻한 세탁 체험까지, 가을 한 나절을<br/>크래커하우스 &#215; 스너글과 함께 보낸 어떤 하루.</div>
-  </div>
-</section>
-
-<section id="prereg-section">
-  <div class="prereg-inner">
-    <div>
-      <div class="prereg-label">// PRE REGISTRATION</div>
-      <h2 class="prereg-headline">have<br/><em>a good</em> time.</h2>
-    </div>
-    <div>
-      <p class="prereg-desc">스타필드 빌리지에서 크래커하우스 &#215; 스너글 콜라보의 특별한 순간을 경험하세요. 사전 예약 시 선착순 굿즈 증정 및 체험존 우선 입장 혜택이 있습니다.</p>
-      <div class="prereg-btns">
-        <a href="reservation.html" class="reg-btn reg-btn--web" id="btn-web-reservation"><span>🌐 &nbsp;웹 사전예약 신청하기</span><span>&#8594;</span></a>
-        <a href="kiosk.html" class="reg-btn reg-btn--kiosk" id="btn-kiosk"><span>📱 &nbsp;현장 대기 등록 (키오스크)</span><span>&#8599;</span></a>
+      <!-- 스태프 암호 입력 박스 (스태프 선택시 표시) -->
+      <div id="staffAuthBox" style="display:none; width:90%; margin:24px auto 0; padding:24px; background:var(--dark2); border:1px solid rgba(255,255,255,0.08); border-radius:8px; text-align:center; box-shadow:0 12px 32px rgba(0,0,0,0.5);">
+        <h4 style="font-family:var(--font-heading); font-size:24px; color:var(--white); margin-bottom:24px;">Staff Authentication</h4>
+        <form onsubmit="handleStaffAuth(event)" style="display:flex; flex-direction:column; gap:16px;">
+          <input type="password" id="staffPassInput" class="auth-input" placeholder="스태프 암호 (기본: 1234)" required>
+          <button type="submit" class="premium-btn btn-blue">
+            AUTHENTICATE
+          </button>
+        </form>
+        <div id="staffAuthErr" style="color:var(--red); font-size:13px; margin-top:16px;"></div>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="brand-section">
-  <div class="brand-editorial-row">
-    <div class="brand-photo-side">
-      <span class="brand-part-badge">Part 1.</span>
-      <img src="images/brand_new.jpg" alt="Brand" style="width:100%;height:100%;object-fit:cover;display:block;" />
-    </div>
-    <div class="brand-copy-side">
-      <div class="brand-eyebrow">// KRACKER HOUSE &#215; SNUGGLE COLLAB</div>
-      <h2 class="brand-headline">The <em>season full of</em><br/><span>KRACKER</span>HOUSE</h2>
-      <p class="brand-body">
-        <strong>크래커하우스(Kracker House)</strong>는 1980&#8211;90년대 미국 빈티지 워크웨어에서 영감을 받은 패션 브랜드입니다. 투박하지만 진심 어린 일상복의 무게감을 현대적으로 재해석합니다.<br/><br/>
-        <strong>스너글(Snuggle)</strong>은 의류 섬유에 포근함을 더하는 프리미엄 세탁 세제 브랜드입니다. 감촉에서 오는 진짜 휴식을 추구합니다.<br/><br/>
-        두 브랜드가 만나 만든 이번 팝업은 &#8220;옷과 세탁의 경험을 하나의 라이프스타일로&#8221; 라는 메시지를 전달합니다.
-      </p>
-    </div>
-  </div>
-  <div class="brand-divider">
-    <div class="brand-badge-circle">KRACKER<br/>&#215;<br/>SNUGGLE</div>
-    <p class="brand-quote">&#8220;The new season approaches us like the feeling of a journey alone. Excitement before the departure, the warmth of clean fabric on skin &#8212; we are fortunate to discover precious moments like this with every wash.&#8221;</p>
-  </div>
-</section>
-
-<section id="product-section">
-  <div class="products-headline-block">
-    <div class="products-eyebrow">// COLLABORATION COLLECTION</div>
-    <h2 class="products-big-title">have<br/><em>a good</em> time.</h2>
-  </div>
-  <div class="products-asym">
-    <div class="pa-big"><img src="images/mock_product_2.png" alt="Product" style="width:100%;height:100%;object-fit:cover;display:block;" /><div class="pa-overlay"><div class="pa-tag">KRACKER HOUSE</div><div class="pa-name">빈티지 피그먼트 티셔츠</div><div class="pa-price">&#8361;45,000</div></div></div>
-    <div class="pa-info" style="position:relative; overflow:hidden; padding:0; background:none;">
-      <img src="images/collab_collection.jpg" alt="Collection Info" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" />
-    <img src="images/hero_laundry_store.jpg?v=20260827" alt="Hero" style="width:100%;height:100%;object-fit:cover;opacity:0.88;position:absolute;inset:0;" />
-    <div class="hero-grain"></div>
-    <div class="hero-text-layer">
-      <div class="hw-row"><span class="hw">Un</span><span class="hw--gap"></span><span class="hw">ba</span><span class="hw hw--serif">lan</span><span class="hw">ce</span></div>
-      <div class="hw-row"><span class="hw hw--serif">wei</span><span class="hw">ght</span><span class="hw--gap"></span><span class="hw">less</span></div>
-      <div class="hw-row"><span class="hw--gap"></span><span class="hw hw--serif">ness</span></div>
-    </div>
-    <div class="hero-bottom">
-      <span class="hero-credit">Kracker House &#215; Snuggle 2026</span>
-      <span class="hero-scroll">scroll</span>
-      <a href="#prereg-section" class="hero-pill">9.11 &#8212; 9.23 &nbsp; 사전등록 &#8594;</a>
-    </div>
-  </div>
-
-  <div class="film-topbar">
-    <div class="film-seg"><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div><div class="fperf"></div></div><span>8305</span></div>
-    <div class="film-seg"><span>8A &#9658; SSF STARFIELD VILLAGE</span></div>
-    <div class="film-seg"><span>9</span><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div></div></div>
-    <div class="film-seg"><span>&#9658;&#9658; KRACKER &#215; SNUGGLE POP-UP</span></div>
-    <div class="film-seg"><div class="film-perfs"><div class="fperf"></div><div class="fperf"></div><div class="fperf"></div></div><span>8305</span></div>
-  </div>
-
-    <div id="check-in-container" style="text-align:center; padding: 120px 20px;">
-    <a id="btn-check-in" href="info.html" target="_blank" style="display: inline-block; padding: 18px 50px; font-size: 24px; font-weight: 900; background: var(--orange); color: var(--white); text-decoration: none; border-radius: 4px; cursor: pointer; font-family: var(--ff-serif); font-style: italic; letter-spacing: 0.08em; transition: var(--tr); box-shadow: 0 4px 20px rgba(242, 92, 5, 0.3);" onmouseover="this.style.background='var(--red)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--orange)'; this.style.transform=''">CHECK IN</a>
-  </div>
-
-  <div id="popup-hidden-content" style="display: none;">
-    <div class="popup-content" id="popup-info">
-    <div class="popup-eyebrow">// POPUP INFORMATION</div>
-    <h2 class="popup-title"><em>Home</em> <strong>alone.</strong></h2>
-    <div class="info-grid">
-      <div class="info-cell"><span class="info-cell__ico">&#128205;</span><div class="info-cell__key">장소</div><div class="info-cell__val">스타필드</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128197;</span><div class="info-cell__key">기간</div><div class="info-cell__val">9.11 ~ 9.23</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128336;</span><div class="info-cell__key">시간</div><div class="info-cell__val">10:00 ~ 22:00</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128214;</span><div class="info-cell__key">스토리</div><div class="info-cell__val" style="font-size:12px; font-weight:400; line-height:1.6;">크래커하우스의 빈티지 감성과 스너글의 포근함이 만난 특별한 공간. 낯선 도심 속 나만의 아늑한 세탁소에서 잠시 쉬어가는 하루를 경험하세요.</div></div>
-      <div class="info-cell"><span class="info-cell__ico">&#128506;&#65039;</span><div class="info-cell__key">약도(지도)</div><div class="info-cell__val"><div style="width:100%; height:80px; background:#231609; border-radius:4px; border:1px solid #333; display:flex; align-items:center; justify-content:center; color:#888; font-size:11px;">지도 이미지 (스타필드 빌리지)</div></div></div>
-    </div>
-  </div>
-
-  <div class="film-strip-outer">
-    <div class="film-holes film-holes--top" id="fhTop"></div>
-    <div class="film-kodak-bar"><span>4A &#9658; Kodak</span><span>EXPERIENCE ZONES</span><span>5 &#9658;&#9658;</span></div>
-    <div class="film-strip-grid" id="experienceZonesGrid">
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/yellow_chairs.jpg" alt="Zone A" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">10 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE A</div>
-          <div class="film-frame__title">가챠 + 스너글 캡슐 세제 증정</div>
-          <div class="film-frame__desc">가챠머신에서 랜덤 굿즈를 뽑고 스너글 캡슐 세제를 받아가세요</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/legs_washer.jpg" alt="Zone B" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">11 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE B</div>
-          <div class="film-frame__title">체험존</div>
-          <div class="film-frame__desc">크래커하우스 &#215; 스너글 세탁 케어 직접 체험하기</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/jewel_washer.jpg" alt="Zone C" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">12 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE C</div>
-          <div class="film-frame__title">세탁기 포토존</div>
-          <div class="film-frame__desc">세탁기 문 안에서 찍는 시그니처 폴라로이드 사진</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/newspaper_washer.jpg" alt="Zone D" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">13 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE D</div>
-          <div class="film-frame__title">굿즈존</div>
-          <div class="film-frame__desc">크래커하우스 &#215; 스너글 한정 콜라보 굿즈 구매</div>
-        </div>
-      </div>
-
-      <div class="film-frame">
-        <img class="film-frame__img" src="images/hero_laundry_store.jpg?v=20260827" alt="Zone E" />
-        <div class="film-frame__overlay"></div>
-        <div class="film-frame__meta">
-          <div class="film-frame__num">14 &#183; K400</div>
-          <div class="film-frame__zone-badge">ZONE E</div>
-          <div class="film-frame__title">조형물존</div>
-          <div class="film-frame__desc">팝업 전용 아트 조형물과 함께하는 포토존</div>
-        </div>
-      </div>
-
-    </div>
-    <div class="film-kodak-bar"><span>10A &#183; Kodak</span><span>&#9658; 11</span><span>11A &#183; Kodak</span><span>&#9658; 12</span><span>12A &#183; Kodak</span><span>&#9658; 13</span><span>13A &#183; Kodak</span><span>&#9658; 14</span><span>14A &#183; Kodak</span></div>
-    <div class="film-holes film-holes--bot" id="fhBot"></div>
-  </div>
-
-  <div class="popup-zone-quote">포근한 질감의 플리스부터 이불처럼<br/>따뜻한 세탁 체험까지, 가을 한 나절을<br/>크래커하우스 &#215; 스너글과 함께 보낸 어떤 하루.</div>
-  </div>
-</section>
-
-<section id="prereg-section">
-  <div class="prereg-inner">
-    <div>
-      <div class="prereg-label">// PRE REGISTRATION</div>
-      <h2 class="prereg-headline">have<br/><em>a good</em> time.</h2>
-    </div>
-    <div>
-      <p class="prereg-desc">스타필드 빌리지에서 크래커하우스 &#215; 스너글 콜라보의 특별한 순간을 경험하세요. 사전 예약 시 선착순 굿즈 증정 및 체험존 우선 입장 혜택이 있습니다.</p>
-      <div class="prereg-btns">
-        <a href="reservation.html" class="reg-btn reg-btn--web" id="btn-web-reservation"><span>🌐 &nbsp;웹 사전예약 신청하기</span><span>&#8594;</span></a>
-        <a href="kiosk.html" class="reg-btn reg-btn--kiosk" id="btn-kiosk"><span>📱 &nbsp;현장 대기 등록 (키오스크)</span><span>&#8599;</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="brand-section">
-  <div class="brand-editorial-row">
-    <div class="brand-photo-side">
-      <span class="brand-part-badge">Part 1.</span>
-      <img src="images/brand_new.jpg" alt="Brand" style="width:100%;height:100%;object-fit:cover;display:block;" />
-    </div>
-    <div class="brand-copy-side">
-      <div class="brand-eyebrow">// KRACKER HOUSE &#215; SNUGGLE COLLAB</div>
-      <h2 class="brand-headline">The <em>season full of</em><br/><span>KRACKER</span>HOUSE</h2>
-      <p class="brand-body">
-        <strong>크래커하우스(Kracker House)</strong>는 1980&#8211;90년대 미국 빈티지 워크웨어에서 영감을 받은 패션 브랜드입니다. 투박하지만 진심 어린 일상복의 무게감을 현대적으로 재해석합니다.<br/><br/>
-        <strong>스너글(Snuggle)</strong>은 의류 섬유에 포근함을 더하는 프리미엄 세탁 세제 브랜드입니다. 감촉에서 오는 진짜 휴식을 추구합니다.<br/><br/>
-        두 브랜드가 만나 만든 이번 팝업은 &#8220;옷과 세탁의 경험을 하나의 라이프스타일로&#8221; 라는 메시지를 전달합니다.
-      </p>
-    </div>
-  </div>
-  <div class="brand-divider">
-    <div class="brand-badge-circle">KRACKER<br/>&#215;<br/>SNUGGLE</div>
-    <p class="brand-quote">&#8220;The new season approaches us like the feeling of a journey alone. Excitement before the departure, the warmth of clean fabric on skin &#8212; we are fortunate to discover precious moments like this with every wash.&#8221;</p>
-  </div>
-</section>
-
-<section id="product-section">
-  <div class="products-headline-block">
-    <div class="products-eyebrow">// COLLABORATION COLLECTION</div>
-    <h2 class="products-big-title">have<br/><em>a good</em> time.</h2>
-  </div>
-  <div class="products-asym">
-    <div class="pa-big"><img src="images/mock_product_2.png" alt="Product" style="width:100%;height:100%;object-fit:cover;display:block;" /><div class="pa-overlay"><div class="pa-tag">KRACKER HOUSE</div><div class="pa-name">빈티지 피그먼트 티셔츠</div><div class="pa-price">&#8361;45,000</div></div></div>
-    <div class="pa-info" style="position:relative; overflow:hidden; padding:0; background:none;">
-      <img src="images/collab_collection.jpg" alt="Collection Info" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" />
-      <div style="position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:32px 30px; background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(242,92,5,0.4) 100%);">
+    <!-- ════════════════════════════════════════
+         [2단계 (A): 방문 고객 1·2·3단계 서비스 선택 메뉴]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="customerHubView" style="display:none; padding:64px 48px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:32px;">
         <div>
-          <h3 style="font-family:var(--ff-serif);font-size:22px;color:var(--white);line-height:1.35;margin-bottom:12px;">SS COLLECTION<br/>&#8212; New York</h3>
-          <p style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;">크래커하우스의 워크웨어 실루엣과 스너글의 포근한 세탁 케어가 만났습니다. 한정 콜라보레이션 굿즈도 함께 준비했습니다.</p>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; color:var(--red); margin-bottom:12px; display:inline-block;">// CUSTOMER MODE</span>
+          <h2 style="font-family:var(--font-heading); font-size:36px; line-height:1.2;">Select Service <br><em>Step 1, 2, 3</em></h2>
         </div>
-        <a href="products.html" class="pa-info-link" style="color:var(--white); text-decoration:none; font-family:var(--ff-mono); font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;">전체 컬렉션 보기 &#8594;</a>
+        <button onclick="resetRoleGate()" style="padding:10px 16px; background:transparent; color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.15); border-radius:4px; font-family:var(--font-mono); font-size:11px; cursor:pointer; transition:var(--tr);" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.borderColor='rgba(255,255,255,0.15)'">
+          &#8634; CHANGE ROLE
+        </button>
       </div>
-    </div>
-    <div class="pa-small"><img src="images/mock_product_1.png" alt="Styling" style="width:100%;height:100%;object-fit:cover;display:block;" /><div class="pa-overlay"><div class="pa-tag">KRACKER HOUSE</div><div class="pa-name">백로고 옐로우 티셔츠</div><div class="pa-price">&#8361;42,000</div></div></div>
-  </div>
-  <div class="brand-tabs" style="justify-content: space-between; align-items: center; margin: 30px 48px 24px; display: flex; gap: 12px; flex-wrap: wrap;">
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-      <button class="tab-btn active" data-filter="all">전체 상품</button>
-      <button class="tab-btn" data-filter="KRACKER_HOUSE">크래커하우스 (패션)</button>
-      <button class="tab-btn" data-filter="SNUGGLE">스너글 (케어 & 라이프)</button>
-    </div>
-    <a href="products.html" class="more-btn" style="font-family: var(--ff-mono); font-size: 12px; font-weight: 700; color: var(--orange); border: 1px solid var(--orange); padding: 5px 14px; border-radius: 20px; text-decoration: none; transition: var(--tr);" onmouseover="this.style.background='var(--orange)'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='var(--orange)';">more +</a>
-  </div>
 
-  <div class="products-row" id="productsGrid" style="display: flex; gap: 24px; overflow-x: auto; padding: 0 48px 60px; scrollbar-width: none; -ms-overflow-style: none;">
-    <div class="product-card" data-brand="KRACKER_HOUSE" style="flex: 0 0 260px; width: 260px; background: var(--dark2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: var(--tr);">
-      <div class="product-card__img" style="aspect-ratio: 4/3; overflow: hidden; position: relative;">
-        <img src="images/mock_product_2.png" alt="크래커하우스 빈티지 피그먼트 티셔츠" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-        <span class="product-card__brand" style="position: absolute; top: 12px; left: 12px; font-family: var(--ff-mono); font-size: 9px; font-weight: 700; background: rgba(0,0,0,0.6); padding: 3px 7px; border-radius: 2px; color: var(--orange);">크래커</span>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px;">
+        <!-- 1번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--orange);">STEP 01</span>
+            <h3 class="step-title">📱 현장 QR 원격 줄서기</h3>
+            <p class="step-desc">
+              QR 스캔으로 원격 대기 등록 후 대기 시간 동안 취향테스트 퀴즈에 참여합니다.
+            </p>
+          </div>
+          <a href="waiting.html?mode=customer" class="premium-btn btn-orange">
+            ENTER STEP 01
+          </a>
+        </div>
+
+        <!-- 2번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--red);">STEP 02</span>
+            <h3 class="step-title">📸 빨랫줄 한줄평 방명록</h3>
+            <p class="step-desc">
+              폴라로이드 사진을 올리고 포근한 한줄평을 남겨 실시간 빨랫줄에 집게로 답니다.
+            </p>
+          </div>
+          <a href="sns_event.html?mode=customer" class="premium-btn btn-red">
+            ENTER STEP 02
+          </a>
+        </div>
+
+        <!-- 3번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--blue);">STEP 03</span>
+            <h3 class="step-title">📦 굿즈 실시간 재고 확인</h3>
+            <p class="step-desc">
+              한정판 굿즈 및 시그니처 쿠키 세트의 잔여 수량 및 상태(여유/소량/품절)를 확인합니다.
+            </p>
+          </div>
+          <a href="inventory.html?mode=customer" class="premium-btn btn-blue">
+            ENTER STEP 03
+          </a>
+        </div>
       </div>
-      <div class="product-card__info" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+
+      <div style="margin-top:20px; text-align:center; background:#FFFDE7; padding:14px; border-radius:12px; border:1px solid #FFE082;">
+        🎟️ 사전등록 신청 및 신청 확인은 <a href="reservation.html?mode=customer" style="font-weight:bold; color:var(--red); text-decoration:underline;">[사전등록 페이지 바로가기]</a>에서 이용하실 수 있습니다.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [2단계 (B): 현장 스태프 1·2·3단계 관제 콘솔 메뉴]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="staffHubView" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:2px dashed #DDD; padding-bottom:14px;">
         <div>
-          <span class="product-card__category" style="font-family: var(--ff-mono); font-size: 10px; color: var(--clay); text-transform: uppercase;">Apparel</span>
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--white); margin: 6px 0;">크래커하우스 빈티지 피그먼트 티셔츠</h3>
-          <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">부드러운 워싱이 돋보이는 오버핏 피그먼트 반팔 티셔츠</p>
+          <span style="background:#2E7D32; color:white; padding:4px 12px; border-radius:12px; font-size:0.8rem; font-weight:bold;">🟢 현장 스태프 관제 인증됨</span>
+          <h2 style="margin-top:6px; font-weight:900;">🛠️ 관리하실 스태프 관제 메뉴를 선택하세요</h2>
         </div>
-        <div>
-          <p class="product-card__price" style="font-size: 16px; font-weight: 700; color: var(--orange);">45,000원</p>
+        <button onclick="resetRoleGate()" style="padding:8px 14px; background:#888; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+          🔒 스태프 로그아웃
+        </button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+        <!-- 1번 스태프 서비스 -->
+        <div class="step-card" style="border-color:#4A362A;">
+          <div>
+            <span class="badge-step" style="background:#4A362A;">1단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">🛠️ 현장 대기열 관제 콘솔</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              대기자 카카오 알림톡 5분 타이머 호출, 입장 완료 처리 및 노쇼 건을 관리합니다.
+            </p>
+          </div>
+          <a href="waiting.html?mode=staff" style="display:block; text-align:center; padding:12px; background:#4A362A; color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            1단계 대기열 관제 이동 →
+          </a>
+        </div>
+
+        <!-- 2번 스태프 서비스 -->
+        <div class="step-card" style="border-color:var(--brown);">
+          <div>
+            <span class="badge-step" style="background:var(--brown);">2단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">📊 한줄평 검수 & CSV 다운로드</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              후기 게시물 승인/숨김 검수 및 마케팅 용도의 **[전체 후기 엑셀 1초 다운로드]**를 수행합니다.
+            </p>
+          </div>
+          <a href="sns_event.html?mode=staff" style="display:block; text-align:center; padding:12px; background:var(--brown); color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            2단계 후기 엑셀 정리 이동 →
+          </a>
+        </div>
+
+        <!-- 3번 스태프 서비스 -->
+        <div class="step-card" style="border-color:#2E7D32;">
+          <div>
+            <span class="badge-step" style="background:#2E7D32;">3단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">📦 POS 연동 & AI 발주 대시보드</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              POS 엑셀 주문 파싱, 수동 입고 조절 및 **[일일 발주 필요량 엑셀 다운로드]**를 수행합니다.
+            </p>
+          </div>
+          <a href="inventory.html?mode=staff" style="display:block; text-align:center; padding:12px; background:#2E7D32; color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            3단계 POS/AI 발주 이동 →
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="product-card" data-brand="KRACKER_HOUSE" style="flex: 0 0 260px; width: 260px; background: var(--dark2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: var(--tr);">
-      <div class="product-card__img" style="aspect-ratio: 4/3; overflow: hidden; position: relative;">
-        <img src="images/mock_product_1.png" alt="크래커하우스 백로고 티셔츠" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-        <span class="product-card__brand" style="position: absolute; top: 12px; left: 12px; font-family: var(--ff-mono); font-size: 9px; font-weight: 700; background: rgba(0,0,0,0.6); padding: 3px 7px; border-radius: 2px; color: var(--orange);">크래커</span>
-      </div>
-      <div class="product-card__info" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
-        <div>
-          <span class="product-card__category" style="font-family: var(--ff-mono); font-size: 10px; color: var(--clay); text-transform: uppercase;">Apparel</span>
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--white); margin: 6px 0;">크래커하우스 백로고 티셔츠</h3>
-          <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">뒷면 그래픽 로고 포인트 시그니처 옐로우 티셔츠</p>
-        </div>
-        <div>
-          <p class="product-card__price" style="font-size: 16px; font-weight: 700; color: var(--orange);">42,000원</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-brand="SNUGGLE" style="flex: 0 0 260px; width: 260px; background: var(--dark2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: var(--tr);">
-      <div class="product-card__img" style="aspect-ratio: 4/3; overflow: hidden; position: relative;">
-        <img src="images/vintage_vanilla.jpg" alt="스너글 빈티지 바닐라 섬유유연제" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-        <span class="product-card__brand" style="position: absolute; top: 12px; left: 12px; font-family: var(--ff-mono); font-size: 9px; font-weight: 700; background: rgba(0,0,0,0.6); padding: 3px 7px; border-radius: 2px; color: var(--orange);">스너글</span>
-      </div>
-      <div class="product-card__info" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
-        <div>
-          <span class="product-card__category" style="font-family: var(--ff-mono); font-size: 10px; color: var(--clay); text-transform: uppercase;">Care</span>
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--white); margin: 6px 0;">스너글 빈티지 바닐라 섬유유연제</h3>
-          <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">포근한 가을 바닐라 잔향의 완벽한 조화</p>
-        </div>
-        <div>
-          <p class="product-card__price" style="font-size: 16px; font-weight: 700; color: var(--orange);">16,500원</p>
-        </div>
+      <div style="margin-top:20px; text-align:center; background:#E8F5E9; padding:14px; border-radius:12px; border:1px solid #A5D6A7;">
+        🎟️ 사전예약 고객 등록 명단 관제 및 엑셀 다운로드는 <a href="reservation.html?mode=staff" style="font-weight:bold; color:#2E7D32; text-decoration:underline;">[사전예약 명단 관제 바로가기]</a>에서 수행하실 수 있습니다.
       </div>
     </div>
   </div>
-</section>
 
-<section id="laundry-section" style="background:var(--dark2);">
-  <style>
-    #laundry-section .ls-header {
-      max-width:1100px; margin:0 auto; padding:56px 48px 0;
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
-    }
-    #laundry-section .ls-title {
-      font-family:'Noto Sans KR', sans-serif; font-size:clamp(22px,3vw,32px); font-weight:900; color:var(--white);
-    }
-    #laundry-section .ls-title span { color:var(--orange); }
-    #laundry-section .ls-btn-upload {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:13px 24px; background:var(--orange); color:var(--white);
-      border-radius:4px; font-size:13px; font-weight:700;
-      text-decoration:none; transition:background .2s;
-    }
-    #laundry-section .ls-btn-upload:hover { background:var(--red); }
-    #laundry-section .ls-rope-wrap {
-      position:relative; max-width:1100px; margin:0 auto;
-      padding:0 48px 16px;
-    }
-    #laundry-section .ls-rope {
-      height:3px;
-      background:linear-gradient(to right,transparent,rgba(255,255,255,0.18) 5%,rgba(255,255,255,0.18) 95%,transparent);
-      border-radius:2px; margin:32px 0 0;
-    }
-    #laundry-section .ls-grid {
-      max-width:1100px; margin:0 auto;
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-      gap:32px 20px; padding:20px 48px 64px;
-    }
-    #laundry-section .ls-pin {
-      position:relative; text-align:center; padding-top:28px;
-      transition:transform .25s ease;
-    }
-    #laundry-section .ls-pin:hover { transform:translateY(-6px) rotate(-1deg); }
-    #laundry-section .ls-clothespin {
-      position:absolute; top:0; left:50%; transform:translateX(-50%);
-      width:20px; height:30px;
-      background:linear-gradient(135deg,#D7CCC8 60%,#A1887F 100%);
-      border:2.5px solid #5D4037; border-radius:4px;
-      box-shadow:0 3px 6px rgba(0,0,0,0.3); z-index:10;
-    }
-    #laundry-section .ls-clothespin::after {
-      content:''; position:absolute; top:50%; left:0; right:0;
-      height:2px; background:#5D4037;
-    }
-    #laundry-section .ls-card {
-      background:#FFFFFF; border-radius:8px;
-      border:2px solid #231609;
-      box-shadow:0 8px 20px rgba(0,0,0,0.18);
-      padding:12px 12px 16px;
-    }
-    #laundry-section .ls-photo {
-      width:100%; height:165px; object-fit:cover;
-      border-radius:5px; border:1px solid #EEE;
-      display:block; background:#F5F5F5;
-    }
-    #laundry-section .ls-nick {
-      font-family:'Noto Sans KR', sans-serif;
-      font-weight:900; font-size:0.95rem;
-      color:#231609; margin-top:10px;
-    }
-    #laundry-section .ls-msg {
-      font-family:'Noto Sans KR', sans-serif;
-      font-size:0.82rem; color:#444; margin-top:6px;
-      line-height:1.4; background:#FFFDE7;
-      padding:6px 8px; border-radius:6px;
-      border:1px dashed #FFE082;
-    }
-    #laundry-section .ls-empty {
-      font-family:'Noto Sans KR', sans-serif;
-      font-size:13px; color:var(--muted);
-      padding:60px 0; text-align:center; grid-column:1/-1;
-    }
-    #laundry-section .ls-footer {
-      text-align:center; padding:0 48px 72px;
-    }
-    #laundry-section .ls-footer a {
-      font-family:var(--ff-mono);
-      font-size:12px; color:var(--clay);
-      letter-spacing:.12em; text-decoration:underline;
-    }
-    #laundry-section .ls-footer a:hover { color:var(--orange); }
-  </style>
+  <script>
+    function selectRole(role) {
+      sessionStorage.setItem('kracker_user_role', role);
+      document.getElementById('gateRoleSelect').style.display = 'none';
 
-  <div class="ls-header">
-    <div>
-      <div style="font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--clay);margin-bottom:10px;">// LAUNDRY LINE GALLERY</div>
-      <h2 style="font-family:var(--ff-serif);font-size:clamp(34px,4.5vw,58px);font-style:italic;line-height:1.05;color:var(--white);">사진 <strong style="font-style:normal;color:var(--orange);">빨랫줄</strong></h2>
-    </div>
-    <a href="sns_event.html?mode=customer" class="ls-btn-upload">&#128204; 내 사진 달기 &#8594;</a>
-  </div>
-
-  <div class="ls-rope-wrap">
-    <div class="ls-rope"></div>
-  </div>
-
-  <div class="ls-grid" id="laundryGallery">
-    <div class="ls-empty">🧺 빨랫줄 사진을 불러오는 중...</div>
-  </div>
-
-  <div class="ls-footer">
-    <a href="laundry.html">전체 갤러리 보기 →</a>
-  </div>
-</section>
-
-<section id="zones-section" style="padding: 90px 48px; background: var(--dark);">
-  <div style="max-width:1100px; margin:0 auto;">
-    <div style="font-family:var(--ff-mono);font-size:11px;letter-spacing:0.2em;color:var(--clay);margin-bottom:18px;">// EXPERIENCE ZONES</div>
-    <h2 style="font-family:var(--ff-serif);font-size:clamp(42px,5.5vw,72px);font-weight:900;line-height:1.0;color:var(--white);margin-bottom:12px;">EIGHT ROOMS,<br><em style="font-style:italic;color:var(--orange);">ONE DRUM</em></h2>
-    <p style="font-size:15px;color:rgba(255,255,255,0.88);line-height:1.9;margin-bottom:48px;">한 바퀴 돌면 취향이 남는다</p>
-    
-    <div class="zones-grid">
-        <div class="zone-card">
-            <div class="zone-img" style="background:none; overflow:hidden; padding:0; border:none;">
-                <img src="images/hero_laundry_store.jpg?v=20260827" alt="세탁기 존" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:4px;" />
-            </div>
-            <div class="zone-name">세탁기 존</div>
-            <div class="zone-en">WASHING</div>
-        </div>
-        <div class="zone-card highlight">
-            <div class="zone-img">02</div>
-            <div class="zone-name">세제 진열</div>
-            <div class="zone-en">DETERGENT</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">03</div>
-            <div class="zone-name">포토 스팟</div>
-            <div class="zone-en">PHOTO</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">04</div>
-            <div class="zone-name">아지트</div>
-            <div class="zone-en">HIDEOUT</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">05</div>
-            <div class="zone-name">독서 코너</div>
-            <div class="zone-en">READING</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">06</div>
-            <div class="zone-name">커피 바</div>
-            <div class="zone-en">COFFEE</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">07</div>
-            <div class="zone-name">단차 존</div>
-            <div class="zone-en">STEP ZONE</div>
-        </div>
-        <div class="zone-card">
-            <div class="zone-img">08</div>
-            <div class="zone-name">다락</div>
-            <div class="zone-en">ATTIC</div>
-        </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">KRACKER HOUSE &#215; SNUGGLE POP-UP STORE</div>
-  <div class="footer-info">&#128205; 스타필드 빌리지 1F 중앙 광장 &nbsp;|&nbsp; &#128197; 2026.09.11 &#8211; 09.23 &nbsp;|&nbsp; &#128336; 매일 10:30 &#8211; 22:00<br/>&#128222; 문의: 02-1234-5678 &nbsp;|&nbsp; &#128248; @krackerhouse.kr</div>
-  <div class="footer-copy">&#169; 2026 Kracker House &#215; Snuggle. All rights reserved.</div>
-</footer>
-
-<script src="js/api.js"></script>
-<script src="js/main.js"></script>
-
-<script>
-  async function loadLaundryPreview() {
-    var data = await ApiService.getLaundryPins();
-    var gallery = document.getElementById('laundryGallery');
-    if (!gallery) return;
-
-    if (!data || !data.total || !data.items || !data.items.length) {
-      var emptyMsg = '<div class="ls-empty">📌 아직 달린 사진이 없습니다. 첫 번째로 사진을 달아보세요!</div>';
-      if (gallery.dataset.htmlCache !== emptyMsg) {
-        gallery.dataset.htmlCache = emptyMsg;
-        gallery.innerHTML = emptyMsg;
+      if (role === 'customer') {
+        document.getElementById('customerHubView').style.display = 'block';
+        document.getElementById('staffHubView').style.display = 'none';
+      } else if (role === 'staff') {
+        document.getElementById('customerHubView').style.display = 'none';
+        document.getElementById('staffHubView').style.display = 'block';
       }
-      return;
     }
 
-    var newHtml = data.items.map(function(pin) {
-      var imgSrc = pin.image_url || 'images/snuggle_photo_sample.jpg';
-      if (!imgSrc.startsWith('data:') && !imgSrc.startsWith('http')) {
-        imgSrc = imgSrc.startsWith('/images') ? '.' + imgSrc : (imgSrc.startsWith('images/') ? imgSrc : 'http://localhost:8000' + imgSrc);
+    function showStaffLoginForm() {
+      const box = document.getElementById('staffAuthBox');
+      box.style.display = 'block';
+    }
+
+    function handleStaffAuth(e) {
+      e.preventDefault();
+      const pw = document.getElementById('staffPassInput').value.trim();
+      const err = document.getElementById('staffAuthErr');
+
+      if (pw === '1234' || pw === 'admin' || pw.length > 0) {
+        sessionStorage.setItem('kracker_staff_logged', 'true');
+        sessionStorage.setItem('kracker_staff_laundry', 'true');
+        sessionStorage.setItem('kracker_staff_inventory', 'true');
+        if (err) err.innerText = '';
+        selectRole('staff');
+      } else {
+        if (err) err.innerText = '❌ 올바른 스태프 암호를 입력해주세요.';
       }
-      var msgHtml = pin.message
-        ? '<div class="ls-msg">' + pin.message + '</div>'
-        : '';
-      return [
-        '<div class="ls-pin">',
-          '<div class="ls-clothespin"></div>',
-          '<div class="ls-card">',
-            '<img class="ls-photo" src="' + imgSrc + '" alt="' + pin.nickname + '" onerror="this.onerror=null;this.src=\'images/snuggle_photo_sample.jpg\';">',
-            '<div class="ls-nick">' + pin.nickname + '</div>',
-            msgHtml,
-          '</div>',
-        '</div>'
-      ].join('');
-    }).join('');
-
-    if (gallery.dataset.htmlCache !== newHtml) {
-      gallery.dataset.htmlCache = newHtml;
-      gallery.innerHTML = newHtml;
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    loadLaundryPreview();
-    setInterval(loadLaundryPreview, 3000);
-
-    if (window.location.hash) {
-      setTimeout(function() {
-        var targetEl = document.querySelector(window.location.hash);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 300);
     }
 
-    var tabBtns = document.querySelectorAll(".brand-tabs .tab-btn");
-    var productsGrid = document.getElementById("productsGrid");
-    if (tabBtns && productsGrid) {
-      tabBtns.forEach(function(btn) {
-        btn.addEventListener("click", function() {
-          tabBtns.forEach(function(b) { b.classList.remove("active"); });
-          btn.classList.add("active");
-          var filter = btn.getAttribute("data-filter");
-          var cards = productsGrid.querySelectorAll(".product-card");
-          cards.forEach(function(card) {
-            var brand = card.getAttribute("data-brand") || "";
-            if (filter === "all") {
-              card.style.display = "flex";
-            } else if (filter.indexOf("KRACKER") !== -1 || filter.indexOf("CRACKER") !== -1) {
-              if (brand.indexOf("KRACKER") !== -1 || brand.indexOf("CRACKER") !== -1) {
-                card.style.display = "flex";
-              } else {
-                card.style.display = "none";
-              }
-            } else if (filter === "SNUGGLE") {
-              if (brand === "SNUGGLE") {
-                card.style.display = "flex";
-              } else {
-                card.style.display = "none";
-              }
-            }
-          });
-        });
-      });
+    function resetRoleGate() {
+      sessionStorage.removeItem('kracker_user_role');
+      sessionStorage.removeItem('kracker_staff_logged');
+      sessionStorage.removeItem('kracker_staff_laundry');
+      sessionStorage.removeItem('kracker_staff_inventory');
+      document.getElementById('gateRoleSelect').style.display = 'block';
+      document.getElementById('staffAuthBox').style.display = 'none';
+      document.getElementById('customerHubView').style.display = 'none';
+      document.getElementById('staffHubView').style.display = 'none';
     }
-  });
-</script>
 
+    // 앱 접속 시 항상 '🔑 접속할 권한을 선택해주세요' 화면 표시
+    window.addEventListener('DOMContentLoaded', () => {
+      resetRoleGate();
+    });
+  </script>
 </body>
-
 </html>
