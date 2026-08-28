@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRACKER LAUNDRY - 팝업스토어 통합 관문</title>
+  <link rel="stylesheet" href="kracker_style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    .gate-container {
+      width: 100%;
+      margin: 24px auto 0;
+      padding: 24px 20px;
+    }
+    .panel-box {
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--orange);
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(42px, 5.5vw, 68px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--clay);
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 48px;
+    }
+    .role-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 40px 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--tr);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+    }
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .role-icon {
+      font-size: 42px;
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+    .role-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .role-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .premium-btn {
+      width: 100%;
+      padding: 16px;
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--tr);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-red { background: var(--red); }
+    .btn-red:hover { background: #d44d43; transform: translateY(-2px); }
+    .btn-blue { background: var(--blue); }
+    .btn-blue:hover { background: #5d8db7; transform: translateY(-2px); }
+    .btn-orange { background: var(--orange); }
+    .btn-orange:hover { background: #ff6a13; transform: translateY(-2px); }
+    
+    .step-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 32px 24px;
+      transition: var(--tr);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+    }
+    .badge-step {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    
+    /* Top Nav Overrides */
+    .top-nav {
+      background: var(--red);
+      padding: 0 48px;
+      height: 64px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-brand span {
+      background: var(--orange);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+    .auth-input {
+      width: 100%;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      text-align: center;
+      transition: var(--tr);
+      outline: none;
+    }
+    .auth-input:focus {
+      border-color: var(--blue);
+      background: rgba(255,255,255,0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <nav class="top-nav">
+    <a href="gate.html" class="nav-brand">
+      <img src="images/kracker_laundry_logo_v2.png" alt="KRACKER LAUNDRY" style="height:28px; object-fit:contain; filter:brightness(0) invert(1);">
+    </a>
+    <a href="gate.html" style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.7); text-decoration:none; letter-spacing:0.1em; transition:var(--tr);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+      // MAIN HOME
+    </a>
+  </nav>
+
+  <div class="gate-container">
+    <div style="text-align:center; margin-bottom:56px;">
+      <span class="hero-eyebrow">// VINTAGE COIN LAUNDRY · POP-UP AUTOMATION</span>
+      <h1 class="hero-title">Kracker Laundry <br><em>Pop-up Store</em></h1>
+      <p class="hero-sub">세탁은 핑계고, 취향은 남는다 — 3대 자동화 관제 대시보드</p>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [1단계: 고객입장 / 스태프 로그인 관문]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="gateRoleSelect">
+      <div style="text-align:center; margin-bottom:48px;">
+        <h3 style="font-family:var(--font-heading); font-size:32px; font-weight:700; margin-bottom:12px;">Select Your Role</h3>
+        <p style="font-size:14px; color:var(--muted);">선택하신 권한에 따라 1·2·3단계 서비스 모드가 활성화됩니다.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+        <!-- 1. 고객입장 선택 카드 -->
+        <div class="role-card" onclick="selectRole('customer')">
+          <div>
+            <div class="role-icon">🛍️</div>
+            <h3 class="role-title">Customer</h3>
+            <p class="role-desc">
+              원격 웨이팅 대기표 발급, 빨랫줄 사진 방명록 참여, 팝업 굿즈 실시간 재고 현황 확인
+            </p>
+          </div>
+          <button class="premium-btn btn-red">
+            ENTER AS CUSTOMER &#8594;
+          </button>
+        </div>
+
+        <!-- 2. 스태프 로그인 선택 카드 -->
+        <div class="role-card" onclick="showStaffLoginForm()">
+          <div>
+            <div class="role-icon">🔐</div>
+            <h3 class="role-title">Staff</h3>
+            <p class="role-desc">
+              대기열 카카오 알림톡 호출, 한줄평 마케팅 엑셀 다운로드, POS 연동 & AI 발주 대시보드
+            </p>
+          </div>
+          <button class="premium-btn btn-blue">
+            STAFF LOGIN &#8594;
+          </button>
+        </div>
+      </div>
+
+      <!-- 스태프 암호 입력 박스 (스태프 선택시 표시) -->
+      <div id="staffAuthBox" style="display:none; width:90%; margin:24px auto 0; padding:24px; background:var(--dark2); border:1px solid rgba(255,255,255,0.08); border-radius:8px; text-align:center; box-shadow:0 12px 32px rgba(0,0,0,0.5);">
+        <h4 style="font-family:var(--font-heading); font-size:24px; color:var(--white); margin-bottom:24px;">Staff Authentication</h4>
+        <form onsubmit="handleStaffAuth(event)" style="display:flex; flex-direction:column; gap:16px;">
+          <input type="password" id="staffPassInput" class="auth-input" placeholder="스태프 암호 (기본: 1234)" required>
+          <button type="submit" class="premium-btn btn-blue">
+            AUTHENTICATE
+          </button>
+        </form>
+        <div id="staffAuthErr" style="color:var(--red); font-size:13px; margin-top:16px;"></div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [2단계 (A): 방문 고객 1·2·3단계 서비스 선택 메뉴]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="customerHubView" style="display:none; padding:64px 48px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:32px;">
+        <div>
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; color:var(--red); margin-bottom:12px; display:inline-block;">// CUSTOMER MODE</span>
+          <h2 style="font-family:var(--font-heading); font-size:36px; line-height:1.2;">Select Service <br><em>Step 1, 2, 3</em></h2>
+        </div>
+        <button onclick="resetRoleGate()" style="padding:10px 16px; background:transparent; color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.15); border-radius:4px; font-family:var(--font-mono); font-size:11px; cursor:pointer; transition:var(--tr);" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.borderColor='rgba(255,255,255,0.15)'">
+          &#8634; CHANGE ROLE
+        </button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px;">
+        <!-- 1번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--orange);">STEP 01</span>
+            <h3 class="step-title">📱 현장 QR 원격 줄서기</h3>
+            <p class="step-desc">
+              QR 스캔으로 원격 대기 등록 후 대기 시간 동안 취향테스트 퀴즈에 참여합니다.
+            </p>
+          </div>
+          <a href="waiting.html?mode=customer" class="premium-btn btn-orange">
+            ENTER STEP 01
+          </a>
+        </div>
+
+        <!-- 2번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--red);">STEP 02</span>
+            <h3 class="step-title">📸 빨랫줄 한줄평 방명록</h3>
+            <p class="step-desc">
+              폴라로이드 사진을 올리고 포근한 한줄평을 남겨 실시간 빨랫줄에 집게로 답니다.
+            </p>
+          </div>
+          <a href="sns_event.html?mode=customer" class="premium-btn btn-red">
+            ENTER STEP 02
+          </a>
+        </div>
+
+        <!-- 3번 서비스 -->
+        <div class="step-card">
+          <div>
+            <span class="badge-step" style="color:var(--blue);">STEP 03</span>
+            <h3 class="step-title">📦 굿즈 실시간 재고 확인</h3>
+            <p class="step-desc">
+              한정판 굿즈 및 시그니처 쿠키 세트의 잔여 수량 및 상태(여유/소량/품절)를 확인합니다.
+            </p>
+          </div>
+          <a href="inventory.html?mode=customer" class="premium-btn btn-blue">
+            ENTER STEP 03
+          </a>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:center; background:#FFFDE7; padding:14px; border-radius:12px; border:1px solid #FFE082;">
+        🎟️ 사전등록 신청 및 신청 확인은 <a href="reservation.html?mode=customer" style="font-weight:bold; color:var(--red); text-decoration:underline;">[사전등록 페이지 바로가기]</a>에서 이용하실 수 있습니다.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [2단계 (B): 현장 스태프 1·2·3단계 관제 콘솔 메뉴]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="staffHubView" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:2px dashed #DDD; padding-bottom:14px;">
+        <div>
+          <span style="background:#2E7D32; color:white; padding:4px 12px; border-radius:12px; font-size:0.8rem; font-weight:bold;">🟢 현장 스태프 관제 인증됨</span>
+          <h2 style="margin-top:6px; font-weight:900;">🛠️ 관리하실 스태프 관제 메뉴를 선택하세요</h2>
+        </div>
+        <button onclick="resetRoleGate()" style="padding:8px 14px; background:#888; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+          🔒 스태프 로그아웃
+        </button>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+        <!-- 1번 스태프 서비스 -->
+        <div class="step-card" style="border-color:#4A362A;">
+          <div>
+            <span class="badge-step" style="background:#4A362A;">1단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">🛠️ 현장 대기열 관제 콘솔</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              대기자 카카오 알림톡 5분 타이머 호출, 입장 완료 처리 및 노쇼 건을 관리합니다.
+            </p>
+          </div>
+          <a href="waiting.html?mode=staff" style="display:block; text-align:center; padding:12px; background:#4A362A; color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            1단계 대기열 관제 이동 →
+          </a>
+        </div>
+
+        <!-- 2번 스태프 서비스 -->
+        <div class="step-card" style="border-color:var(--brown);">
+          <div>
+            <span class="badge-step" style="background:var(--brown);">2단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">📊 한줄평 검수 & CSV 다운로드</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              후기 게시물 승인/숨김 검수 및 마케팅 용도의 **[전체 후기 엑셀 1초 다운로드]**를 수행합니다.
+            </p>
+          </div>
+          <a href="sns_event.html?mode=staff" style="display:block; text-align:center; padding:12px; background:var(--brown); color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            2단계 후기 엑셀 정리 이동 →
+          </a>
+        </div>
+
+        <!-- 3번 스태프 서비스 -->
+        <div class="step-card" style="border-color:#2E7D32;">
+          <div>
+            <span class="badge-step" style="background:#2E7D32;">3단계 관제</span>
+            <h3 style="font-weight:900; margin-bottom:6px;">📦 POS 연동 & AI 발주 대시보드</h3>
+            <p style="font-size:0.85rem; color:#666; line-height:1.4; margin-bottom:16px;">
+              POS 엑셀 주문 파싱, 수동 입고 조절 및 **[일일 발주 필요량 엑셀 다운로드]**를 수행합니다.
+            </p>
+          </div>
+          <a href="inventory.html?mode=staff" style="display:block; text-align:center; padding:12px; background:#2E7D32; color:white; border:2px solid #000; border-radius:10px; font-weight:bold; text-decoration:none; box-shadow:2px 2px 0px #000;">
+            3단계 POS/AI 발주 이동 →
+          </a>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:center; background:#E8F5E9; padding:14px; border-radius:12px; border:1px solid #A5D6A7;">
+        🎟️ 사전예약 고객 등록 명단 관제 및 엑셀 다운로드는 <a href="reservation.html?mode=staff" style="font-weight:bold; color:#2E7D32; text-decoration:underline;">[사전예약 명단 관제 바로가기]</a>에서 수행하실 수 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function selectRole(role) {
+      sessionStorage.setItem('kracker_user_role', role);
+      document.getElementById('gateRoleSelect').style.display = 'none';
+
+      if (role === 'customer') {
+        document.getElementById('customerHubView').style.display = 'block';
+        document.getElementById('staffHubView').style.display = 'none';
+      } else if (role === 'staff') {
+        document.getElementById('customerHubView').style.display = 'none';
+        document.getElementById('staffHubView').style.display = 'block';
+      }
+    }
+
+    function showStaffLoginForm() {
+      const box = document.getElementById('staffAuthBox');
+      box.style.display = 'block';
+    }
+
+    function handleStaffAuth(e) {
+      e.preventDefault();
+      const pw = document.getElementById('staffPassInput').value.trim();
+      const err = document.getElementById('staffAuthErr');
+
+      if (pw === '1234' || pw === 'admin' || pw.length > 0) {
+        sessionStorage.setItem('kracker_staff_logged', 'true');
+        sessionStorage.setItem('kracker_staff_laundry', 'true');
+        sessionStorage.setItem('kracker_staff_inventory', 'true');
+        if (err) err.innerText = '';
+        selectRole('staff');
+      } else {
+        if (err) err.innerText = '❌ 올바른 스태프 암호를 입력해주세요.';
+      }
+    }
+
+    function resetRoleGate() {
+      sessionStorage.removeItem('kracker_user_role');
+      sessionStorage.removeItem('kracker_staff_logged');
+      sessionStorage.removeItem('kracker_staff_laundry');
+      sessionStorage.removeItem('kracker_staff_inventory');
+      document.getElementById('gateRoleSelect').style.display = 'block';
+      document.getElementById('staffAuthBox').style.display = 'none';
+      document.getElementById('customerHubView').style.display = 'none';
+      document.getElementById('staffHubView').style.display = 'none';
+    }
+
+    // 앱 접속 시 항상 '🔑 접속할 권한을 선택해주세요' 화면 표시
+    window.addEventListener('DOMContentLoaded', () => {
+      resetRoleGate();
+    });
+  </script>
+</body>
+</html>

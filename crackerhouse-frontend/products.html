@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>콜라보 상품 — 크래커하우스 X 스너글 콜라보 팝업</title>
+  <meta name="description" content="크래커하우스 X 스너글 콜라보 팝업스토어 한정판 의류 및 굿즈 컬렉션" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    @font-face {
+      font-family: 'SheLeeOkSun';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/Her-Leeoksun.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ══════════════════════
+       DESIGN TOKENS (Main Page Sync)
+    ══════════════════════ */
+    :root {
+      --red:      #BC453C;
+      --clay:     #BF6E50;
+      --orange:   #F25C05;
+      --espresso: #594335;
+      --blue:     #517EA6;
+      --beige:    #EBE4D8;
+      --cream:    #F7F2EA;
+      --dark:     #1A1208;
+      --dark2:    #231609;
+      --card:     #2E1D0F;
+      --white:    #FFFFFF;
+      --muted:    #C4B9AE;
+      --ff-serif: 'SheLeeOkSun', 'Playfair Display', serif;
+      --ff-mono:  'DM Mono', monospace;
+      --ff-sans:  'Noto Sans KR', sans-serif;
+      --tr:       all 0.28s ease;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-sans); background: var(--dark); color: var(--white); overflow-x: hidden; }
+    a    { text-decoration: none; color: inherit; }
+
+    /* ══════════════════════
+       TOP NAV (Main Page Sync)
+    ══════════════════════ */
+    #top-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 58px;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 36px;
+      z-index: 999;
+      box-shadow: 0 3px 24px rgba(0,0,0,0.35);
+    }
+
+    .nav-logo {
+      font-family: var(--ff-mono);
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.14em;
+      background: var(--orange);
+      padding: 5px 14px; border-radius: 3px;
+      color: var(--white);
+    }
+
+    .nav-links { display: flex; list-style: none; gap: 30px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.82); letter-spacing: 0.03em;
+      transition: var(--tr);
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      #top-nav   { padding: 0 20px; }
+    }
+
+    /* ══════════════════════
+       PAGE HEADER
+    ══════════════════════ */
+    .page-header {
+      padding: 130px 48px 60px;
+      background: var(--espresso);
+      text-align: center;
+      position: relative;
+    }
+
+    .page-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--clay);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .page-desc {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ══════════════════════
+       MAIN CONTENT - TABS & GRID
+    ══════════════════════ */
+    .products-container {
+      max-width: 1100px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+
+    /* Brand Filters */
+    .brand-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--tr);
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+    }
+
+    .tab-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    /* Dynamic Grid Injection Styling */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--tr);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .product-card__img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--card) 0%, #1a0d05 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .product-card__img::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 16px,
+        rgba(255,255,255,0.015) 16px,
+        rgba(255,255,255,0.015) 17px
+      );
+    }
+
+    .product-card__brand {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-family: var(--ff-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: 2px;
+      color: var(--orange);
+    }
+
+    .product-card__info {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .product-card__category {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--clay);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .product-card__info h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .product-card__price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    /* ══════════════════════
+       FOOTER (Main Page Sync)
+    ══════════════════════ */
+    footer {
+      background: var(--red);
+      padding: 36px 48px; text-align: center;
+      margin-top: 80px;
+    }
+
+    .footer-logo {
+      font-family: var(--ff-mono); font-size: 13px;
+      letter-spacing: 0.14em; color: var(--white); margin-bottom: 14px;
+    }
+
+    .footer-info {
+      font-size: 13px; color: rgba(255,255,255,0.82); line-height: 2.1;
+    }
+
+    .footer-copy {
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      margin-top: 18px; font-family: var(--ff-mono);
+    }
+  
+    /* --- TOP BUTTON --- */
+    .top-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 52px;
+      height: 52px;
+      background: var(--orange);
+      color: var(--white);
+      border: 2px solid var(--clay);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+    }
+    .top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .top-btn:hover {
+      background: var(--red);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(235, 69, 60, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ TOP NAV ══ -->
+<nav id="top-nav">
+  <a href="index.html" class="nav-logo">KRACKER × SNUGGLE</a>
+    <ul class="nav-links">
+    <li><a href="index.html#check-in-container">팝업정보</a></li>
+    <li><a href="index.html#prereg-section">사전등록</a></li>
+    <li><a href="index.html#brand-section">브랜드소개</a></li>
+    <li><a href="index.html#product-section">상품</a></li>
+    <li><a href="index.html#laundry-section">사진빨랫줄</a></li>
+    <li><a href="index.html#zones-section">공간 구조 존</a></li>
+  </ul>
+</nav>
+
+<!-- ══ PAGE HEADER ══ -->
+<header class="page-header">
+  <div class="page-eyebrow">// limited collection</div>
+  <h1 class="page-title">콜라보 <em>컬렉션</em></h1>
+  <p class="page-desc">
+    크래커하우스의 피그먼트 워싱 의류와 스너글의 포근한 세탁 향기가 담긴 한정판 상품 목록입니다.<br/>
+    스타필드 빌리지 팝업스토어 현장에서 직접 입어보고 기분 좋은 향과 감촉을 경험해 보세요.
+  </p>
+</header>
+
+<!-- ══ MAIN LAYOUT ══ -->
+<main class="products-container">
+  
+  <!-- 브랜드 필터 탭 -->
+  <div class="brand-tabs">
+    <button class="tab-btn active" data-filter="all">전체 상품</button>
+    <button class="tab-btn" data-filter="KRACKER_HOUSE">크래커하우스 (패션)</button>
+    <button class="tab-btn" data-filter="SNUGGLE">스너글 (케어 & 라이프)</button>
+  </div>
+
+  <!-- 상품 그리드 -->
+  <div class="products-grid" id="productsGrid">
+    <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--muted); font-family: var(--ff-mono);">
+      LOADING PRODUCTS...
+    </div>
+  </div>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">KRACKER HOUSE × SNUGGLE POP-UP STORE</div>
+  <div class="footer-info">
+    📍 스타필드 빌리지 1F 중앙 광장 &nbsp;|&nbsp;
+    📅 2026.09.01 – 09.14 &nbsp;|&nbsp;
+    🕐 매일 10:30 – 22:00<br/>
+    📞 문의: 02-1234-5678 &nbsp;|&nbsp;
+    📸 @krackerhouse.kr
+  </div>
+  <div class="footer-copy">© 2026 Kracker House × Snuggle. All rights reserved.</div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="top-btn" id="scrollTopBtn" title="Go to top">&#8593;</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var topBtn = document.getElementById("scrollTopBtn");
+      if (topBtn) {
+        window.addEventListener("scroll", function() {
+          var scrollPos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+          if (scrollPos > 300) {
+            topBtn.classList.add("visible");
+          } else {
+            topBtn.classList.remove("visible");
+          }
+        });
+        topBtn.addEventListener("click", function() {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+    });
+  </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var tabBtns = document.querySelectorAll(".brand-tabs .tab-btn");
+    var productsGrid = document.getElementById("productsGrid");
+    if (tabBtns && productsGrid) {
+      tabBtns.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          tabBtns.forEach(function(b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          var filter = btn.getAttribute("data-filter");
+          var cards = productsGrid.querySelectorAll(".product-card");
+          cards.forEach(function(card) {
+            var brand = card.getAttribute("data-brand") || "";
+            if (filter === "all") {
+              card.style.display = "flex";
+            } else if (filter.indexOf("KRACKER") !== -1 || filter.indexOf("CRACKER") !== -1) {
+              if (brand.indexOf("KRACKER") !== -1 || brand.indexOf("CRACKER") !== -1) {
+                card.style.display = "flex";
+              } else {
+                card.style.display = "none";
+              }
+            } else if (filter === "SNUGGLE") {
+              if (brand === "SNUGGLE") {
+                card.style.display = "flex";
+              } else {
+                card.style.display = "none";
+              }
+            }
+          });
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+
+</html>

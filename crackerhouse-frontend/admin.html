@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 콘솔 — 크래커하우스 X 스너글</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'SheLeeOkSun';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/Her-Leeoksun.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ── ADMIN PALETTE ── */
+    :root {
+      --c-red:      #BC453C;
+      --c-clay:     #BF6E50;
+      --c-orange:   #F25C05;
+      --c-espresso: #594335;
+      --c-blue:     #517EA6;
+      --c-card:     #4A3628;
+      --c-beige:    #EBE4D8;
+      --c-muted:    #C4B9AE;
+      --c-white:    #FFFFFF;
+      --font: 'Noto Sans KR', sans-serif;
+      --mono: 'DM Mono', monospace;
+      --font-title: 'SheLeeOkSun', 'Playfair Display', serif;
+      --radius: 10px;
+      --tr: all 0.25s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); background: var(--c-beige); color: var(--c-white); }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-title); }
+
+    /* ── LOGIN SCREEN ── */
+    #loginScreen {
+      min-height: 100vh;
+      background: var(--c-espresso);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-card {
+      background: var(--c-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 4px solid var(--c-red);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      width: 100%; max-width: 420px;
+      text-align: center;
+    }
+    .login-badge {
+      display: inline-block;
+      background: var(--c-orange);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    .login-card h1 { font-size: 26px; margin-bottom: 6px; }
+    .login-card p  { font-size: 14px; color: var(--c-muted); margin-bottom: 32px; }
+
+    .field { text-align: left; margin-bottom: 18px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--c-muted); margin-bottom: 6px; }
+    .field input {
+      width: 100%; padding: 12px 16px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: white; font-size: 14px; font-family: var(--font);
+      outline: none; transition: var(--tr);
+    }
+    .field input:focus { border-color: var(--c-orange); }
+
+    .btn-login {
+      width: 100%; padding: 14px;
+      background: var(--c-red); color: white;
+      border: none; border-radius: 6px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: var(--tr);
+    }
+    .btn-login:hover { background: var(--c-orange); }
+    .login-back { display: block; margin-top: 18px; font-size: 12px; color: var(--c-muted); }
+    .login-back:hover { color: white; }
+
+    /* ── MAIN DASHBOARD LAYOUT ── */
+    #dashScreen { display: none; min-height: 100vh; }
+
+    /* Top bar */
+    .dash-topbar {
+      height: 60px;
+      background: var(--c-red);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .dash-topbar__logo {
+      font-family: var(--mono); font-weight: 700; font-size: 15px;
+      background: var(--c-orange); padding: 5px 12px; border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .dash-topbar__right { display: flex; align-items: center; gap: 20px; }
+    .dash-topbar__refresh {
+      padding: 6px 14px;
+      background: transparent; border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 4px; color: white; cursor: pointer; font-size: 13px;
+      transition: var(--tr);
+    }
+    .dash-topbar__refresh:hover { background: rgba(255,255,255,0.15); }
+    .dash-topbar__logout {
+      font-size: 13px; color: rgba(255,255,255,0.7); cursor: pointer;
+    }
+    .dash-topbar__logout:hover { color: white; }
+
+    /* Content area */
+    .dash-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Sidebar */
+    .dash-sidebar {
+      background: var(--c-espresso);
+      padding: 24px 16px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-label {
+      font-size: 11px; font-weight: 700; color: var(--c-clay);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0 12px; margin: 20px 0 8px 0;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 6px;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: var(--tr); color: var(--c-muted);
+    }
+    .sidebar-item:hover { background: rgba(255,255,255,0.07); color: white; }
+    .sidebar-item.active { background: var(--c-card); color: white; }
+    .sidebar-item.active::before {
+      content: ''; display: block;
+      width: 3px; height: 18px; background: var(--c-orange);
+      border-radius: 2px; margin-right: 2px;
+    }
+
+    /* Main content */
+    .dash-main { background: var(--c-beige); padding: 32px; overflow-y: auto; }
+    .dash-main h2 { font-size: 24px; color: var(--c-espresso); margin-bottom: 24px; font-weight: 900; }
+
+    /* ── STAT CARDS ── */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    @media (max-width: 1000px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+    .stat-card {
+      background: var(--c-espresso);
+      border-radius: var(--radius);
+      padding: 24px;
+      border-top: 3px solid var(--c-clay);
+      color: white;
+    }
+    .stat-card__val { font-size: 36px; font-weight: 900; color: var(--c-orange); line-height: 1; }
+    .stat-card__lbl { font-size: 13px; color: var(--c-muted); margin-top: 6px; }
+
+    /* ── TABLE ── */
+    .table-card {
+      background: var(--c-espresso);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .table-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .table-header h3 { font-size: 17px; font-weight: 700; }
+    .badge-count {
+      background: var(--c-orange); color: white;
+      padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      padding: 12px 20px; text-align: left; font-size: 12px;
+      color: var(--c-clay); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    td {
+      padding: 14px 20px; font-size: 14px; color: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.03); }
+
+    /* ── STATUS BADGES ── */
+    .s-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 4px;
+      font-size: 12px; font-weight: 700;
+    }
+    .s-badge--wait    { background: rgba(242,92,5,0.2); color: #F25C05; }
+    .s-badge--done    { background: rgba(81,126,166,0.2); color: #517EA6; }
+    .s-badge--cancel  { background: rgba(188,69,60,0.2); color: #BC453C; }
+
+    /* ── ACTION BUTTONS ── */
+    .act-btn {
+      padding: 5px 12px; border: none; border-radius: 4px;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: var(--tr); margin-right: 4px;
+    }
+    .act-btn--in   { background: var(--c-blue); color: white; }
+    .act-btn--in:hover { background: #3f688c; }
+    .act-btn--out  { background: rgba(188,69,60,0.3); color: #BC453C; border: 1px solid #BC453C; }
+    .act-btn--out:hover { background: var(--c-red); color: white; }
+    .act-btn--ok   { background: var(--c-orange); color: white; }
+    .act-btn--ok:hover { background: var(--c-red); }
+    .act-btn--del  { background: rgba(188,69,60,0.2); color: #BC453C; border: 1px solid #BC453C; }
+    .act-btn--del:hover { background: var(--c-red); color: white; }
+
+    /* ── APPROVAL CARDS GRID ── */
+    .approval-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .appr-card {
+      background: var(--c-espresso);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .appr-card img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      background: var(--c-card);
+    }
+    .appr-card__body { padding: 16px; }
+    .appr-card__type {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      color: var(--c-clay); margin-bottom: 6px;
+    }
+    .appr-card p { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 12px; }
+    .appr-card__nick { font-size: 12px; color: var(--c-muted); }
+    .appr-card__actions { display: flex; gap: 8px; margin-top: 12px; }
+    .appr-card__actions button { flex: 1; padding: 8px; }
+
+    /* ── TABS ── */
+    .tab-section { display: none; }
+    .tab-section.active { display: block; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      padding: 48px; text-align: center; color: var(--c-muted);
+    }
+    .empty-state span { font-size: 40px; display: block; margin-bottom: 12px; }
+
+    /* ── WAITING LIVE TICKER ── */
+    .live-ticker {
+      background: var(--c-card);
+      border: 1px solid var(--c-clay);
+      border-radius: 8px;
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .live-ticker__label { font-size: 14px; color: var(--c-muted); }
+    .live-ticker__count { font-size: 32px; font-weight: 900; color: var(--c-orange); }
+    .live-ticker__unit  { font-size: 14px; color: var(--c-muted); margin-left: 6px; }
+  
+    /* --- TOP BUTTON --- */
+    .top-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 52px;
+      height: 52px;
+      background: var(--orange);
+      color: var(--white);
+      border: 2px solid var(--clay);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+    }
+    .top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .top-btn:hover {
+      background: var(--red);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(235, 69, 60, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     🔐 LOGIN SCREEN
+════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <span class="login-badge">ADMIN CONSOLE</span>
+    <h1>관리자 로그인</h1>
+    <p>크래커하우스 X 스너글 팝업스토어 운영 콘솔</p>
+    <form id="adminLoginForm">
+      <div class="field">
+        <label>이메일 계정</label>
+        <input type="email" id="adminEmail" placeholder="admin@krackerhouse.kr" required />
+      </div>
+      <div class="field">
+        <label>비밀번호</label>
+        <input type="password" id="adminPassword" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-login">콘솔 로그인 →</button>
+    </form>
+    <a href="index.html" class="login-back">← 팝업 홈페이지로 돌아가기</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     📊 DASHBOARD SCREEN
+════════════════════════════════ -->
+<div id="dashScreen">
+
+  <!-- TOP BAR -->
+  <div class="dash-topbar">
+    <span class="dash-topbar__logo">KRACKER × SNUGGLE CONSOLE</span>
+    <div class="dash-topbar__right">
+      <button class="dash-topbar__refresh" onclick="refresh()">🔄 새로고침</button>
+      <span class="dash-topbar__logout" onclick="logout()">로그아웃 ↗</span>
+    </div>
+  </div>
+
+  <div class="dash-body">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-label">Overview</div>
+      <div class="sidebar-item active" onclick="switchTab('overview', this)">📊 대시보드</div>
+
+      <div class="sidebar-label">예약 관리</div>
+      <div class="sidebar-item" onclick="switchTab('prereserv', this)">📅 사전예약 목록</div>
+      <div class="sidebar-item" onclick="switchTab('queues', this)">🚨 현장 대기열</div>
+
+      <div class="sidebar-label">콘텐츠</div>
+      <div class="sidebar-item" onclick="switchTab('approvals', this)">📎 승인 대기 콘텐츠</div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dash-main">
+
+      <!-- ── TAB: 대시보드 ── -->
+      <section id="tab-overview" class="tab-section active">
+        <h2>📊 팝업스토어 실시간 현황</h2>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-card__val" id="stat-pre">—</div>
+            <div class="stat-card__lbl">웹 사전예약 접수</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__val" id="stat-wait">—</div>
+            <div class="stat-card__lbl">현장 대기 중인 팀</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__val" id="stat-pins">—</div>
+            <div class="stat-card__lbl">빨랫줄 총 사진수</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__val" id="stat-pending">—</div>
+            <div class="stat-card__lbl">미승인 콘텐츠</div>
+          </div>
+        </div>
+
+        <!-- 팝업 요약 안내 -->
+        <div class="table-card" style="padding: 24px;">
+          <h3 style="font-size: 17px; margin-bottom: 12px;">스타필드 빌리지 팝업스토어</h3>
+          <p style="color: var(--c-muted); font-size: 14px; line-height: 1.8;">
+            📍 스타필드 빌리지 1F 중앙 광장 &nbsp;|&nbsp;
+            📅 2026.9.1 – 9.14 &nbsp;|&nbsp;
+            🕐 매일 10:30 – 22:00 <br/>
+            현장 키오스크에서 발급된 대기번호를 모니터링하고, 방문객이 업로드한 폴라로이드와 방명록을 검토 후 승인해 주세요.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── TAB: 사전예약 ── -->
+      <section id="tab-prereserv" class="tab-section">
+        <h2>📅 웹 사전예약 접수 현황</h2>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>사전예약 목록</h3>
+            <span class="badge-count" id="badge-pre">0</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>성함</th><th>연락처</th>
+                  <th>예약 날짜</th><th>시간대</th>
+                  <th>인원</th><th>상태</th><th>관리</th>
+                </tr>
+              </thead>
+              <tbody id="preTable">
+                <tr><td colspan="7" class="empty-state"><span>📅</span>로딩 중...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB: 현장 대기열 ── -->
+      <section id="tab-queues" class="tab-section">
+        <h2>🚨 현장 대기열 관리</h2>
+        <div class="live-ticker">
+          <div>
+            <div class="live-ticker__label">현재 대기 중인 팀</div>
+            <div style="display:flex; align-items:baseline; gap:6px;">
+              <span class="live-ticker__count" id="liveCount">—</span>
+              <span class="live-ticker__unit">팀</span>
+            </div>
+          </div>
+          <div style="font-size: 13px; color: var(--c-muted);">
+            키오스크 발권 순서대로 정렬됩니다.
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>현장 대기 목록</h3>
+            <span class="badge-count" id="badge-queue">0</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>대기번호</th><th>성함</th><th>연락처</th>
+                  <th>등록 시각</th><th>인원</th><th>상태</th><th>관리</th>
+                </tr>
+              </thead>
+              <tbody id="queueTable">
+                <tr><td colspan="7" class="empty-state"><span>🚨</span>로딩 중...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB: 승인 대기 ── -->
+      <section id="tab-approvals" class="tab-section">
+        <h2>📎 미승인 콘텐츠 관리</h2>
+        <p style="color: var(--c-espresso); margin-bottom: 24px; font-size: 14px;">
+          방문객이 등록한 폴라로이드 사진과 방명록 중 승인 대기 중인 항목입니다.
+        </p>
+        <div class="approval-grid" id="approvalGrid">
+          <div class="empty-state" style="grid-column:1/-1; color:var(--c-espresso);">
+            <span>📎</span>로딩 중...
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+  // ─────────────────────────────────
+  // LOGIN
+  // ─────────────────────────────────
+  if (sessionStorage.getItem("admin_token")) openDash();
+
+  document.getElementById("adminLoginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("adminEmail").value.trim();
+    const pw    = document.getElementById("adminPassword").value;
+    const res   = await ApiService.adminLogin(email, pw);
+    if (res.success) { openDash(); }
+    else { alert(res.message); }
+  });
+
+  function openDash() {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("dashScreen").style.display = "block";
+    loadAll();
+  }
+
+  function logout() {
+    sessionStorage.removeItem("admin_token");
+    location.reload();
+  }
+
+  function refresh() { loadAll(); }
+
+  // ─────────────────────────────────
+  // TAB SWITCH
+  // ─────────────────────────────────
+  function switchTab(name, el) {
+    document.querySelectorAll(".tab-section").forEach(s => s.classList.remove("active"));
+    document.querySelectorAll(".sidebar-item").forEach(s => s.classList.remove("active"));
+    document.getElementById("tab-" + name).classList.add("active");
+    el.classList.add("active");
+    loadAll();
+  }
+
+  // ─────────────────────────────────
+  // LOAD ALL DATA
+  // ─────────────────────────────────
+  async function loadAll() {
+    const [stats, resAll, pending] = await Promise.all([
+      ApiService.getAdminStats(),
+      ApiService.getAllReservations(),
+      ApiService.getPendingContent()
+    ]);
+
+    // Stats
+    if (stats) {
+      document.getElementById("stat-pins").textContent    = stats.total_pins    ?? "—";
+      document.getElementById("stat-pending").textContent = stats.pending_pins   ?? "—";
+    }
+
+    if (resAll.items) {
+      const pre     = resAll.items.filter(r => r.reservation_type === "PRE_REGISTRATION");
+      const onsite  = resAll.items.filter(r => r.reservation_type === "ONSITE_KIOSK");
+      const waiting = onsite.filter(r => r.status === "WAITING");
+
+      document.getElementById("stat-pre").textContent  = pre.length;
+      document.getElementById("stat-wait").textContent = waiting.length;
+      document.getElementById("liveCount").textContent = waiting.length;
+      document.getElementById("badge-pre").textContent   = pre.length;
+      document.getElementById("badge-queue").textContent = onsite.length;
+
+      renderPreTable(pre);
+      renderQueueTable(onsite);
+    }
+
+    renderApprovals(pending.items || []);
+  }
+
+  // ─────────────────────────────────
+  // PRE-RESERVATION TABLE
+  // ─────────────────────────────────
+  function renderPreTable(list) {
+    const tb = document.getElementById("preTable");
+    if (!list.length) {
+      tb.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span>📅</span>등록된 사전예약이 없습니다.</div></td></tr>`;
+      return;
+    }
+    tb.innerHTML = list.map(r => `
+      <tr>
+        <td><strong>${r.name}</strong></td>
+        <td>${r.phone}</td>
+        <td>${new Date(r.reservation_date).toLocaleDateString("ko-KR")}</td>
+        <td>${r.reservation_time}</td>
+        <td>${r.people_count}명</td>
+        <td>${statusBadge(r.status)}</td>
+        <td>${r.status === "WAITING"
+          ? `<button class="act-btn act-btn--in" onclick="setStatus('${r.id}','COMPLETED')">✅ 입장완료</button>
+             <button class="act-btn act-btn--out" onclick="setStatus('${r.id}','CANCELLED')">취소</button>`
+          : "—"}</td>
+      </tr>
+    `).join("");
+  }
+
+  // ─────────────────────────────────
+  // QUEUE TABLE
+  // ─────────────────────────────────
+  function renderQueueTable(list) {
+    const tb = document.getElementById("queueTable");
+    if (!list.length) {
+      tb.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span>🎫</span>현장 대기자가 없습니다.</div></td></tr>`;
+      return;
+    }
+    tb.innerHTML = list.map(r => `
+      <tr>
+        <td><span style="font-size:20px;font-weight:900;color:var(--c-orange);">${r.waiting_number}</span>번</td>
+        <td><strong>${r.name}</strong></td>
+        <td>${r.phone}</td>
+        <td>${new Date(r.created_at).toLocaleTimeString("ko-KR", {hour:"2-digit",minute:"2-digit"})}</td>
+        <td>${r.people_count}명</td>
+        <td>${statusBadge(r.status)}</td>
+        <td>${r.status === "WAITING"
+          ? `<button class="act-btn act-btn--in" onclick="setStatus('${r.id}','COMPLETED')">🛎 호출 & 입장</button>
+             <button class="act-btn act-btn--out" onclick="setStatus('${r.id}','CANCELLED')">미방문</button>`
+          : "—"}</td>
+      </tr>
+    `).join("");
+  }
+
+  async function setStatus(id, status) {
+    const res = await ApiService.updateReservationStatus(id, status);
+    if (res.success) loadAll();
+    else alert(res.message);
+  }
+
+  // ─────────────────────────────────
+  // APPROVALS GRID
+  // ─────────────────────────────────
+  function renderApprovals(list) {
+    const grid = document.getElementById("approvalGrid");
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1; color:var(--c-espresso);">
+        <span>✅</span>승인 대기 중인 콘텐츠가 없습니다.
+      </div>`;
+      return;
+    }
+    grid.innerHTML = list.map(item => `
+      <div class="appr-card">
+        ${item.type === "pin"
+          ? `<img src="http://localhost:8000${item.content}" alt="사진" onerror="this.style.background='var(--c-card)';this.style.height='180px';"/>`
+          : `<div style="background:var(--c-card);padding:24px;font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;">
+               "✍️ ${item.content}"
+             </div>`
+        }
+        <div class="appr-card__body">
+          <div class="appr-card__type">${item.type === "pin" ? "📎 빨랫줄 사진" : "📬 방명록"}</div>
+          <p>${item.type === "pin" ? (item.message || "—") : item.content}</p>
+          <div class="appr-card__nick">by <strong style="color:var(--c-orange);">${item.nickname}</strong></div>
+          <div class="appr-card__actions">
+            <button class="act-btn act-btn--ok" style="flex:1; padding:8px;" onclick="doApprove('${item.type}','${item.id}')">승인 ✓</button>
+            <button class="act-btn act-btn--del" style="flex:1; padding:8px;" onclick="doReject('${item.type}','${item.id}')">거절 ✕</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  async function doApprove(type, id) {
+    const r = await ApiService.approveContent(type, id);
+    if (r.success) { alert(r.message); loadAll(); }
+    else alert(r.message);
+  }
+  async function doReject(type, id) {
+    if (!confirm("삭제/거절하시겠습니까?")) return;
+    const r = await ApiService.rejectContent(type, id);
+    if (r.success) loadAll();
+    else alert(r.message);
+  }
+
+  // ─────────────────────────────────
+  // HELPERS
+  // ─────────────────────────────────
+  function statusBadge(s) {
+    const map = {
+      WAITING:   ["s-badge--wait",   "대기 중"],
+      COMPLETED: ["s-badge--done",   "입장 완료"],
+      CANCELLED: ["s-badge--cancel", "취소"],
+    };
+    const [cls, txt] = map[s] || ["","—"];
+    return `<span class="s-badge ${cls}">${txt}</span>`;
+  }
+</script>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="top-btn" id="scrollTopBtn" title="Go to top">&#8593;</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var topBtn = document.getElementById("scrollTopBtn");
+      if (topBtn) {
+        window.addEventListener("scroll", function() {
+          var scrollPos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+          if (scrollPos > 300) {
+            topBtn.classList.add("visible");
+          } else {
+            topBtn.classList.remove("visible");
+          }
+        });
+        topBtn.addEventListener("click", function() {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

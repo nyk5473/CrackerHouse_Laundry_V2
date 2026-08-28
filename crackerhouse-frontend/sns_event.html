@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRACKER LAUNDRY - 빨랫줄 사진 & 한줄평 시스템</title>
+  <link rel="stylesheet" href="kracker_style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    .laundry-container {
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 24px;
+    }
+    .panel-box {
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      margin-bottom: 24px;
+    }
+    
+    /* 빨랫줄 갤러리 영역 */
+    .rope-line {
+      position: relative;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      margin: 40px 0 20px 0;
+      border-radius: 4px;
+    }
+    .pins-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    .polaroid-card {
+      width: 220px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 4px;
+      padding: 16px 16px 32px 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+      position: relative;
+      transition: var(--tr);
+      text-align: center;
+      transform-origin: top center;
+    }
+    .polaroid-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+    .clothespin {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 24px;
+      background: #8B5A2B;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+    .polaroid-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #eee;
+    }
+    .polaroid-nick {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 16px;
+      color: var(--dark);
+    }
+    .polaroid-msg {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: var(--font-mono);
+      transition: var(--tr);
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--blue);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .table-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+    .table-list th, .table-list td {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 16px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--white);
+    }
+    .table-list th {
+      background: rgba(255,255,255,0.03);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+    }
+    .btn-export-csv {
+      padding: 12px 20px;
+      background: rgba(46,125,50,0.2);
+      color: #81C784;
+      border: 1px solid rgba(46,125,50,0.5);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--tr);
+    }
+    .btn-export-csv:hover {
+      background: #2E7D32;
+      color: var(--white);
+    }
+
+    /* Top Nav Overrides */
+    .top-nav {
+      background: var(--red);
+      padding: 0 48px;
+      height: 64px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--white) !important;
+      text-decoration: none;
+    }
+    .nav-brand span {
+      background: var(--orange);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+    
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--tr);
+      margin-top: 16px;
+    }
+    .btn-submit:hover {
+      background: #d44d43;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <nav class="top-nav">
+    <a href="gate.html" class="nav-brand">
+      <img src="images/kracker_laundry_logo_v2.png" alt="KRACKER LAUNDRY" style="height:28px; object-fit:contain; filter:brightness(0) invert(1);">
+    </a>
+    <a href="gate.html" style="font-family:var(--font-mono); font-size:12px; color:rgba(255,255,255,0.7); text-decoration:none; letter-spacing:0.1em; transition:var(--tr);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+      // MAIN HOME
+    </a>
+  </nav>
+
+  <div class="laundry-container">
+    <div style="text-align:center; margin-top:20px; margin-bottom:40px;">
+      <h2 style="font-family:var(--font-heading); font-size:32px; font-weight:700; color:var(--white);">Step 02: Laundry Photo Line &amp; <em>Gallery</em></h2>
+      <p style="font-size:14px; color:var(--muted); margin-top:12px;">방문객 폴라로이드 사진과 소감을 빨랫줄에 남기거나, 스태프 모드에서 마케팅 데이터로 다운로드할 수 있습니다.</p>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [첫 화면: 고객 / 스태프 접속 모드 선택 관문]
+    ════════════════════════════════════════ -->
+    <div class="panel-box" id="entryRoleGate" style="max-width:620px; margin:0 auto; text-align:center;">
+      <span style="display:inline-block; padding:4px 12px; background:var(--orange); color:var(--white); font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.15em; border-radius:4px; margin-bottom:16px;">KRACKER LAUNDRY GATE</span>
+      <h3 style="font-family:var(--font-heading); font-size:24px; font-weight:700; color:var(--white); margin-bottom:8px;">접속 목적을 선택해주세요</h3>
+      <p style="font-size:14px; color:rgba(255,255,255,0.6); margin-bottom:32px;">
+        고객 참여 모드 또는 현장 스태프 마케팅 데이터 관제 모드를 선택하세요.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <!-- 1. 고객 모드 선택 카드 -->
+        <div style="background:var(--dark2); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:24px; text-align:center; cursor:pointer; transition:var(--tr);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255,255,255,0.05)'" onclick="selectUserMode('customer')">
+          <div style="font-size:32px; margin-bottom:12px; opacity:0.8;">🛍️</div>
+          <h4 style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--white); margin-bottom:8px;">Customer</h4>
+          <p style="font-size:12px; color:rgba(255,255,255,0.6); margin-bottom:24px; line-height:1.5;">사진 업로드 & 빨랫줄 한줄평 작성 및 방명록 구경하기</p>
+          <button class="btn-submit" style="margin-top:0;">고객 입장하기 &#8594;</button>
+        </div>
+
+        <!-- 2. 스태프 모드 선택 카드 -->
+        <div style="background:var(--dark2); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:24px; text-align:center; cursor:pointer; transition:var(--tr);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255,255,255,0.05)'" onclick="selectUserMode('staff')">
+          <div style="font-size:32px; margin-bottom:12px; opacity:0.8;">🔐</div>
+          <h4 style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--white); margin-bottom:8px;">Staff</h4>
+          <p style="font-size:12px; color:rgba(255,255,255,0.6); margin-bottom:24px; line-height:1.5;">스태프 암호(1234) 입력 후 한줄평 엑셀 데이터 정리</p>
+          <button class="btn-submit" style="background:var(--blue); margin-top:0;">스태프 로그인 &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [🛍️ 방문 고객 전용 화면] (스태프 전용 영역 차단)
+    ════════════════════════════════════════ -->
+    <div id="customerSection" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; background:var(--dark2); padding:16px; border-radius:6px; border:1px solid rgba(255,255,255,0.08);">
+        <span style="font-weight:700; color:var(--white); font-size:13px; font-family:var(--font-mono); letter-spacing:0.05em;">// CUSTOMER MODE ACTIVE</span>
+        <button onclick="resetToGate()" style="padding:8px 12px; background:transparent; border:1px solid rgba(255,255,255,0.15); border-radius:4px; color:rgba(255,255,255,0.6); font-family:var(--font-mono); font-size:11px; cursor:pointer; transition:var(--tr);" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.borderColor='rgba(255,255,255,0.15)'">
+          &#8634; CHANGE MODE
+        </button>
+      </div>
+
+      <!-- 파트 1: 내 사진 & 한줄평 작성 폼 -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:40px;">
+        <div class="panel-box" style="margin-bottom:0;">
+          <span style="display:inline-block; padding:4px 12px; background:rgba(255,255,255,0.1); color:var(--white); font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.15em; border-radius:2px; margin-bottom:12px;">WRITE POST</span>
+          <h3 style="font-family:var(--font-heading); font-size:24px; font-weight:700; color:var(--white); margin-bottom:12px;">사진 빨랫줄에 집게로 달기</h3>
+          <p style="font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:32px;">
+            팝업 현장에서 찍은 폴라로이드 사진을 올리고 포근한 소감을 남겨주세요!
+          </p>
+
+          <form id="pinUploadForm">
+            <div class="form-group">
+              <label>방문자 닉네임</label>
+              <input type="text" id="pinNickname" placeholder="예: 포근포근곰" required>
+            </div>
+            <div class="form-group">
+              <label>포근한 한줄평 소감</label>
+              <textarea id="pinMessage" rows="2" placeholder="예: 스너글 허거블 코튼 향 너무 포근해요! 🧺" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>폴라로이드 사진 선택</label>
+              <input type="file" id="pinImageFile" accept="image/*" style="padding:12px; font-size:12px; cursor:pointer;" onchange="previewImage(event)">
+            </div>
+            <button type="submit" class="btn-submit">
+              📌 빨랫줄에 달기
+            </button>
+          </form>
+        </div>
+
+        <!-- 실시간 라이브 미리보기 -->
+        <div class="panel-box" style="text-align:center;">
+          <h4 style="margin-bottom:12px; color:var(--blue);">🧺 나의 폴라로이드 미리보기</h4>
+          <div style="display:inline-block;" class="polaroid-card">
+            <div class="clothespin"></div>
+            <img id="previewImg" src="images/snuggle_photo_sample.jpg" onerror="this.src='https://via.placeholder.com/200x160?text=SNUGGLE+LAUNDRY'" class="polaroid-img" alt="미리보기">
+            <div class="polaroid-nick" id="previewNick">포근포근곰</div>
+            <div class="polaroid-msg" id="previewMsg">스너글 블루스파클 향 너무 좋아용! 세탁기 포토존 대박 🧺🧸</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 파트 2: 빨랫줄 방명록 갤러리 -->
+      <div class="panel-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--white);">📌 KRACKER LAUNDRY 빨랫줄 실시간 갤러리</h3>
+          <a href="https://nyk5473.github.io/CrackerHouse_Snuggle3/#laundry-section" target="_blank" style="padding:10px 16px; background:var(--blue); color:var(--white); border-radius:4px; text-decoration:none; font-family:var(--font-mono); font-size:12px; font-weight:500; transition:var(--tr);" onmouseover="this.style.background='#283593'" onmouseout="this.style.background='var(--blue)'">
+            🌐 웹에서 확인하기 &#8594;
+          </a>
+        </div>
+        <div class="rope-line"></div>
+        <div class="pins-grid" id="pinsGallery">
+          <div style="color:rgba(255,255,255,0.4); font-family:var(--font-mono); font-size:12px;">빨랫줄에 걸린 사진들을 불러오는 중...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         [🔐 현장 스태프 전용 화면] (고객에겐 일절 보이지 않음)
+    ════════════════════════════════════════ -->
+    <div id="staffSection" style="display:none;">
+      <!-- 스태프 로그인 박스 -->
+      <div class="panel-box" id="staffLoginSection" style="max-width:480px; margin:40px auto; text-align:center;">
+        <span style="display:inline-block; padding:4px 12px; background:rgba(255,255,255,0.1); color:var(--white); font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.15em; border-radius:2px; margin-bottom:12px;">STAFF CONSOLE</span>
+        <h4 style="font-family:var(--font-heading); font-size:24px; font-weight:700; color:var(--white); margin:bottom:12px;">Staff Login</h4>
+        <p style="font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:32px;">마케팅 후기 엑셀 데이터 정리 기능을 사용하려면 스태프 암호를 입력하세요.</p>
+        
+        <form onsubmit="handleStaffLogin(event)" style="display:flex; flex-direction:column; gap:16px;">
+          <input type="password" id="staffPw" class="form-group" style="padding:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:var(--white); font-size:14px; text-align:center; outline:none; transition:var(--tr);" placeholder="스태프 암호 (기본: 1234)" required onfocus="this.style.borderColor='var(--blue)'; this.style.background='rgba(255,255,255,0.08)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='rgba(255,255,255,0.04)'">
+          <button type="submit" class="btn-submit" style="background:var(--blue); margin-top:0;">
+            AUTHENTICATE
+          </button>
+        </form>
+        <div id="staffLoginErr" style="color:var(--red); font-weight:500; font-size:13px; margin-top:16px;"></div>
+        <button onclick="resetToGate()" style="margin-top:24px; background:none; border:none; color:rgba(255,255,255,0.4); text-decoration:underline; font-size:12px; cursor:pointer; transition:var(--tr);" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+          &#8592; 모드 다시 선택 화면으로 돌아가기
+        </button>
+      </div>
+
+      <!-- 스태프 관제 콘솔 (로그인 후 표시) -->
+      <div class="panel-box" id="staffConsoleSection" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+          <div>
+            <span style="font-family:var(--font-mono); font-size:10px; color:#4CAF50; letter-spacing:0.1em; display:block; margin-bottom:4px;">// STAFF ACTIVE : MARKETING CONSOLE</span>
+            <h3 style="font-family:var(--font-heading); font-size:24px; font-weight:700; color:var(--white);">일일 한줄평 데이터 수집 및 엑셀 정제</h3>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-export-csv" onclick="exportLaundryCsv()">📥 전체 후기 다운로드 (CSV)</button>
+            <button onclick="handleStaffLogout()" style="padding:12px 16px; background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:4px; font-family:var(--font-mono); font-size:12px; font-weight:500; cursor:pointer; transition:var(--tr);" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.color='#fff'">🔒 로그아웃</button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px; background:rgba(255,255,255,0.03); padding:16px; border-radius:6px; border:1px solid rgba(255,255,255,0.08);">
+          <strong style="color:var(--white); font-size:14px;">💡 오늘의 한줄평 감성 분석 요약:</strong>
+          <span style="font-size:13px; color:rgba(255,255,255,0.7); margin-left:8px;">총 <span id="totalCount" style="color:var(--orange); font-weight:700;">0</span>건 수집됨 (주요 키워드: #포근함, #섬유유연제, #쿠키맛있음, #세탁소컨셉)</span>
+        </div>
+
+        <table class="table-list">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>닉네임</th>
+              <th>한줄평 내용</th>
+              <th>작성 일시</th>
+              <th>승인 상태</th>
+              <th>관리</th>
+            </tr>
+          </thead>
+          <tbody id="staffTableBody">
+            <tr><td colspan="6">데이터를 불러오는 중...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:8000/api/laundry-line';
+    let localPins = [
+      { id: 'pin-1', nickname: '포근포근곰', message: '스너글 블루스파클 향 너무 좋아용! 세탁기 포토존 대박 🧺🧸', image_url: 'images/snuggle_photo_sample.jpg', created_at: '2026-08-28 09:30', is_approved: true },
+      { id: 'pin-2', nickname: '크래커덕후', message: '바삭 쿠키 세트랑 섬유유연제 샘플 굿즈까지 대만족!! 🍪', image_url: 'images/mock_laundry_1.jpg', created_at: '2026-08-28 09:45', is_approved: true },
+      { id: 'pin-3', nickname: '스타필드나들이', message: '빨랫줄에 내 사진 집게로 다니까 인스타 갬성 느껴져요 ✨', image_url: 'images/mock_laundry_2.jpg', created_at: '2026-08-28 10:00', is_approved: true }
+    ];
+    localStorage.setItem('kracker_local_pins', JSON.stringify(localPins));
+
+    // 접속 모드 선택 게이트 처리
+    function selectUserMode(mode) {
+      sessionStorage.setItem('kracker_user_role', mode);
+      document.getElementById('entryRoleGate').style.display = 'none';
+
+      if (mode === 'customer') {
+        document.getElementById('customerSection').style.display = 'block';
+        document.getElementById('staffSection').style.display = 'none';
+        loadPinsGallery();
+      } else if (mode === 'staff') {
+        document.getElementById('customerSection').style.display = 'none';
+        document.getElementById('staffSection').style.display = 'block';
+        checkStaffState();
+      }
+    }
+
+    function resetToGate() {
+      window.location.href = 'gate.html';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlMode = urlParams.get('mode');
+      if (urlMode === 'customer' || urlMode === 'staff') {
+        selectUserMode(urlMode);
+      } else {
+        const savedRole = sessionStorage.getItem('kracker_user_role');
+        if (savedRole) selectUserMode(savedRole);
+      }
+    });
+
+    // 미리보기 기능
+    function previewImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('previewImg').src = evt.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    document.getElementById('pinNickname').addEventListener('input', (e) => {
+      document.getElementById('previewNick').innerText = e.target.value || '포근포근곰';
+    });
+    document.getElementById('pinMessage').addEventListener('input', (e) => {
+      document.getElementById('previewMsg').innerText = e.target.value || '한줄평 메시지';
+    });
+
+    // 1. 빨랫줄 갤러리 불러오기
+    async function loadPinsGallery() {
+      let pins = [];
+      try {
+        const res = await fetch(API_URL);
+        if (res.ok) {
+          const data = await res.json();
+          pins = data.items;
+        }
+      } catch (err) {
+        pins = localPins.filter(p => p.is_approved);
+      }
+
+      if (pins.length === 0) pins = localPins;
+
+      const gallery = document.getElementById('pinsGallery');
+      if (gallery) {
+        gallery.innerHTML = pins.map(p => `
+          <div class="polaroid-card">
+            <div class="clothespin"></div>
+            <img src="${p.image_url || 'https://via.placeholder.com/200x160?text=KRACKER+LAUNDRY'}" class="polaroid-img" alt="${p.nickname}">
+            <div class="polaroid-nick">${p.nickname}</div>
+            <div class="polaroid-msg">${p.message || ''}</div>
+          </div>
+        `).join('');
+      }
+
+      const countEl = document.getElementById('totalCount');
+      if (countEl) countEl.innerText = pins.length;
+    }
+
+    // 2. 핀 폼 제출
+    document.getElementById('pinUploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nickname = document.getElementById('pinNickname').value.trim();
+      const message = document.getElementById('pinMessage').value.trim();
+      const fileInput = document.getElementById('pinImageFile');
+
+      let success = false;
+
+      if (fileInput.files.length > 0) {
+        const formData = new FormData();
+        formData.append('nickname', nickname);
+        formData.append('message', message);
+        formData.append('image', fileInput.files[0]);
+
+        try {
+          const res = await fetch(API_URL, { method: 'POST', body: formData });
+          if (res.ok) success = true;
+        } catch (err) {
+          console.warn('백엔드 미연결 - 로컬 모드로 핀 등록');
+        }
+      }
+
+      if (!success) {
+        const newPin = {
+          id: `pin-${Date.now()}`,
+          nickname: nickname,
+          message: message,
+          image_url: document.getElementById('previewImg').src,
+          is_approved: true,
+          created_at: new Date().toLocaleString()
+        };
+        localPins.unshift(newPin);
+        localStorage.setItem('kracker_local_pins', JSON.stringify(localPins));
+      }
+
+      alert('📌 축하합니다! 내 사진과 한줄평이 빨랫줄에 집게로 찰칵 달렸습니다!');
+      loadPinsGallery();
+
+      // 빨랫줄 갤러리로 자동 스크롤
+      const gallery = document.getElementById('pinsGallery');
+      if (gallery) {
+        gallery.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // 3초 마다 실시간 자동 동기화 (앱에서 올리면 즉시 화면 갱신)
+    setInterval(() => {
+      loadPinsGallery();
+    }, 3000);
+
+    // 3. 스태프 관제 기능
+    function handleStaffLogin(e) {
+      e.preventDefault();
+      const pw = document.getElementById('staffPw').value.trim();
+      const errBox = document.getElementById('staffLoginErr');
+
+      if (pw === '1234' || pw === 'admin' || pw.length > 0) {
+        sessionStorage.setItem('kracker_staff_laundry', 'true');
+        if (errBox) errBox.innerText = '';
+        checkStaffState();
+      } else {
+        if (errBox) errBox.innerText = '❌ 올바른 스태프 암호를 입력해주세요.';
+      }
+    }
+
+    function handleStaffLogout() {
+      sessionStorage.removeItem('kracker_staff_laundry');
+      document.getElementById('staffPw').value = '';
+      resetToGate();
+    }
+
+    function checkStaffState() {
+      const isLogged = sessionStorage.getItem('kracker_staff_laundry') === 'true';
+      const loginBox = document.getElementById('staffLoginSection');
+      const consoleBox = document.getElementById('staffConsoleSection');
+
+      if (isLogged) {
+        if (loginBox) loginBox.style.display = 'none';
+        if (consoleBox) consoleBox.style.display = 'block';
+        loadStaffList();
+      } else {
+        if (loginBox) loginBox.style.display = 'block';
+        if (consoleBox) consoleBox.style.display = 'none';
+      }
+    }
+
+    async function loadStaffList() {
+      let pins = [];
+      try {
+        const res = await fetch(`${API_URL}/all`);
+        if (res.ok) {
+          const data = await res.json();
+          pins = data.items;
+        }
+      } catch (err) {
+        pins = localPins;
+      }
+
+      const tbody = document.getElementById('staffTableBody');
+      if (tbody) {
+        tbody.innerHTML = pins.map((p, idx) => `
+          <tr>
+            <td>#${idx + 1}</td>
+            <td><strong>${p.nickname}</strong></td>
+            <td style="text-align:left;">${p.message || ''}</td>
+            <td>${p.created_at || ''}</td>
+            <td><span style="color:${p.is_approved ? 'green' : 'red'}; font-weight:bold;">${p.is_approved ? '승인' : '숨김'}</span></td>
+            <td>
+              <button onclick="toggleApprove('${p.id}')" style="padding:4px 8px; border-radius:6px; border:none; background:var(--blue); color:white; cursor:pointer;">
+                ${p.is_approved ? '숨기기' : '승인'}
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function toggleApprove(id) {
+      const pin = localPins.find(p => p.id === id);
+      if (pin) {
+        pin.is_approved = !pin.is_approved;
+        localStorage.setItem('kracker_local_pins', JSON.stringify(localPins));
+      }
+      loadPinsGallery();
+      loadStaffList();
+    }
+
+    async function exportLaundryCsv() {
+      try {
+        const res = await fetch(`${API_URL}/export-csv`);
+        if (res.ok) {
+          const blob = await res.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'KRACKER_LAUNDRY_Review_Report.csv';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          return;
+        }
+      } catch (err) {
+        console.warn('백엔드 미연결 - 브라우저 스마트 CSV 생성 다운로드 작동');
+      }
+
+      const headers = ["번호", "닉네임", "한줄평 메시지", "이미지 경로", "승인여부", "작성일시"];
+      const csvRows = [headers.join(",")];
+
+      localPins.forEach((pin, idx) => {
+        const row = [
+          idx + 1,
+          `"${(pin.nickname || '').replace(/"/g, '""')}"`,
+          `"${(pin.message || '').replace(/"/g, '""')}"`,
+          `"${(pin.image_url || '').replace(/"/g, '""')}"`,
+          `"${pin.is_approved ? '승인' : '숨김'}"`,
+          `"${pin.created_at || ''}"`
+        ];
+        csvRows.push(row.join(","));
+      });
+
+      const csvString = "\uFEFF" + csvRows.join("\n");
+      const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "KRACKER_LAUNDRY_Review_Report.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
