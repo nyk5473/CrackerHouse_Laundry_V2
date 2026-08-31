@@ -372,9 +372,9 @@
   <script>
     const API_URL = 'http://localhost:8000/api/laundry-line';
     let localPins = [
-      { id: 'pin-1', nickname: '포근포근곰', message: '스너글 블루스파클 향 너무 좋아용! 세탁기 포토존 대박 🧺🧸', image_url: 'images/snuggle_photo_sample.jpg', created_at: '2026-08-28 09:30', is_approved: true },
-      { id: 'pin-2', nickname: '크래커덕후', message: '바삭 쿠키 세트랑 섬유유연제 샘플 굿즈까지 대만족!! 🍪', image_url: 'images/mock_laundry_1.jpg', created_at: '2026-08-28 09:45', is_approved: true },
-      { id: 'pin-3', nickname: '스타필드나들이', message: '빨랫줄에 내 사진 집게로 다니까 인스타 갬성 느껴져요 ✨', image_url: 'images/mock_laundry_2.jpg', created_at: '2026-08-28 10:00', is_approved: true }
+      { id: 'pin-1', nickname: '포근포근곰', message: '스너글 블루스파클 향 너무 좋아용! 세탁기 포토존 대박 🧺🧸', image_url: 'https://via.placeholder.com/200x160?text=Photo+1', created_at: '2026-08-28 09:30', is_approved: true },
+      { id: 'pin-2', nickname: '크래커덕후', message: '바삭 쿠키 세트랑 섬유유연제 샘플 굿즈까지 대만족!! 🍪', image_url: 'https://via.placeholder.com/200x160?text=Photo+2', created_at: '2026-08-28 09:45', is_approved: true },
+      { id: 'pin-3', nickname: '스타필드나들이', message: '빨랫줄에 내 사진 집게로 다니까 인스타 갬성 느껴져요 ✨', image_url: 'https://via.placeholder.com/200x160?text=Photo+3', created_at: '2026-08-28 10:00', is_approved: true }
     ];
     localStorage.setItem('kracker_local_pins', JSON.stringify(localPins));
 
@@ -448,7 +448,7 @@
         gallery.innerHTML = pins.map(p => `
           <div class="polaroid-card">
             <div class="clothespin"></div>
-            <img src="${p.image_url || 'https://via.placeholder.com/200x160?text=KRACKER+LAUNDRY'}" class="polaroid-img" alt="${p.nickname}">
+            <img src="${p.image_url || 'https://via.placeholder.com/200x160?text=KRACKER+LAUNDRY'}" onerror="this.src='https://via.placeholder.com/200x160?text=KRACKER+LAUNDRY'" class="polaroid-img" alt="${p.nickname}">
             <div class="polaroid-nick">${p.nickname}</div>
             <div class="polaroid-msg">${p.message || ''}</div>
           </div>
