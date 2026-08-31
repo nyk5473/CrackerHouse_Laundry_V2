@@ -526,6 +526,50 @@
       }
     });
   </script>
+
+<script>
+  function renderHangingPins(items, containerId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    if (!items || items.length === 0) {
+      container.innerHTML = '<div style="color:var(--muted);font-family:var(--ff-mono);font-size:13px;padding:48px;text-align:center;grid-column:1/-1;">등록된 사진이 없습니다. 첫 번째로 올려보세요! 🧺</div>';
+      return;
+    }
+
+    var pinSvg = '<svg class="clothespin-item" viewBox="0 0 24 34" fill="none"><path d="M7 2C7 2 6 8 6 14C6 20 8 32 8 32H10C10 32 8 20 8 14C8 8 9 2 9 2H7Z" fill="#C89D7C" stroke="#7A5335" stroke-width="1.2"/><path d="M15 2C15 2 16 8 16 14C16 20 14 32 14 32H16C16 32 18 20 18 14C18 8 17 2 17 2H15Z" fill="#D4A785" stroke="#7A5335" stroke-width="1.2"/><circle cx="12" cy="14" r="3.5" fill="#A0A0A0" stroke="#505050" stroke-width="1"/><path d="M8.5 14H15.5" stroke="#303030" stroke-width="1.5"/></svg>';
+
+    container.innerHTML = items.map(function(pin) {
+      var imgUrl = pin.image_url || 'images/snuggle_photo_sample.jpg';
+      if (imgUrl.startsWith('/images')) imgUrl = '.' + imgUrl;
+      var nick = pin.nickname || '익명';
+      var msg = pin.message || '';
+      var pinType = pin.pin_type || 'PHOTO';
+      var tagText = pinType === 'RECEIPT' ? '🧾 세탁 영수증' : (pinType === 'KEYRING' ? '🔑 런드리 키링' : '📍 폴라로이드');
+
+      return '<div class="hanging-card">' +
+        pinSvg +
+        '<div style="aspect-ratio:3/4; overflow:hidden; border-radius:4px; position:relative; margin-bottom:10px;">' +
+          '<img src="' + imgUrl + '" alt="' + nick + '" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.src='images/snuggle_photo_sample.jpg'; this.onerror=null;" />' +
+        '</div>' +
+        '<div style="font-family:var(--ff-mono); font-size:10px; color:var(--orange); margin-bottom:2px;">' + tagText + '</div>' +
+        '<div style="font-size:13px; font-weight:700; color:var(--white);">' + nick + '</div>' +
+        (msg ? '<div style="font-size:11px; color:var(--muted); margin-top:2px;">' + msg + '</div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof ApiService !== "undefined" && ApiService.getLaundryPins) {
+      ApiService.getLaundryPins().then(function(res) {
+        if (res && res.items) {
+          renderHangingPins(res.items, 'laundryLineRope');
+          renderHangingPins(res.items, 'laundryGallery');
+        }
+      });
+    }
+  });
+</script>
+
 </body>
 
 </html>
