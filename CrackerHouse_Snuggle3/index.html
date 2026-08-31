@@ -909,7 +909,7 @@
     }
 
     var newHtml = data.items.map(function(pin) {
-      var imgSrc = pin.image_url || '/images/mock_laundry_1.jpg';
+      var imgSrc = pin.image_url || '/images/mock_laundry_1.jpg?v=20260831';
       if (!imgSrc.startsWith('data:') && !imgSrc.startsWith('http')) {
         imgSrc = imgSrc.startsWith('/images') ? imgSrc : 'http://localhost:8000' + imgSrc;
       }
@@ -920,7 +920,7 @@
         '<div class="ls-pin">',
           '<div class="ls-clothespin"></div>',
           '<div class="ls-card">',
-            '<img class="ls-photo" src="' + imgSrc + '" alt="' + pin.nickname + '" onerror="this.onerror=null;this.src=\'/images/mock_laundry_1.jpg\';">',
+            '<img class="ls-photo" src="' + imgSrc + '" alt="' + pin.nickname + '" onerror="this.onerror=null;this.src=\'/images/mock_laundry_1.jpg?v=20260831\';">',
             '<div class="ls-nick">' + pin.nickname + '</div>',
             msgHtml,
           '</div>',
