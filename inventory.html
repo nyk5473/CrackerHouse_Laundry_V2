@@ -301,7 +301,7 @@
           <h3 style="font-family:var(--font-heading); font-size:24px; font-weight:700; color:var(--white);">팝업스토어 실시간 굿즈 재고 현황</h3>
         </div>
         <button onclick="resetToGate()" style="padding:8px 12px; background:transparent; border:1px solid rgba(255,255,255,0.15); border-radius:4px; color:rgba(255,255,255,0.6); font-family:var(--font-mono); font-size:11px; cursor:pointer; transition:var(--tr);" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'; this.style.borderColor='rgba(255,255,255,0.15)'">
-          &#8634; CHANGE MODE
+          &#8592; 뒤로가기
         </button>
       </div>
 
@@ -473,7 +473,7 @@
     }
 
     function resetToGate() {
-      window.location.href = 'index.html';
+      window.history.back();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
