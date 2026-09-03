@@ -465,6 +465,7 @@
         document.getElementById('staffSection').style.display = 'none';
         loadDashboard();
       } else if (mode === 'staff') {
+          sessionStorage.setItem('kracker_staff_inventory', 'true');
         document.getElementById('customerStockSection').style.display = 'none';
         document.getElementById('staffSection').style.display = 'block';
         checkStaffState();

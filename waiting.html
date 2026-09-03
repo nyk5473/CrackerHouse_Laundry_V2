@@ -799,6 +799,7 @@
         document.getElementById('customerSection').style.display = 'block';
         document.getElementById('staffSection').style.display = 'none';
       } else if (mode === 'staff') {
+          sessionStorage.setItem('kracker_staff_waiting', 'true');
         document.getElementById('customerSection').style.display = 'none';
         document.getElementById('staffSection').style.display = 'block';
         checkStaffAuth();

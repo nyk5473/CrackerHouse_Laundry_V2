@@ -388,6 +388,7 @@
         document.getElementById('staffSection').style.display = 'none';
         loadPinsGallery();
       } else if (mode === 'staff') {
+          sessionStorage.setItem('kracker_staff_laundry', 'true');
         document.getElementById('customerSection').style.display = 'none';
         document.getElementById('staffSection').style.display = 'block';
         checkStaffState();
