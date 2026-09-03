@@ -33,7 +33,7 @@
       --card:     #2E1D0F;
       --white:    #FFFFFF;
       --muted:    #C4B9AE;
-      --ff-serif: 'Noto Sans KR', sans-serif;
+      --ff-serif: 'LeeOkSun', 'SheLeeOkSun', 'Playfair Display', serif;
       --ff-mono:  'Noto Sans KR', sans-serif;
       --ff-sans:  'Noto Sans KR', sans-serif;
       --tr:       all 0.28s ease;
@@ -99,7 +99,7 @@
     }
 
     .page-title {
-      font-family: var(--ff-serif);
+      font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important;
       font-size: clamp(38px, 6vw, 68px);
       font-weight: 900;
       line-height: 1.1;
@@ -151,7 +151,7 @@
     }
 
     .form-section-title {
-      font-family: var(--ff-serif);
+      font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important;
       font-style: italic;
       font-size: 24px;
       color: var(--white);
@@ -310,7 +310,7 @@
     }
 
     .concept-card h3 {
-      font-family: var(--ff-serif);
+      font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important;
       font-style: italic;
       font-size: 18px;
       color: var(--white);
@@ -385,7 +385,7 @@
     .res-modal__icon { font-size: 52px; margin-bottom: 20px; display: block; }
 
     .res-modal__title {
-      font-family: var(--ff-serif); font-size: 26px; font-weight: 900;
+      font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important; font-size: 26px; font-weight: 900;
       color: var(--white); margin-bottom: 12px; line-height: 1.25;
     }
     .res-modal__title em { font-style: italic; color: var(--orange); }
@@ -490,20 +490,94 @@
       box-shadow: 0 8px 24px rgba(235, 69, 60, 0.4);
     }
   </style>
+<style>
+@font-face {
+  font-family: 'LeeOkSun';
+  src: url('images/그녀_이옥선.ttf') format('truetype'),
+       url('그녀_이옥선.ttf') format('truetype'),
+       url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/Her-Leeoksun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SheLeeOkSun';
+  src: url('images/그녀_이옥선.ttf') format('truetype'),
+       url('그녀_이옥선.ttf') format('truetype'),
+       url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/Her-Leeoksun.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3, .hero-title, .products-big-title, .prereg-headline, .brand-headline, .page-title, .kiosk-title, .waiting-title, .zone-header {
+  font-family: 'LeeOkSun', 'SheLeeOkSun', 'Playfair Display', serif !important;
+}
+</style>
+
+<style>
+  /* 그녀-이옥순 (LeeOkSun) 폰트 - 히어로 영문 포인트 (lan, wei, ness) 및 주황색 글씨 전면 적용 */
+  .hw--serif, 
+  em, 
+  .orange-text,
+  [style*="color: var(--orange)"],
+  [style*="color:var(--orange)"],
+  [style*="color: #F25C05"],
+  [style*="color:#F25C05"],
+  .pa-price,
+  .product-card__price,
+  .pa-info-link,
+  .brand-headline span,
+  .products-big-title em,
+  .kiosk-title em,
+  .page-title em {
+    font-family: 'LeeOkSun', 'SheLeeOkSun', 'Playfair Display', serif !important;
+  }
+
+  .hw--serif{font-family:'LeeOkSun','SheLeeOkSun',serif !important;color:var(--orange) !important;font-weight:700 !important;}
+</style>
+
+
+<style>
+  /* 그녀-이옥순 (LeeOkSun) 폰트 - 요청된 핵심 타이틀 4종 전면 적용 */
+  .prereg-headline,
+  .products-big-title,
+  .brand-headline,
+  #laundry-section .ls-title,
+  .page-title,
+  .laundry-title,
+  h1, h2, h3 {
+    font-family: 'LeeOkSun', 'SheLeeOkSun', 'Playfair Display', serif !important;
+  }
+</style>
+
+
+<style>
+  /* 그녀-이옥순 (LeeOkSun) 폰트 - CHECK IN 버튼 적용 */
+  #btn-check-in, 
+  #check-in-container a, 
+  .btn-checkin, 
+  .check-in-btn {
+    font-family: 'LeeOkSun', 'SheLeeOkSun', 'Playfair Display', serif !important;
+  }
+</style>
+
 </head>
 <body>
 
 <!-- ══ TOP NAV ══ -->
-<nav id="top-nav">
-  <a href="index.html" class="nav-logo">🧺 KRACKER LAUNDRY 팝업스토어</a>
-    <ul class="nav-links">
-    <li><a href="promo.html#check-in-container">팝업정보</a></li>
-    <li><a href="promo.html#prereg-section">사전등록</a></li>
-    <li><a href="promo.html#brand-section">브랜드소개</a></li>
-    <li><a href="promo.html#product-section">상품</a></li>
-    <li><a href="promo.html#laundry-section">사진빨랫줄</a></li>
-    <li><a href="promo.html#zones-section">공간 구조 존</a></li>
-  </ul>
+<nav id="top-nav" style="position:fixed; top:0; left:0; right:0; height:58px; background:#BC453C; display:flex; align-items:center; justify-content:space-between; padding:0 36px; z-index:9999; box-shadow:0 3px 24px rgba(0,0,0,0.35);">
+  <a href="index.html" class="nav-logo" style="background:none; padding:0; display:inline-flex; align-items:center; text-decoration:none;">
+    <img src="kracker_logo_new.png?v=20260901_top" alt="Kracker Laundry Pop-up Store" style="height:36px; max-width:200px; object-fit:contain; display:block;" onerror="this.src='images/kracker_logo_new.png'; this.onerror=null;" />
+  </a>
+  <div style="display:flex; align-items:center; gap:24px;">
+    <ul class="nav-links" style="display:flex; list-style:none; gap:28px; margin:0; padding:0; align-items:center;">
+      <li><a href="#prereg-section" style="color:rgba(255,255,255,0.9); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s ease;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">사전등록</a></li>
+      <li><a href="#brand-section" style="color:rgba(255,255,255,0.9); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s ease;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">브랜드소개</a></li>
+      <li><a href="#product-section" style="color:rgba(255,255,255,0.9); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s ease;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">상품</a></li>
+      <li><a href="#laundry-section" style="color:rgba(255,255,255,0.9); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s ease;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">사진빨랫줄</a></li>
+      <li><a href="#zones-section" style="color:rgba(255,255,255,0.9); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s ease;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">공간 구조 존</a></li>
+    </ul>
+    <audio id="bgm-player" src="bgm.mp3" controls autoplay loop style="height:24px; width:110px; outline:none; border-radius:15px; background-color:#F25C05; opacity:0.85; transition:opacity 0.28s ease;"></audio>
+  </div>
 </nav>
 
 <!-- ══ PAGE HEADER ══ -->
@@ -599,7 +673,7 @@
   <!-- 스태프 로그인 박스 (로그인 전) -->
   <div class="form-section-card" id="staffResLoginBox" style="max-width: 520px; margin: 0 auto; text-align: center;">
     <span style="background: var(--clay); color: var(--white); padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; font-family: var(--ff-mono);">STAFF CONTROL CENTER</span>
-    <h3 style="font-family: var(--ff-serif); font-style: italic; font-size: 24px; color: var(--white); margin: 16px 0 8px;">🔐 사전예약 스태프 관제 로그인</h3>
+    <h3 style="font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important; font-style: italic; font-size: 24px; color: var(--white); margin: 16px 0 8px;">🔐 사전예약 스태프 관제 로그인</h3>
     <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6;">
       팝업스토어 사전예약 등록자 명단을 관리하고 입장을 처리하려면 스태프 암호를 입력하세요.
     </p>
@@ -615,7 +689,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
       <div>
         <span style="color: var(--blue); font-family: var(--ff-mono); font-size: 12px; font-weight: bold;">🟢 스태프 인증됨 (사전예약 관제)</span>
-        <h3 style="font-family: var(--ff-serif); font-style: italic; font-size: 24px; color: var(--white); margin-top: 4px;">🛠️ 사전예약 등록 명단 관제 콘솔</h3>
+        <h3 style="font-family: 'LeeOkSun', 'SheLeeOkSun', serif !important; font-style: italic; font-size: 24px; color: var(--white); margin-top: 4px;">🛠️ 사전예약 등록 명단 관제 콘솔</h3>
       </div>
       <div style="display: flex; gap: 10px; align-items: center;">
         <button onclick="exportResCsv()" style="padding: 10px 18px; background: #2E7D32; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">📥 사전예약 명단 엑셀(CSV) 1초 다운로드</button>
@@ -885,28 +959,7 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  
-      // Upload to Cloudflare R2
-      const formData = new FormData();
-      formData.append('file', blob, "KRACKER_LAUNDRY_PreReservation_List.csv");
-      formData.append('filename', "KRACKER_LAUNDRY_PreReservation_List.csv");
-      
-      fetch('/api/upload-csv', { method: 'POST', body: formData })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                console.log("Uploaded successfully to Cloudflare R2", data.key);
-                alert("Cloudflare R2에 성공적으로 백업(업로드) 되었습니다!\n(파일명: " + data.key + ")");
-            } else {
-                console.error("Upload error:", data);
-                alert("업로드 실패: " + (data.error || "알 수 없는 오류"));
-            }
-        })
-        .catch(err => {
-            console.error("Network error during upload:", err);
-            // Ignore error gracefully if running locally
-        });
-    }
+  }
 
   checkStaffResState();
 </script>
